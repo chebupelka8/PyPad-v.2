@@ -32,6 +32,7 @@ class MainWidget(QWidget):
     def setup_ui(self) -> None:
         self.tabEditor.addTab(WelcomeScreen(), "Welcome")
         self.tabEditor.addTab(self.codeArea, "main.py")
+        self.tabEditor.addTab(TextEditorArea(), "text.txt")
 
         self.mainLayout.addLayout(self.workbenchLayout)
         self.setLayout(self.mainLayout)
