@@ -3,7 +3,7 @@ QPlainTextEdit#code-area {
     border-radius: 4px;
     border: none;
     padding: 3px;
-    color: #ffffff;
+    color: #ffffff; /* should remove */
 }
 
 /*  SCROLLBAR:VERTICAL  */

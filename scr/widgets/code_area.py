@@ -1,7 +1,7 @@
 from scr.scripts import FileLoader, CodeHighlighter, CodeAnalyzer
 
 from PySide6.QtWidgets import QPlainTextEdit, QTextEdit, QWidget
-from PySide6.QtGui import QColor, QTextFormat, QPainter
+from PySide6.QtGui import QColor, QTextFormat, QPainter, QFont
 from PySide6.QtCore import Qt, QRect, QSize, QPoint
 
 
@@ -16,14 +16,19 @@ class CodeEditorArea(QPlainTextEdit):
         CodeHighlighter(self)  # set highlighter
         self.__highlight_current_line()
 
+        # font setup
+        self.__main_font = QFont("Arial", 18, 1, False)
+        self.setFont(self.__main_font)
+
+        # instances
+        self.__lineNumberArea = LineNumPaint(self)
+
         # connections
         self.__update_line_number_area_width()
         self.blockCountChanged.connect(self.__update_line_number_area_width)
         self.cursorPositionChanged.connect(self.__update_current_line)
         self.cursorPositionChanged.connect(self.__highlight_current_line)
         self.textChanged.connect(self.__highlight_current_line())
-
-        self.__lineNumberArea = LineNumPaint(self)
 
         # variables
         self.__current_line = 0
@@ -99,6 +104,7 @@ class CodeEditorArea(QPlainTextEdit):
         while block.isValid() and (top <= event.rect().bottom()) and block_number <= last_block_number:
             if block.isVisible():
                 number = str(block_number + 1)
+                painter.setFont(self.__main_font)
                 painter.setPen(QColor("#b3b3b3"))
 
                 painter.drawText(0, top, self.__lineNumberArea.width(), height, Qt.AlignCenter, number)
@@ -196,7 +202,6 @@ class LineNumPaint(QWidget):
     def __init__(self, parent: CodeEditorArea):
         super().__init__(parent)
 
-        self.setStyleSheet(FileLoader.load_style("scr/styles/line_number_area.css"))
         self.setObjectName("number-area")
 
         self.edit_line_num = parent

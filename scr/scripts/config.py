@@ -38,27 +38,29 @@ class PythonPatterns:
 class ThemeColors:
     fake = Faker()
 
-    KEYWORDS = fake.hex_color()
+    DEFAULT = "#ffffff"
 
-    CLASS_NAME = fake.hex_color()
+    KEYWORDS = "#dd6f66"
 
-    FUNCTION_NAME = fake.hex_color()
+    CLASS_NAME = "#f59c47"
+
+    FUNCTION_NAME = "#c7bcfa"
 
     PYTHON_FUNCTIONS = fake.hex_color()
 
-    BOOLEAN = fake.hex_color()
-    NONE_TYPE = fake.hex_color()
+    BOOLEAN = "#dd6f66"
+    NONE_TYPE = "#dd6f66"
     DATA_TYPES = fake.hex_color()
 
-    SPECIAL_SELF = fake.hex_color()
+    SPECIAL_SELF = "#f59c47"
 
-    BRACKETS = fake.hex_color()
-    DIGITS = fake.hex_color()
-    PYTHON_SYMBOLS = fake.hex_color()
+    BRACKETS = DEFAULT
+    DIGITS = DEFAULT
+    PYTHON_SYMBOLS = KEYWORDS
 
-    DECORATOR = fake.hex_color()
-    COMMENT = fake.hex_color()
+    DECORATOR = "#dcbdfb"
+    COMMENT = "#768390"
 
-    STRING_DOUBLE_QUOTATION = fake.hex_color()
-    STRING_APOSTROPHE = fake.hex_color()
-    LONG_STRING = fake.hex_color()
+    STRING_DOUBLE_QUOTATION = "#96d0ff"
+    STRING_APOSTROPHE = STRING_DOUBLE_QUOTATION
+    LONG_STRING = STRING_DOUBLE_QUOTATION
