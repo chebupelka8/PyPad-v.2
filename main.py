@@ -12,7 +12,7 @@ class MainWidget(QWidget):
         super().__init__(parent)
 
         # Self
-        self.setObjectName("main")
+        self.setObjectName("main-widget")
 
         # Init layouts
         self.mainLayout = QVBoxLayout()
