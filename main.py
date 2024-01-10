@@ -33,6 +33,7 @@ class MainWidget(QWidget):
         self.tabEditor.addTab(WelcomeScreen(), "Welcome")
         self.tabEditor.addTab(self.codeArea, "main.py")
         self.tabEditor.addTab(TextEditorArea(), "text.txt")
+        self.tabEditor.addTab(ImageViewer("test_assets/java_game.png"), "image.png")
 
         self.mainLayout.addLayout(self.workbenchLayout)
         self.setLayout(self.mainLayout)

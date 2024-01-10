@@ -16,7 +16,7 @@ class TextEditorArea(QPlainTextEdit):
         self.setLineWrapMode(QPlainTextEdit.LineWrapMode.NoWrap)
 
         # font setup
-        self.__main_font = QFont("Arial", 18, 1, False)
+        self.__main_font = QFont("Cascadia mono", 18, 1, False)
         self.setFont(self.__main_font)
 
         # instances
@@ -29,6 +29,7 @@ class TextEditorArea(QPlainTextEdit):
         self.cursorPositionChanged.connect(self.__update_current_line)
         self.cursorPositionChanged.connect(self.__highlight_current_line)
         self.textChanged.connect(self.__highlight_current_line())
+        self.verticalScrollBar().valueChanged.connect(self.lineNumberArea.update)
 
         # variables
         self.__current_line = 0
