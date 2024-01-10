@@ -10,6 +10,7 @@ class ImageViewer(QGraphicsView):
         super().__init__()
 
         self.setStyleSheet(FileLoader.load_style("scr/styles/image_viewer.css"))
+        self.setObjectName("image-viewer")
 
         self.setScene(QGraphicsScene(self))
         self.setRenderHint(QPainter.Antialiasing, True)

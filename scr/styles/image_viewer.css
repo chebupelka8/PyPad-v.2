@@ -1,11 +1,4 @@
-QScrollArea#image-viewer {
-    background-color: #272727;
-    border-radius: 4px;
-    border: none;
-    padding: 3px;
-}
-
-QGraphicsView {
+QGraphicsView#image-viewer {
     background-color: #272727;
     border-radius: 4px;
     border: none;
