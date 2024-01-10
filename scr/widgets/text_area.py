@@ -53,10 +53,9 @@ class TextEditorArea(QPlainTextEdit):
         super().resizeEvent(event)
 
         content_rect = self.contentsRect()
-        self.lineNumberArea.setGeometry(QRect(content_rect.left(),
-                                                content_rect.top(),
-                                                self.get_number_area_width(),
-                                                content_rect.height()))
+        self.lineNumberArea.setGeometry(
+            QRect(content_rect.left(), content_rect.top(), self.get_number_area_width(), content_rect.height())
+        )
 
     def get_current_line(self) -> int:
         return self.__current_line
