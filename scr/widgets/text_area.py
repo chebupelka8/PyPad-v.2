@@ -6,17 +6,20 @@ from PySide6.QtCore import Qt, QRect, QSize, QPoint
 
 
 class TextEditorArea(QPlainTextEdit):
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    def __init__(self, __path: str | None = None):
+        super().__init__()
 
-        self.setStyleSheet(FileLoader.load_style("scr/styles/text_area.css"))
+        self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
         self.setObjectName("text-area")
+
+        if __path != None:
+            self.insertPlainText(FileLoader.load_text_file(__path, ".txt", ".md"))
 
         # self setup
         self.setLineWrapMode(QPlainTextEdit.LineWrapMode.NoWrap)
 
         # font setup
-        self.__main_font = QFont("Cascadia mono", 18, 1, False)
+        self.__main_font = QFont("Cascadia mono", 15, 1, False)
         self.setFont(self.__main_font)
 
         # instances

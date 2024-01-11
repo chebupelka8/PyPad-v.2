@@ -4,12 +4,15 @@ from .text_area import TextEditorArea
 from PySide6.QtCore import Qt
 
 
-class CodeEditorArea(TextEditorArea):
-    def __init__(self, parent=None):
-        super().__init__(parent)
+class PythonCodeEditorArea(TextEditorArea):
+    def __init__(self, __path: str | None = None):
+        super().__init__()
 
-        self.setStyleSheet(FileLoader.load_style("scr/styles/code_area.css"))
+        self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
         self.setObjectName("code-area")
+
+        if __path != None:
+            self.insertPlainText(FileLoader.load_python_file(__path))
 
         CodeHighlighter(self)  # set highlighter
 
@@ -96,3 +99,8 @@ class CodeEditorArea(TextEditorArea):
 
         else:
             super().keyPressEvent(event)
+
+
+class JsonCodeEditorArea(TextEditorArea):
+    def __init__(self):
+        super().__init__()

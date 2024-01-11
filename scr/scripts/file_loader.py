@@ -1,4 +1,4 @@
-from scr.exceptions import WrongFileExtension, NotFileError
+from .file_checker import FileChecker
 
 import json
 import os
@@ -8,17 +8,7 @@ from PIL import Image
 class FileLoader:
 
     @staticmethod
-    def __verify_file(__path: str, *__expansions: str) -> None:
-        match __path:
-            case path if not os.path.isfile(path):
-                raise NotFileError(f"Argument must be a file, not directory ({path})")
-
-            case path if not os.path.splitext(path)[1] in __expansions:
-                raise WrongFileExtension(f"File extension must be in {__expansions}")
-
-    @classmethod
-    def load_style(cls, __path: str) -> str:
-        cls.__verify_file(__path, ".css", ".qss")
+    def __load_any_text_file(__path: str) -> str:
 
         with open(os.path.normpath(__path), "r", encoding="utf-8") as file:
             result = file.read()
@@ -26,8 +16,26 @@ class FileLoader:
         return result
 
     @classmethod
-    def load_json(cls, __path: str) -> str:
-        cls.__verify_file(__path, ".json")
+    def load_text_file(cls, __path: str, *__extensions: str) -> str:
+        FileChecker.verify_file_extensions(__path, *__extensions)
+
+        return cls.__load_any_text_file(__path)
+
+    @classmethod
+    def load_style(cls, __path: str) -> str:
+        FileChecker.verify_style_file(__path)
+
+        return cls.__load_any_text_file(__path)
+
+    @classmethod
+    def load_python_file(cls, __path: str) -> str:
+        FileChecker.verify_python_file(__path)
+
+        return cls.__load_any_text_file(__path)
+
+    @staticmethod
+    def load_json(__path: str) -> str:
+        FileChecker.verify_json_file(__path)
 
         with open(os.path.normpath(__path), "r", encoding="utf-8") as file:
             result = json.load(file)
@@ -35,8 +43,8 @@ class FileLoader:
         return result
 
     @classmethod
-    def load_image(cls, __path) -> Image:
-        cls.__verify_file(__path, ".png", ".jpg", ".jpeg")
+    def load_image(cls, __path: str) -> Image:
+        FileChecker.verify_file_extensions(__path, ".png", ".jpg", ".jpeg")
 
         with Image.open(os.path.normpath(__path)) as image:
             result = image

@@ -1,6 +1,6 @@
 from scr.scripts import FileLoader
 
-from PySide6.QtWidgets import QLabel, QScrollArea, QApplication, QGraphicsScene, QGraphicsView
+from PySide6.QtWidgets import QGraphicsScene, QGraphicsView
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap, QPainter
 
@@ -28,6 +28,7 @@ class ImageViewer(QGraphicsView):
 
             if event.angleDelta().y() < 0:
                 factor = 1.0 / factor
+                print(factor)
 
             self.scale(factor, factor)
         else:

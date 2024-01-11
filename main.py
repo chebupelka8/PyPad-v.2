@@ -22,7 +22,6 @@ class MainWidget(QWidget):
         self.setup_ui()
 
     def init_ui(self) -> None:
-        self.codeArea = CodeEditorArea()
         self.fileTree = FileTree()
         self.tabEditor = TabEditor()
 
@@ -31,7 +30,7 @@ class MainWidget(QWidget):
 
     def setup_ui(self) -> None:
         self.tabEditor.addTab(WelcomeScreen(), "Welcome")
-        self.tabEditor.addTab(self.codeArea, "main.py")
+        self.tabEditor.addTab(PythonCodeEditorArea("scr/widgets/file_tree.py"), "main.py")
         self.tabEditor.addTab(TextEditorArea(), "text.txt")
         self.tabEditor.addTab(ImageViewer("test_assets/java_game.png"), "image.png")
 
