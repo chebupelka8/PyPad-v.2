@@ -3,7 +3,7 @@ from scr import *
 import sys
 from PySide6.QtWidgets import (
     QWidget, QApplication, QMainWindow,
-    QHBoxLayout, QVBoxLayout
+    QHBoxLayout, QVBoxLayout, QFileDialog
 )
 
 
@@ -20,6 +20,14 @@ class MainWidget(QWidget):
 
         self.init_ui()
         self.setup_ui()
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_O:
+            self.fileTree.open_directory(FileDialog.get_open_directory())
+        elif event.key() == Qt.Key.Key_P:
+            self.fileTree.open_file(FileDialog.get_open_file_name())
+        else:
+            super().keyPressEvent(event)
 
     def init_ui(self) -> None:
         self.fileTree = FileTree()
