@@ -28,7 +28,6 @@ class ImageViewer(QGraphicsView):
 
             if event.angleDelta().y() < 0:
                 factor = 1.0 / factor
-                print(factor)
 
             self.scale(factor, factor)
         else:

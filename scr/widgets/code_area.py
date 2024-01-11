@@ -27,9 +27,9 @@ class PythonCodeEditorArea(TextEditorArea):
     def __pass_duplicate_symbol(self, __target: str) -> None | str:
         cursor = self.textCursor()
 
-        if len(self.toPlainText().split("\n")[self.__current_line][cursor.positionInBlock():]) != 0:
+        if len(self.toPlainText().split("\n")[self.get_current_line()][cursor.positionInBlock():]) != 0:
 
-            if self.toPlainText().split("\n")[self.__current_line][cursor.positionInBlock()] == __target:
+            if self.toPlainText().split("\n")[self.get_current_line()][cursor.positionInBlock()] == __target:
                 cursor.setPosition(cursor.position() + 1)
                 self.setTextCursor(cursor)
 
@@ -102,5 +102,11 @@ class PythonCodeEditorArea(TextEditorArea):
 
 
 class JsonCodeEditorArea(TextEditorArea):
-    def __init__(self):
+    def __init__(self, __path: str | None = None):
         super().__init__()
+
+        self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
+        self.setObjectName("code-area")
+
+        if __path != None:
+            self.insertPlainText(FileLoader.load_json_file(__path))

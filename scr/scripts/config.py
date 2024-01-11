@@ -1,6 +1,3 @@
-from faker import Faker
-
-
 WINDOW_SIZE = (1200, 800)
 VERSION = "2.0 alpha"
 
@@ -21,7 +18,7 @@ class PythonPatterns:
     NONE_TYPE = r"\b(None)\b"
     DATA_TYPES = r"\b(int|float|str|dict|set|tuple|list|bool)\b"
 
-    SPECIAL_SELF = r"\b(self)\b"
+    SPECIAL_SELF = r"\b(self|cls)\b"
 
     BRACKETS = r"\(|\)|\[|\]|\{|\}"
     DIGITS = r"1|2|3|4|5|6|7|8|9|0"
@@ -36,21 +33,20 @@ class PythonPatterns:
 
 
 class ThemeColors:
-    fake = Faker()
 
     DEFAULT = "#ffffff"
 
     KEYWORDS = "#dd6f66"
 
-    CLASS_NAME = "#f59c47"
+    CLASS_NAME = "#87bba2"
 
     FUNCTION_NAME = "#c7bcfa"
 
-    PYTHON_FUNCTIONS = fake.hex_color()
+    PYTHON_FUNCTIONS = "#fabd2f"
 
     BOOLEAN = "#dd6f66"
     NONE_TYPE = "#dd6f66"
-    DATA_TYPES = fake.hex_color()
+    DATA_TYPES = "#fabd2f"
 
     SPECIAL_SELF = "#f59c47"
 
@@ -61,6 +57,6 @@ class ThemeColors:
     DECORATOR = "#dcbdfb"
     COMMENT = "#768390"
 
-    STRING_DOUBLE_QUOTATION = "#96d0ff"
+    STRING_DOUBLE_QUOTATION = "#84a98c"
     STRING_APOSTROPHE = STRING_DOUBLE_QUOTATION
     LONG_STRING = STRING_DOUBLE_QUOTATION
