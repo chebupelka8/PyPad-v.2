@@ -3,7 +3,7 @@ from scr import *
 import sys
 from PySide6.QtWidgets import (
     QWidget, QApplication, QMainWindow,
-    QHBoxLayout, QVBoxLayout, QFileDialog
+    QHBoxLayout, QVBoxLayout
 )
 
 

@@ -19,7 +19,9 @@ class TextEditorArea(QPlainTextEdit):
         self.setLineWrapMode(QPlainTextEdit.LineWrapMode.NoWrap)
 
         # font setup
-        self.__main_font = QFont("Cascadia mono", 15, 1, False)
+        font = FileLoader.load_json("scr/data/settings.json")["font"]
+        self.__main_font = QFont(font["family"], font["size"], 1, font["italic"])
+        self.__main_font.setBold(font["bold"])
         self.setFont(self.__main_font)
 
         # instances
