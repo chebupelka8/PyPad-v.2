@@ -21,17 +21,8 @@ class FileTree(QTreeView):
         for i in range(1, 4): self.header().setSectionHidden(i, True)
 
     def open_file(self, __path: str) -> None:
-        if not os.path.isfile(__path):
-            print("Must be a file")
-
         self.open_directory(os.path.dirname(__path))
 
     def open_directory(self, __path: str) -> None:
-        if not os.path.isdir(__path):
-            print("Must be a dir")
-
-        try:
-            self.model.setRootPath(__path)
-            self.setRootIndex(self.model.index(__path))
-        except FileNotFoundError:
-            print("File not found")
+        self.model.setRootPath(__path)
+        self.setRootIndex(self.model.index(__path))

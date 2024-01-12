@@ -7,7 +7,7 @@ class FileDialog:
 
     @staticmethod
     def get_open_file_name():
-        path = QFileDialog.getOpenFileName()
+        path = QFileDialog.getOpenFileName()[0]
 
         if not os.path.exists(path):
             print("Warning: {File not found}")

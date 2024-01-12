@@ -116,7 +116,7 @@ class TextEditorArea(QPlainTextEdit):
             if block.isVisible():
                 number = str(block_number + 1)
                 painter.setFont(self.__main_font)
-                painter.setPen(QColor("#b3b3b3"))
+                painter.setPen(QColor("#7f7f7f"))
 
                 painter.drawText(0, top, self.lineNumberArea.width(), height, Qt.AlignCenter, number)
 
