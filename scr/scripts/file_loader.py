@@ -28,13 +28,19 @@ class FileLoader:
         return cls.__load_any_text_file(__path)
 
     @classmethod
+    def load_json_text(cls, __path: str) -> str:
+        FileChecker.verify_json_file(__path)
+
+        return cls.__load_any_text_file(__path)
+
+    @classmethod
     def load_python_file(cls, __path: str) -> str:
         FileChecker.verify_python_file(__path)
 
         return cls.__load_any_text_file(__path)
 
     @staticmethod
-    def load_json(__path: str) -> str:
+    def load_json(__path: str) -> dict:
         FileChecker.verify_json_file(__path)
 
         with open(os.path.normpath(__path), "r", encoding="utf-8") as file:

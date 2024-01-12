@@ -75,5 +75,38 @@
             "italic": false,
             "bold": false
         }
+    },
+
+    "json-theme": {
+        "string": {
+            "color": "#84a98c",
+            "italic": false,
+            "bold": false
+        },
+        "boolean": {
+            "color": "#dd6f66",
+            "italic": false,
+            "bold": false
+        },
+        "symbols": {
+            "color": "#ffffff",
+            "italic": false,
+            "bold": false
+        },
+        "brackets": {
+            "color": "#daaa3f",
+            "italic": false,
+            "bold": false
+        },
+        "digits": {
+            "color": "#ffffff",
+            "italic": false,
+            "bold": false
+        },
+        "null-type": {
+            "color": "#dd6f66",
+            "italic": false,
+            "bold": false
+        }
     }
 }

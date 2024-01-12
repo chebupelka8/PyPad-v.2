@@ -1,22 +1,14 @@
-from scr.scripts import FileLoader, CodeHighlighter, CodeAnalyzer
+from scr.scripts import FileLoader, PythonCodeHighlighter, CodeAnalyzer, JsonCodeHighLighter
 from .text_area import TextEditorArea
 
 from PySide6.QtCore import Qt
 
 
-class PythonCodeEditorArea(TextEditorArea):
-    def __init__(self, __path: str | None = None):
+class CodeEditorArea(TextEditorArea):
+    def __init__(self):
         super().__init__()
 
-        self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
-        self.setObjectName("code-area")
-
-        if __path != None:
-            self.insertPlainText(FileLoader.load_python_file(__path))
-
-        CodeHighlighter(self)  # set highlighter
-
-    def __insert_around_cursor(self, __symbol_1: str, __symbol_2: str) -> None:
+    def insert_around_cursor(self, __symbol_1: str, __symbol_2: str) -> None:
         cursor = self.textCursor()
         selected_text = cursor.selectedText()
 
@@ -24,7 +16,7 @@ class PythonCodeEditorArea(TextEditorArea):
         cursor.setPosition(cursor.position() - 1)
         self.setTextCursor(cursor)
 
-    def __pass_duplicate_symbol(self, __target: str) -> None | str:
+    def pass_duplicate_symbol(self, __target: str) -> None | str:
         cursor = self.textCursor()
 
         if len(self.toPlainText().split("\n")[self.get_current_line()][cursor.positionInBlock():]) != 0:
@@ -39,34 +31,47 @@ class PythonCodeEditorArea(TextEditorArea):
         else:
             return "exception"
 
+
+class PythonCodeEditorArea(CodeEditorArea):
+    def __init__(self, __path: str | None = None):
+        super().__init__()
+
+        self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
+        self.setObjectName("code-area")
+
+        if __path != None:
+            self.insertPlainText(FileLoader.load_python_file(__path))
+
+        PythonCodeHighlighter(self)  # set highlighter
+
     def keyPressEvent(self, event):
         self.lineNumberArea.update()  # update number area
 
         if event.key() == Qt.Key.Key_ParenLeft:
-            self.__insert_around_cursor("(", ")")
+            self.insert_around_cursor("(", ")")
 
         elif event.key() == Qt.Key.Key_BraceLeft:
-            self.__insert_around_cursor("{", "}")
+            self.insert_around_cursor("{", "}")
 
         elif event.key() == Qt.Key.Key_BracketLeft:
-            self.__insert_around_cursor("[", "]")
+            self.insert_around_cursor("[", "]")
 
         elif event.key() == Qt.Key.Key_QuoteDbl:
-            self.__insert_around_cursor('"', '"')
+            self.insert_around_cursor('"', '"')
 
         elif event.key() == Qt.Key.Key_Apostrophe:
-            self.__insert_around_cursor("'", "'")
+            self.insert_around_cursor("'", "'")
 
         elif event.key() == Qt.Key.Key_ParenRight:
-            if self.__pass_duplicate_symbol(")") == "exception":
+            if self.pass_duplicate_symbol(")") == "exception":
                 super().keyPressEvent(event)
 
         elif event.key() == Qt.Key.Key_BraceRight:
-            if self.__pass_duplicate_symbol("}") == "exception":
+            if self.pass_duplicate_symbol("}") == "exception":
                 super().keyPressEvent(event)
 
         elif event.key() == Qt.Key.Key_BracketRight:
-            if self.__pass_duplicate_symbol("]") == "exception":
+            if self.pass_duplicate_symbol("]") == "exception":
                 super().keyPressEvent(event)
 
         elif event.key() == Qt.Key.Key_Tab:
@@ -101,7 +106,7 @@ class PythonCodeEditorArea(TextEditorArea):
             super().keyPressEvent(event)
 
 
-class JsonCodeEditorArea(TextEditorArea):
+class JsonCodeEditorArea(CodeEditorArea):
     def __init__(self, __path: str | None = None):
         super().__init__()
 
@@ -109,4 +114,32 @@ class JsonCodeEditorArea(TextEditorArea):
         self.setObjectName("code-area")
 
         if __path != None:
-            self.insertPlainText(FileLoader.load_json_file(__path))
+            self.insertPlainText(FileLoader.load_json_text(__path))
+
+        JsonCodeHighLighter(self)
+
+    def keyPressEvent(self, event):
+        self.lineNumberArea.update()
+
+        if event.key() == Qt.Key.Key_BraceLeft:
+            self.insert_around_cursor("{", "}")
+
+        elif event.key() == Qt.Key.Key_BracketLeft:
+            self.insert_around_cursor("[", "]")
+
+        elif event.key() == Qt.Key.Key_QuoteDbl:
+            self.insert_around_cursor('"', '"')
+
+        elif event.key() == Qt.Key.Key_BraceRight:
+            if self.pass_duplicate_symbol("}") == "exception":
+                super().keyPressEvent(event)
+
+        elif event.key() == Qt.Key.Key_BracketRight:
+            if self.pass_duplicate_symbol("]") == "exception":
+                super().keyPressEvent(event)
+
+        elif event.key() == Qt.Key.Key_Tab:
+            self.textCursor().insertText("    ")
+
+        else:
+            super().keyPressEvent(event)

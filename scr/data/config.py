@@ -37,6 +37,15 @@ class PythonPatterns:
     LONG_STRING = r'""".*?"""|""".*?'
 
 
+class JsonPatterns:
+    STRING = r'".*?\n*?"|".*?'
+    BRACKETS = r"\[|\]|\{|\}"
+    BOOLEAN = r"\b(true|false)\b"
+    SYMBOLS = r"\,\:"
+    DIGITS = r"1|2|3|4|5|6|7|8|9|0"
+    NULL_TYPE = r"\b(null)\b"
+
+
 class TextCharCreator:
 
     @staticmethod
@@ -68,3 +77,14 @@ class PythonTheme:
     DIGITS = TextCharCreator.create_char_format(*theme["digits"].values())
     BRACKETS = TextCharCreator.create_char_format(*theme["brackets"].values())
     SPECIAL = TextCharCreator.create_char_format(*theme["special"].values())
+
+
+class JsonTheme:
+    theme = FileLoader.load_json("scr/data/theme.json")["json-theme"]
+
+    STRING = TextCharCreator.create_char_format(*theme["string"].values())
+    BOOLEAN = TextCharCreator.create_char_format(*theme["boolean"].values())
+    SYMBOLS = TextCharCreator.create_char_format(*theme["symbols"].values())
+    DIGITS = TextCharCreator.create_char_format(*theme["digits"].values())
+    BRACKETS = TextCharCreator.create_char_format(*theme["brackets"].values())
+    NULL_TYPE = TextCharCreator.create_char_format(*theme["null-type"].values())
