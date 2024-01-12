@@ -1,4 +1,5 @@
 from scr.scripts import FileLoader, PythonCodeHighlighter, CodeAnalyzer, JsonCodeHighLighter
+from scr.data import PythonTheme, JsonTheme
 from .text_area import TextEditorArea
 
 from PySide6.QtCore import Qt
@@ -43,6 +44,7 @@ class PythonCodeEditorArea(CodeEditorArea):
             self.insertPlainText(FileLoader.load_python_file(__path))
 
         PythonCodeHighlighter(self)  # set highlighter
+        self.set_default_text_color(PythonTheme.DEFAULT)
 
     def keyPressEvent(self, event):
         self.lineNumberArea.update()  # update number area
@@ -117,6 +119,7 @@ class JsonCodeEditorArea(CodeEditorArea):
             self.insertPlainText(FileLoader.load_json_text(__path))
 
         JsonCodeHighLighter(self)
+        self.set_default_text_color(JsonTheme.DEFAULT)
 
     def keyPressEvent(self, event):
         self.lineNumberArea.update()

@@ -1,17 +1,8 @@
-QPlainTextEdit#text-area {
+QPlainTextEdit {
     background-color: #272727;
     border-radius: 4px;
     border: none;
     padding: 3px;
-    color: #ffffff;
-}
-
-QPlainTextEdit#code-area {
-    background-color: #272727;
-    border-radius: 4px;
-    border: none;
-    padding: 3px;
-    color: #ffffff;
 }
 
 /*  SCROLLBAR:VERTICAL  */

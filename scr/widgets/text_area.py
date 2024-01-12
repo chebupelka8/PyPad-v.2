@@ -1,7 +1,8 @@
 from scr.scripts import FileLoader
+from scr.data import TextEditorTheme
 
 from PySide6.QtWidgets import QPlainTextEdit, QTextEdit, QWidget
-from PySide6.QtGui import QColor, QTextFormat, QPainter, QFont
+from PySide6.QtGui import QColor, QTextFormat, QPainter, QFont, QPalette
 from PySide6.QtCore import Qt, QRect, QSize, QPoint
 
 
@@ -24,6 +25,9 @@ class TextEditorArea(QPlainTextEdit):
         self.__main_font.setBold(font["bold"])
         self.setFont(self.__main_font)
 
+        # color setup
+        self.set_default_text_color(TextEditorTheme.DEFAULT)
+
         # instances
         self.lineNumberArea = LineNumPaint(self)
 
@@ -38,6 +42,11 @@ class TextEditorArea(QPlainTextEdit):
 
         # variables
         self.__current_line = 0
+
+    def set_default_text_color(self, __color: str) -> None:
+        palette = QPalette()
+        palette.setColor(QPalette.ColorRole.Text, QColor(__color))
+        self.setPalette(palette)
 
     def wheelEvent(self, delta) -> None:
         self.lineNumberArea.update()

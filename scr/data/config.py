@@ -59,10 +59,16 @@ class TextCharCreator:
         return res
 
 
+class TextEditorTheme:
+    theme = FileLoader.load_json("scr/data/theme.json")["text-editor-theme"]
+
+    DEFAULT = theme["default"]
+
+
 class PythonTheme:
     theme = FileLoader.load_json("scr/data/theme.json")["python-theme"]
 
-    DEFAULT = TextCharCreator.create_char_format(*theme["default"].values())
+    DEFAULT = theme["default"]
     KEYWORDS = TextCharCreator.create_char_format(*theme["keywords"].values())
     STRING = TextCharCreator.create_char_format(*theme["string"].values())
     COMMENT = TextCharCreator.create_char_format(*theme["comment"].values())
@@ -82,6 +88,7 @@ class PythonTheme:
 class JsonTheme:
     theme = FileLoader.load_json("scr/data/theme.json")["json-theme"]
 
+    DEFAULT = theme["default"]
     STRING = TextCharCreator.create_char_format(*theme["string"].values())
     BOOLEAN = TextCharCreator.create_char_format(*theme["boolean"].values())
     SYMBOLS = TextCharCreator.create_char_format(*theme["symbols"].values())

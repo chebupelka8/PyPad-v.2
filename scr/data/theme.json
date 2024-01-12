@@ -1,10 +1,10 @@
 {
+    "text-editor-theme": {
+        "default": "#ffffff"
+    },
+
     "python-theme": {
-        "default": {
-            "color": "#ffffff",
-            "italic": false,
-            "bold": false
-        },
+        "default": "#ffffff",
         "keywords": {
             "color": "#dd6f66",
             "italic": false,
@@ -78,6 +78,7 @@
     },
 
     "json-theme": {
+        "default": "#ffffff",
         "string": {
             "color": "#84a98c",
             "italic": false,
