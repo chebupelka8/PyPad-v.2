@@ -72,6 +72,5 @@ class FileChecker:
             case path if cls.is_picture_file(path):
                 cls.verify_picture_file(path)
 
-            case path:
-                with open(path):
-                    pass
+            case _:
+                raise WrongFileExtension("PyPad can't open this file")
