@@ -9,6 +9,8 @@ class ImageViewer(QGraphicsView):
     def __init__(self, __path: str) -> None:
         super().__init__()
 
+        self.__path = __path
+
         self.setStyleSheet(FileLoader.load_style("scr/styles/image_viewer.css"))
         self.setObjectName("image-viewer")
 
@@ -21,6 +23,9 @@ class ImageViewer(QGraphicsView):
 
         self.pixmap = QPixmap(__path)
         self.scene().addPixmap(self.pixmap)
+
+    def get_full_path(self) -> str:
+        return self.__path
 
     def wheelEvent(self, event):
         if event.modifiers() == Qt.ControlModifier:

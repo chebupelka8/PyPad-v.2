@@ -13,6 +13,8 @@ class TextEditorArea(QPlainTextEdit):
         self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
         self.setObjectName("text-area")
 
+        self.__path = __path
+
         if __path != None:
             self.insertPlainText(FileLoader.load_text_file(__path, ".txt", ".md"))
 
@@ -42,6 +44,9 @@ class TextEditorArea(QPlainTextEdit):
 
         # variables
         self.__current_line = 0
+
+    def get_full_path(self):
+        return self.__path
 
     def set_default_text_color(self, __color: str) -> None:
         palette = QPalette()

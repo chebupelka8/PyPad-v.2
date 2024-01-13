@@ -37,6 +37,8 @@ class PythonCodeEditorArea(CodeEditorArea):
     def __init__(self, __path: str | None = None):
         super().__init__()
 
+        self.__path = __path
+
         self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
         self.setObjectName("code-area")
 
@@ -45,6 +47,9 @@ class PythonCodeEditorArea(CodeEditorArea):
 
         PythonCodeHighlighter(self)  # set highlighter
         self.set_default_text_color(PythonTheme.DEFAULT)
+
+    def get_full_path(self):
+        return self.__path
 
     def keyPressEvent(self, event):
         self.lineNumberArea.update()  # update number area
@@ -112,6 +117,8 @@ class JsonCodeEditorArea(CodeEditorArea):
     def __init__(self, __path: str | None = None):
         super().__init__()
 
+        self.__path = __path
+
         self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
         self.setObjectName("code-area")
 
@@ -120,6 +127,9 @@ class JsonCodeEditorArea(CodeEditorArea):
 
         JsonCodeHighLighter(self)
         self.set_default_text_color(JsonTheme.DEFAULT)
+
+    def get_full_path(self):
+        return self.__path
 
     def keyPressEvent(self, event):
         self.lineNumberArea.update()
@@ -152,6 +162,8 @@ class StyleCodeEditorArea(CodeEditorArea):
     def __init__(self, __path: str):
         super().__init__()
 
+        self.__path = __path
+
         self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
         self.setObjectName("code-area")
 
@@ -160,6 +172,9 @@ class StyleCodeEditorArea(CodeEditorArea):
 
         StyleCodeHighLighter(self)
         self.set_default_text_color(StyleTheme.DEFAULT)
+
+    def get_full_path(self):
+        return self.__path
 
     def keyPressEvent(self, event):
         self.lineNumberArea.update()
