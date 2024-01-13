@@ -40,7 +40,7 @@ class MainWidget(QWidget):
         self.tabEditor.addTab(WelcomeScreen(), "Welcome")
         self.tabEditor.addTab(PythonCodeEditorArea("scr/widgets/file_tree.py"), "main.py")
         self.tabEditor.addTab(JsonCodeEditorArea("scr/data/theme.json"), "data.json")
-        self.tabEditor.addTab(TextEditorArea(), "text.txt")
+        self.tabEditor.addTab(TextEditorArea("dist/data_font.txt"), "text.txt")
         self.tabEditor.addTab(ImageViewer("test_assets/java_game.png"), "image.png")
 
         self.mainLayout.addLayout(self.workbenchLayout)
