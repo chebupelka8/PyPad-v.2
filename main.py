@@ -41,11 +41,7 @@ class MainWidget(QWidget):
         self.workbenchLayout.addWidget(self.tabEditor, stretch=5)
 
     def setup_ui(self) -> None:
-        self.tabEditor.addTab(WelcomeScreen(), "Welcome!", IconPaths.MAIN)
-        # self.tabEditor.addTab(PythonCodeEditorArea("scr/widgets/file_tree.py"), "main.py")
-        # self.tabEditor.addTab(JsonCodeEditorArea("scr/data/theme.json"), "data.json")
-        # self.tabEditor.addTab(TextEditorArea("dist/data_font.txt"), "text.txt")
-        # self.tabEditor.addTab(ImageViewer("test_assets/java_game.PNG"), "image.png")
+        # self.tabEditor.addTab(WelcomeScreen(), "Welcome!", IconPaths.MAIN)
 
         self.fileTree.clicked.connect(self.__click_file_tree)
 
