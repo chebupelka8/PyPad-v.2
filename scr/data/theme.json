@@ -109,5 +109,9 @@
             "italic": false,
             "bold": false
         }
+    },
+
+    "style-theme": {
+        "default": "#ff4522"
     }
 }

@@ -4,3 +4,7 @@ class WrongFileExtension(ValueError):
 
 class NotFileError(ValueError):
     pass
+
+
+class NotDirectoryError(ValueError):
+    pass

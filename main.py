@@ -1,3 +1,5 @@
+import os.path
+
 from scr import *
 
 import sys
@@ -5,6 +7,7 @@ from PySide6.QtWidgets import (
     QWidget, QApplication, QMainWindow,
     QHBoxLayout, QVBoxLayout
 )
+from PySide6.QtCore import QModelIndex
 
 
 class MainWidget(QWidget):
@@ -38,13 +41,38 @@ class MainWidget(QWidget):
 
     def setup_ui(self) -> None:
         self.tabEditor.addTab(WelcomeScreen(), "Welcome")
-        self.tabEditor.addTab(PythonCodeEditorArea("scr/widgets/file_tree.py"), "main.py")
-        self.tabEditor.addTab(JsonCodeEditorArea("scr/data/theme.json"), "data.json")
-        self.tabEditor.addTab(TextEditorArea("dist/data_font.txt"), "text.txt")
-        self.tabEditor.addTab(ImageViewer("test_assets/java_game.png"), "image.png")
+        # self.tabEditor.addTab(PythonCodeEditorArea("scr/widgets/file_tree.py"), "main.py")
+        # self.tabEditor.addTab(JsonCodeEditorArea("scr/data/theme.json"), "data.json")
+        # self.tabEditor.addTab(TextEditorArea("dist/data_font.txt"), "text.txt")
+        # self.tabEditor.addTab(ImageViewer("test_assets/java_game.PNG"), "image.png")
+
+        self.fileTree.clicked.connect(self.__click_file_tree)
 
         self.mainLayout.addLayout(self.workbenchLayout)
         self.setLayout(self.mainLayout)
+
+    def __click_file_tree(self, __index: QModelIndex) -> None:
+        path = self.fileTree.get_path_by_index(__index)
+
+        if os.path.isfile(path):
+            self.__open_file_for_edit(path)
+
+    def __open_file_for_edit(self, __path: str) -> None:
+
+        if FileChecker.is_python_file(__path):
+            self.tabEditor.addTab(PythonCodeEditorArea(__path), os.path.basename(__path))
+
+        elif FileChecker.is_style_file(__path):
+            self.tabEditor.addTab(StyleCodeEditorArea(__path), os.path.basename(__path))
+
+        elif FileChecker.is_json_file(__path):
+            self.tabEditor.addTab(JsonCodeEditorArea(__path), os.path.basename(__path))
+
+        elif FileChecker.is_text_file(__path):
+            self.tabEditor.addTab(TextEditorArea(__path), os.path.basename(__path))
+
+        elif FileChecker.is_picture_file(__path):
+            self.tabEditor.addTab(ImageViewer(__path), os.path.basename(__path))
 
 
 class Window(QMainWindow):

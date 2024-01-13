@@ -95,3 +95,9 @@ class JsonTheme:
     DIGITS = TextCharCreator.create_char_format(*theme["digits"].values())
     BRACKETS = TextCharCreator.create_char_format(*theme["brackets"].values())
     NULL_TYPE = TextCharCreator.create_char_format(*theme["null-type"].values())
+
+
+class StyleTheme:
+    theme = FileLoader.load_json("scr/data/theme.json")["style-theme"]
+
+    DEFAULT = theme["default"]

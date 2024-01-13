@@ -1,5 +1,5 @@
 from scr.scripts import FileLoader, PythonCodeHighlighter, CodeAnalyzer, JsonCodeHighLighter
-from scr.data import PythonTheme, JsonTheme
+from scr.data import PythonTheme, JsonTheme, StyleTheme
 from .text_area import TextEditorArea
 
 from PySide6.QtCore import Qt
@@ -132,6 +132,52 @@ class JsonCodeEditorArea(CodeEditorArea):
 
         elif event.key() == Qt.Key.Key_QuoteDbl:
             self.insert_around_cursor('"', '"')
+
+        elif event.key() == Qt.Key.Key_BraceRight:
+            if self.pass_duplicate_symbol("}") == "exception":
+                super().keyPressEvent(event)
+
+        elif event.key() == Qt.Key.Key_BracketRight:
+            if self.pass_duplicate_symbol("]") == "exception":
+                super().keyPressEvent(event)
+
+        elif event.key() == Qt.Key.Key_Tab:
+            self.textCursor().insertText("    ")
+
+        else:
+            super().keyPressEvent(event)
+
+
+class StyleCodeEditorArea(CodeEditorArea):
+    def __init__(self, __path: str):
+        super().__init__()
+
+        self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
+        self.setObjectName("code-area")
+
+        if __path != None:
+            self.insertPlainText(FileLoader.load_style(__path))
+
+        self.set_default_text_color(StyleTheme.DEFAULT)
+
+    def keyPressEvent(self, event):
+        self.lineNumberArea.update()
+
+        if event.key() == Qt.Key.Key_ParenLeft:
+            self.insert_around_cursor("(", ")")
+
+        elif event.key() == Qt.Key.Key_BraceLeft:
+            self.insert_around_cursor("{", "}")
+
+        elif event.key() == Qt.Key.Key_BracketLeft:
+            self.insert_around_cursor("[", "]")
+
+        elif event.key() == Qt.Key.Key_QuoteDbl:
+            self.insert_around_cursor('"', '"')
+
+        elif event.key() == Qt.Key.Key_ParenRight:
+            if self.pass_duplicate_symbol(")") == "exception":
+                super().keyPressEvent(event)
 
         elif event.key() == Qt.Key.Key_BraceRight:
             if self.pass_duplicate_symbol("}") == "exception":
