@@ -112,6 +112,21 @@
     },
 
     "style-theme": {
-        "default": "#ff4522"
+        "default": "#000000",
+        "symbols": {
+            "color": "#ffffff",
+            "italic": false,
+            "bold": false
+        },
+        "digits": {
+            "color": "#ffffff",
+            "italic": false,
+            "bold": false
+        },
+        "brackets": {
+            "color": "#daaa3f",
+            "italic": false,
+            "bold": false
+        }
     }
 }

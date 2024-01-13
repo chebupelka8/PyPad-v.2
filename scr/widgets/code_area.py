@@ -1,4 +1,4 @@
-from scr.scripts import FileLoader, PythonCodeHighlighter, CodeAnalyzer, JsonCodeHighLighter
+from scr.scripts import FileLoader, PythonCodeHighlighter, CodeAnalyzer, JsonCodeHighLighter, StyleCodeHighLighter
 from scr.data import PythonTheme, JsonTheme, StyleTheme
 from .text_area import TextEditorArea
 
@@ -158,6 +158,7 @@ class StyleCodeEditorArea(CodeEditorArea):
         if __path != None:
             self.insertPlainText(FileLoader.load_style(__path))
 
+        StyleCodeHighLighter(self)
         self.set_default_text_color(StyleTheme.DEFAULT)
 
     def keyPressEvent(self, event):

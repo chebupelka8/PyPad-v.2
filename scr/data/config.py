@@ -46,6 +46,12 @@ class JsonPatterns:
     NULL_TYPE = r"\b(null)\b"
 
 
+class StylePatterns:
+    BRACKETS = r"\[|\]|\{|\}|\(|\)"
+    SYMBOLS = r"\,\:"
+    DIGITS = r"1|2|3|4|5|6|7|8|9|0"
+
+
 class TextCharCreator:
 
     @staticmethod
@@ -101,3 +107,6 @@ class StyleTheme:
     theme = FileLoader.load_json("scr/data/theme.json")["style-theme"]
 
     DEFAULT = theme["default"]
+    SYMBOLS = TextCharCreator.create_char_format(*theme["symbols"].values())
+    DIGITS = TextCharCreator.create_char_format(*theme["digits"].values())
+    BRACKETS = TextCharCreator.create_char_format(*theme["brackets"].values())

@@ -1,4 +1,4 @@
-from scr.data import PythonPatterns, PythonTheme, JsonPatterns, JsonTheme
+from scr.data import PythonPatterns, PythonTheme, JsonPatterns, JsonTheme, StylePatterns, StyleTheme
 
 from PySide6.QtGui import QSyntaxHighlighter
 
@@ -61,6 +61,23 @@ class JsonCodeHighLighter(QSyntaxHighlighter):
         self.__highlight_match(JsonPatterns.SYMBOLS, JsonTheme.SYMBOLS, text)
         self.__highlight_match(JsonPatterns.BRACKETS, JsonTheme.BRACKETS, text)
         self.__highlight_match(JsonPatterns.STRING, JsonTheme.STRING, text)
+
+    def __highlight_match(self, __pattern, __format, __text):
+        for match in re.finditer(__pattern, __text):
+            start = match.start()
+            count = match.end() - match.start()
+
+            self.setFormat(start, count, __format)
+
+
+class StyleCodeHighLighter(QSyntaxHighlighter):
+    def __init__(self, target):
+        super().__init__(target.document())
+
+    def highlightBlock(self, text):
+        self.__highlight_match(StylePatterns.DIGITS, StyleTheme.DIGITS, text)
+        self.__highlight_match(StylePatterns.BRACKETS, StyleTheme.BRACKETS, text)
+        self.__highlight_match(StylePatterns.SYMBOLS, StyleTheme.SYMBOLS, text)
 
     def __highlight_match(self, __pattern, __format, __text):
         for match in re.finditer(__pattern, __text):
