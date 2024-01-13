@@ -8,6 +8,7 @@ from PySide6.QtWidgets import (
     QHBoxLayout, QVBoxLayout
 )
 from PySide6.QtCore import QModelIndex
+from PySide6.QtGui import QIcon
 
 
 class MainWidget(QWidget):
@@ -40,7 +41,7 @@ class MainWidget(QWidget):
         self.workbenchLayout.addWidget(self.tabEditor, stretch=5)
 
     def setup_ui(self) -> None:
-        self.tabEditor.addTab(WelcomeScreen(), "Welcome")
+        self.tabEditor.addTab(WelcomeScreen(), "Welcome!", IconPaths.MAIN)
         # self.tabEditor.addTab(PythonCodeEditorArea("scr/widgets/file_tree.py"), "main.py")
         # self.tabEditor.addTab(JsonCodeEditorArea("scr/data/theme.json"), "data.json")
         # self.tabEditor.addTab(TextEditorArea("dist/data_font.txt"), "text.txt")
@@ -60,19 +61,29 @@ class MainWidget(QWidget):
     def __open_file_for_edit(self, __path: str) -> None:
 
         if FileChecker.is_python_file(__path):
-            self.tabEditor.addTab(PythonCodeEditorArea(__path), os.path.basename(__path))
+            self.tabEditor.addTab(
+                PythonCodeEditorArea(__path), os.path.basename(__path), IconPaths.PYTHON
+            )
 
         elif FileChecker.is_style_file(__path):
-            self.tabEditor.addTab(StyleCodeEditorArea(__path), os.path.basename(__path))
+            self.tabEditor.addTab(
+                StyleCodeEditorArea(__path), os.path.basename(__path), IconPaths.CSS
+            )
 
         elif FileChecker.is_json_file(__path):
-            self.tabEditor.addTab(JsonCodeEditorArea(__path), os.path.basename(__path))
+            self.tabEditor.addTab(
+                JsonCodeEditorArea(__path), os.path.basename(__path), IconPaths.JSON
+            )
 
         elif FileChecker.is_text_file(__path):
-            self.tabEditor.addTab(TextEditorArea(__path), os.path.basename(__path))
+            self.tabEditor.addTab(
+                TextEditorArea(__path), os.path.basename(__path), IconPaths.TXT
+            )
 
         elif FileChecker.is_picture_file(__path):
-            self.tabEditor.addTab(ImageViewer(__path), os.path.basename(__path))
+            self.tabEditor.addTab(
+                ImageViewer(__path), os.path.basename(__path), IconPaths.PICTURE
+            )
 
 
 class Window(QMainWindow):
@@ -81,6 +92,7 @@ class Window(QMainWindow):
 
         self.resize(*WINDOW_SIZE)
         self.setWindowTitle("PyPad v2.0 alpha")
+        self.setWindowIcon(QIcon("assets/icons/window_icon.png"))
         self.setStyleSheet(FileLoader.load_style("scr/styles/main.css"))
         self.setObjectName("window")
 

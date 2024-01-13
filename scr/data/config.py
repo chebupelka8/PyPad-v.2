@@ -7,6 +7,15 @@ WINDOW_SIZE = (1200, 800)
 VERSION = "2.0 alpha"
 
 
+class IconPaths:
+    MAIN = "assets/icons/window_icon.png"
+    PYTHON = "assets/icons/python.png"
+    CSS = "assets/icons/css.png"
+    JSON = "assets/icons/json.png"
+    TXT = "assets/icons/txt.png"
+    PICTURE = "assets/icons/image.png"
+
+
 class PythonPatterns:
     KEYWORDS = r"""\b(and|as|assert|async|await|break|class|continue
     |def|del|elif|else|except|finally|for|from|global|if|import|in|is|lambda|nonlocal
