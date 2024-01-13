@@ -41,7 +41,7 @@ class MainWidget(QWidget):
         self.workbenchLayout.addWidget(self.tabEditor, stretch=5)
 
     def setup_ui(self) -> None:
-        # self.tabEditor.addTab(WelcomeScreen(), "Welcome!", IconPaths.MAIN)
+        self.tabEditor.addTab(WelcomeScreen(), "Welcome!", IconPaths.MAIN)
 
         self.fileTree.clicked.connect(self.__click_file_tree)
 
