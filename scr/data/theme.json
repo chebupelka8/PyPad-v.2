@@ -112,7 +112,7 @@
     },
 
     "style-theme": {
-        "default": "#000000",
+        "default": "#ffffff",
         "symbols": {
             "color": "#ffffff",
             "italic": false,
