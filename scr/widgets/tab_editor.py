@@ -1,4 +1,5 @@
 from scr.scripts import FileLoader
+from scr.data import IconPaths
 from .welcome_screen import WelcomeScreen
 
 from PySide6.QtWidgets import QTabWidget
@@ -43,7 +44,7 @@ class TabEditor(QTabWidget):
         super().removeTab(__index)
 
         if self.count() == 0:
-            self.addTab(WelcomeScreen(), "Welcome!")
+            self.addTab(WelcomeScreen(), "Welcome!", IconPaths.SystemIcons.WELCOME)
 
     def addTab(self, widget: Any, arg__2, icon=None):
         if hasattr(widget, "get_full_path"):

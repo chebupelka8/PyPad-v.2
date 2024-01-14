@@ -14,14 +14,30 @@ class IconProvider(QAbstractFileIconProvider):
             elif __info.isFile():
                 if __info.suffix().lower() == "py":
                     return QIcon(IconPaths.FileIcons.PYTHON)
+
                 elif __info.suffix().lower() in ("png", "jpg", "jpeg"):
                     return QIcon(IconPaths.FileIcons.PICTURE)
+
                 elif __info.suffix().lower() in ("qss", "css"):
                     return QIcon(IconPaths.FileIcons.CSS)
+
                 elif __info.suffix().lower() == "json":
                     return QIcon(IconPaths.FileIcons.JSON)
-                elif __info.suffix().lower() in ("txt", "md"):
+
+                elif __info.suffix().lower() == "txt":
                     return QIcon(IconPaths.FileIcons.TXT)
+
+                elif __info.suffix().lower() == "java":
+                    return QIcon(IconPaths.FileIcons.JAVA)
+
+                elif __info.suffix().lower() == "html":
+                    return QIcon(IconPaths.FileIcons.HTML)
+
+                elif __info.suffix().lower() == "js":
+                    return QIcon(IconPaths.FileIcons.JS)
+
+                elif __info.suffix().lower() == "md":
+                    return QIcon(IconPaths.FileIcons.README)
 
         except AttributeError:
             pass

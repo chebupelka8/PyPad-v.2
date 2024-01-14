@@ -15,9 +15,14 @@ class IconPaths:
         JSON = "assets/icons/file_icons/json.png"
         TXT = "assets/icons/file_icons/txt.png"
         PICTURE = "assets/icons/file_icons/image.png"
+        HTML = "assets/icons/file_icons/html.png"
+        JS = "assets/icons/file_icons/js.png"
+        JAVA = "assets/icons/file_icons/java.png"
+        README = "assets/icons/file_icons/readme.png"
 
     class SystemIcons:
         MAIN = "assets/icons/system_icons/window_icon.png"
+        WELCOME = "assets/icons/system_icons/welcome.png"
 
     class FolderIcons:
         DEFAULT = "assets/icons/folder_icons/default_folder.ico"

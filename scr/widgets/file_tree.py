@@ -40,6 +40,9 @@ class FileTree(QTreeView):
     def get_path_by_index(self, __index) -> str:
         return self.model.filePath(__index)
 
+    def get_file_icon(self, __index):
+        return self.model.fileIcon(__index)
+
     def set_project_dir(self, __path: str):
         if not os.path.isdir(__path):
             raise NotDirectoryError("This must be a directory not file")

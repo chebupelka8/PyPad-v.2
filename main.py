@@ -41,7 +41,7 @@ class MainWidget(QWidget):
         self.workbenchLayout.addWidget(self.tabEditor, stretch=5)
 
     def setup_ui(self) -> None:
-        self.tabEditor.addTab(WelcomeScreen(), "Welcome!")
+        self.tabEditor.addTab(WelcomeScreen(), "Welcome!", IconPaths.SystemIcons.WELCOME)
 
         self.fileTree.clicked.connect(self.__click_file_tree)
 
@@ -52,43 +52,37 @@ class MainWidget(QWidget):
         path = self.fileTree.get_path_by_index(__index)
 
         if os.path.isfile(path):
-            self.__open_file_for_edit(path)
+            self.__open_file_for_edit(path, self.fileTree.get_file_icon(__index))
 
-    def __open_file_for_edit(self, __path: str) -> None:
+    def __open_file_for_edit(self, __path: str, __icon) -> None:
 
         if FileChecker.is_python_file(__path):
             self.tabEditor.addTab(
-                PythonCodeEditorArea(__path), os.path.basename(__path), IconPaths.FileIcons.PYTHON
+                PythonCodeEditorArea(__path), os.path.basename(__path), __icon
             )
 
         elif FileChecker.is_style_file(__path):
             self.tabEditor.addTab(
-                StyleCodeEditorArea(__path), os.path.basename(__path), IconPaths.FileIcons.CSS
+                StyleCodeEditorArea(__path), os.path.basename(__path), __icon
             )
 
         elif FileChecker.is_json_file(__path):
             self.tabEditor.addTab(
-                JsonCodeEditorArea(__path), os.path.basename(__path), IconPaths.FileIcons.JSON
-            )
-
-        elif FileChecker.is_text_file(__path):
-            self.tabEditor.addTab(
-                TextEditorArea(__path), os.path.basename(__path), IconPaths.FileIcons.TXT
+                JsonCodeEditorArea(__path), os.path.basename(__path), __icon
             )
 
         elif FileChecker.is_picture_file(__path):
             self.tabEditor.addTab(
-                ImageViewer(__path), os.path.basename(__path), IconPaths.FileIcons.PICTURE
+                ImageViewer(__path), os.path.basename(__path), __icon
             )
 
         elif FileChecker.is_readable(__path):
             try:
                 self.tabEditor.addTab(
-                    TextEditorArea(__path), os.path.basename(__path)
+                    TextEditorArea(__path), os.path.basename(__path), __icon
                 )
             except UnicodeDecodeError:
                 pass
-
 
         self.tabEditor.setCurrentWidget(self.tabEditor.find_by_path(__path))
 
