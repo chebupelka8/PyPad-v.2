@@ -12,7 +12,7 @@ class IconPaths:
     class FileIcons:
         PYTHON = "assets/icons/file_icons/python.png"
         CSS = "assets/icons/file_icons/css.png"
-        JSON = "assets/icons/file_icons/son.png"
+        JSON = "assets/icons/file_icons/json.png"
         TXT = "assets/icons/file_icons/txt.png"
         PICTURE = "assets/icons/file_icons/image.png"
 

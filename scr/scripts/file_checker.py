@@ -34,6 +34,11 @@ class FileChecker:
     def is_picture_file(__path: str) -> bool:
         return os.path.splitext(__path)[1].lower() in (".jpg", ".jpeg", ".png")
 
+    @staticmethod
+    def is_readable(__path: str) -> bool:
+        with open(__path, "r") as file:
+            return file.readable()
+
     @classmethod
     def verify_python_file(cls, __path: str):
         cls.verify_file_extensions(__path, ".py")

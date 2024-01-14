@@ -81,6 +81,15 @@ class MainWidget(QWidget):
                 ImageViewer(__path), os.path.basename(__path), IconPaths.FileIcons.PICTURE
             )
 
+        elif FileChecker.is_readable(__path):
+            try:
+                self.tabEditor.addTab(
+                    TextEditorArea(__path), os.path.basename(__path)
+                )
+            except UnicodeDecodeError:
+                pass
+
+
         self.tabEditor.setCurrentWidget(self.tabEditor.find_by_path(__path))
 
 

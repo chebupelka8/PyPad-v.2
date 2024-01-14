@@ -22,6 +22,10 @@ class FileLoader:
         return cls.__load_any_text_file(__path)
 
     @classmethod
+    def load_text(cls, __path: str) -> str:
+        return cls.__load_any_text_file(__path)
+
+    @classmethod
     def load_style(cls, __path: str) -> str:
         FileChecker.verify_style_file(__path)
 

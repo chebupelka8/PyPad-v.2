@@ -1,4 +1,4 @@
-from scr.scripts import FileLoader
+from scr.scripts import FileLoader, FileChecker
 from scr.data import TextEditorTheme
 
 from PySide6.QtWidgets import QPlainTextEdit, QTextEdit, QWidget
@@ -15,8 +15,8 @@ class TextEditorArea(QPlainTextEdit):
 
         self.__path = __path
 
-        if __path != None:
-            self.insertPlainText(FileLoader.load_text_file(__path, ".txt", ".md"))
+        if __path != None and FileChecker.is_readable(__path):
+            self.insertPlainText(FileLoader.load_text(__path))
 
         # self setup
         self.setLineWrapMode(QPlainTextEdit.LineWrapMode.NoWrap)
