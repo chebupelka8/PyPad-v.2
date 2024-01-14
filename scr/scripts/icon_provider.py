@@ -9,6 +9,7 @@ class IconProvider(QAbstractFileIconProvider):
         try:
 
             if __info.isDir():
+
                 return QIcon(IconPaths.FolderIcons.DEFAULT)
 
             elif __info.isFile():

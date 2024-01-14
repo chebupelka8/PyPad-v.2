@@ -25,7 +25,9 @@ class IconPaths:
         WELCOME = "assets/icons/system_icons/welcome.png"
 
     class FolderIcons:
-        DEFAULT = "assets/icons/folder_icons/default_folder.ico"
+        DEFAULT = "assets/icons/folder_icons/Yellow-folder.ico"
+        MUSIC = "assets/icons/folder_icons/Yellow-folder-music.ico"
+        PICTURE = "assets/icons/folder_icons/Yellow-folder-pictures.ico"
 
 
 class PythonPatterns:

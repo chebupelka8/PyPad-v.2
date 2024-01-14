@@ -17,7 +17,7 @@ class TabEditor(QTabWidget):
         self.setObjectName("tab-editor")
 
         self.setTabsClosable(True)
-        self.setIconSize(QSize(25, 25))
+        self.setIconSize(QSize(20, 20))
         self.tabCloseRequested.connect(self.removeTab)
 
     def find_by_path(self, __path: str):

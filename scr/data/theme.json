@@ -11,7 +11,7 @@
             "bold": false
         },
         "string": {
-            "color": "#84a98c",
+            "color": "#52b788",
             "italic": false,
             "bold": false
         },
@@ -80,7 +80,7 @@
     "json-theme": {
         "default": "#ffffff",
         "string": {
-            "color": "#84a98c",
+            "color": "#52b788",
             "italic": false,
             "bold": false
         },
@@ -100,7 +100,7 @@
             "bold": false
         },
         "digits": {
-            "color": "#ffffff",
+            "color": "#8ecae6",
             "italic": false,
             "bold": false
         },
