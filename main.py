@@ -41,7 +41,7 @@ class MainWidget(QWidget):
         self.workbenchLayout.addWidget(self.tabEditor, stretch=5)
 
     def setup_ui(self) -> None:
-        self.tabEditor.addTab(WelcomeScreen(), "Welcome!", IconPaths.MAIN)
+        self.tabEditor.addTab(WelcomeScreen(), "Welcome!")
 
         self.fileTree.clicked.connect(self.__click_file_tree)
 
@@ -58,28 +58,30 @@ class MainWidget(QWidget):
 
         if FileChecker.is_python_file(__path):
             self.tabEditor.addTab(
-                PythonCodeEditorArea(__path), os.path.basename(__path), IconPaths.PYTHON
+                PythonCodeEditorArea(__path), os.path.basename(__path), IconPaths.FileIcons.PYTHON
             )
 
         elif FileChecker.is_style_file(__path):
             self.tabEditor.addTab(
-                StyleCodeEditorArea(__path), os.path.basename(__path), IconPaths.CSS
+                StyleCodeEditorArea(__path), os.path.basename(__path), IconPaths.FileIcons.CSS
             )
 
         elif FileChecker.is_json_file(__path):
             self.tabEditor.addTab(
-                JsonCodeEditorArea(__path), os.path.basename(__path), IconPaths.JSON
+                JsonCodeEditorArea(__path), os.path.basename(__path), IconPaths.FileIcons.JSON
             )
 
         elif FileChecker.is_text_file(__path):
             self.tabEditor.addTab(
-                TextEditorArea(__path), os.path.basename(__path), IconPaths.TXT
+                TextEditorArea(__path), os.path.basename(__path), IconPaths.FileIcons.TXT
             )
 
         elif FileChecker.is_picture_file(__path):
             self.tabEditor.addTab(
-                ImageViewer(__path), os.path.basename(__path), IconPaths.PICTURE
+                ImageViewer(__path), os.path.basename(__path), IconPaths.FileIcons.PICTURE
             )
+
+        self.tabEditor.setCurrentWidget(self.tabEditor.find_by_path(__path))
 
 
 class Window(QMainWindow):
@@ -88,7 +90,7 @@ class Window(QMainWindow):
 
         self.resize(*WINDOW_SIZE)
         self.setWindowTitle("PyPad v2.0 alpha")
-        self.setWindowIcon(QIcon("assets/icons/window_icon.png"))
+        self.setWindowIcon(QIcon("assets/icons/system_icons/window_icon.png"))
         self.setStyleSheet(FileLoader.load_style("scr/styles/main.css"))
         self.setObjectName("window")
 

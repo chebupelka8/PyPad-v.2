@@ -1,4 +1,4 @@
-from scr.scripts import FileLoader
+from scr.scripts import FileLoader, IconProvider
 from scr.exceptions import NotDirectoryError
 
 import os
@@ -22,6 +22,7 @@ class FileTree(QTreeView):
         self.setModel(self.model)
         self.setRootIndex(self.model.index(""))
         self.setHeaderHidden(True)
+        self.model.setIconProvider(IconProvider())
 
         for i in range(1, 4):
             self.header().setSectionHidden(i, True)

@@ -8,12 +8,19 @@ VERSION = "2.0 alpha"
 
 
 class IconPaths:
-    MAIN = "assets/icons/window_icon.png"
-    PYTHON = "assets/icons/python.png"
-    CSS = "assets/icons/css.png"
-    JSON = "assets/icons/json.png"
-    TXT = "assets/icons/txt.png"
-    PICTURE = "assets/icons/image.png"
+
+    class FileIcons:
+        PYTHON = "assets/icons/file_icons/python.png"
+        CSS = "assets/icons/file_icons/css.png"
+        JSON = "assets/icons/file_icons/son.png"
+        TXT = "assets/icons/file_icons/txt.png"
+        PICTURE = "assets/icons/file_icons/image.png"
+
+    class SystemIcons:
+        MAIN = "assets/icons/system_icons/window_icon.png"
+
+    class FolderIcons:
+        DEFAULT = "assets/icons/folder_icons/default_folder.ico"
 
 
 class PythonPatterns:
