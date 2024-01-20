@@ -19,6 +19,10 @@ class FileChecker:
         return os.path.splitext(__path)[1].lower() == ".py"
 
     @staticmethod
+    def is_html_file(__path: str) -> bool:
+        return os.path.splitext(__path)[1].lower() == ".html"
+
+    @staticmethod
     def is_json_file(__path: str) -> bool:
         return os.path.splitext(__path)[1].lower() == ".json"
 

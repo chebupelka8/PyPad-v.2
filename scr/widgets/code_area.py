@@ -1,8 +1,15 @@
-from scr.scripts import FileLoader, PythonCodeHighlighter, CodeAnalyzer, JsonCodeHighLighter, StyleCodeHighLighter
+from scr.scripts import (
+    FileLoader, PythonCodeHighlighter, CodeAnalyzer,
+    JsonCodeHighLighter, StyleCodeHighLighter,
+)
 from scr.data import PythonTheme, JsonTheme, StyleTheme
 from .text_area import TextEditorArea
 
 from PySide6.QtCore import Qt
+
+from pygments import highlight
+from pygments.lexers import PythonLexer
+from pygments.formatters import HtmlFormatter
 
 
 class CodeEditorArea(TextEditorArea):
@@ -43,6 +50,7 @@ class PythonCodeEditorArea(CodeEditorArea):
         self.setObjectName("code-area")
 
         if __path != None:
+            # self.highlight_insert(FileLoader.load_python_file(__path))
             self.insertPlainText(FileLoader.load_python_file(__path))
 
         PythonCodeHighlighter(self)  # set highlighter
@@ -50,6 +58,11 @@ class PythonCodeEditorArea(CodeEditorArea):
 
     def get_full_path(self):
         return self.__path
+
+    def highlight_insert(self, text):
+        self.clear()
+        highlighted_text = highlight(text, PythonLexer(), HtmlFormatter())
+        self.appendHtml(highlighted_text)
 
     def keyPressEvent(self, event):
         self.lineNumberArea.update()  # update number area
@@ -208,3 +221,16 @@ class StyleCodeEditorArea(CodeEditorArea):
 
         else:
             super().keyPressEvent(event)
+
+
+class HtmlCodeEditorArea(CodeEditorArea):
+    def __init__(self, __path: str | None = None):
+        super().__init__()
+
+        self.__path = __path
+
+        self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
+        self.setObjectName("code-area")
+
+    def get_full_path(self):
+        return

@@ -35,9 +35,9 @@ class PythonPatterns:
     |def|del|elif|else|except|finally|for|from|global|if|import|in|is|lambda|nonlocal
     |not|or|pass|raise|return|try|while|with|yield|case)\b"""
 
-    CLASS_NAME = r"^\s*class .*"
+    CLASS_NAME = r'\bclass\b\s*(\w+)'
 
-    FUNCTION_NAME = r"^\s*def \w*\(.*\).*:"
+    FUNCTION_NAME = r'\bdef\b\s*(\w+)'
 
     PYTHON_FUNCTIONS = r"""\b(divmod|map|filter|zip|super|open|help|hex|abs|eval|exec|ord|chr|sorted
     |reversed|enumerate|range|sum|repr|round|type|all|any)\b"""
@@ -49,14 +49,14 @@ class PythonPatterns:
     SPECIAL_SELF = r"\b(self|cls)\b"
 
     BRACKETS = r"\(|\)|\[|\]|\{|\}"
-    DIGITS = r"1|2|3|4|5|6|7|8|9|0"
+    DIGITS = r'\b[+-]?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\b'
     PYTHON_SYMBOLS = r"\=|\+|\-|\>|\&|\<|\%|\/|\*|\|"
 
-    DECORATOR = r"@.*$"
-    COMMENT = r"#.*$"
+    DECORATOR = r'@[^\n]*'
+    COMMENT = r'#[^\n]*'
 
-    STRING_DOUBLE_QUOTATION = r'".*?\n*?"|".*?'
-    STRING_APOSTROPHE = r"'.*?'|'.*?"
+    STRING_DOUBLE_QUOTATION = r'"[^"\\]*(\\.[^"\\]*)*"'
+    STRING_APOSTROPHE = r"'[^'\\]*(\\.[^'\\]*)*'"
     LONG_STRING = r'""".*?"""|""".*?'
 
 
@@ -65,14 +65,14 @@ class JsonPatterns:
     BRACKETS = r"\[|\]|\{|\}"
     BOOLEAN = r"\b(true|false)\b"
     SYMBOLS = r"\,\:"
-    DIGITS = r"1|2|3|4|5|6|7|8|9|0"
-    NULL_TYPE = r"\b(null)\b"
+    DIGITS = r'\b[+-]?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\b'
+    NULL_TYPE = r"\bnull\b"
 
 
 class StylePatterns:
     BRACKETS = r"\[|\]|\{|\}|\(|\)"
     SYMBOLS = r"\,\:"
-    DIGITS = r"1|2|3|4|5|6|7|8|9|0"
+    DIGITS = r'\b[+-]?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\b'
 
 
 class TextCharCreator:

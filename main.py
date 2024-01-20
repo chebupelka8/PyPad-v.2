@@ -76,6 +76,11 @@ class MainWidget(QWidget):
                 ImageViewer(__path), os.path.basename(__path), __icon
             )
 
+        elif FileChecker.is_html_file(__path):
+            self.tabEditor.addTab(
+                HtmlCodeEditorArea(), os.path.basename(__path), __icon
+            )
+
         elif FileChecker.is_readable(__path):
             try:
                 self.tabEditor.addTab(
