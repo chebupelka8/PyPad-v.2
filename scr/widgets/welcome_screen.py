@@ -12,6 +12,6 @@ class WelcomeScreen(QWidget):
         self.setObjectName("welcome-screen")
 
         self.mainLayout = QHBoxLayout()
-        self.mainLayout.addWidget(QLabel("Welcome"), alignment=Qt.AlignmentFlag.AlignCenter)
+        self.mainLayout.addWidget(QLabel("Welcome to PyPad"), alignment=Qt.AlignmentFlag.AlignCenter)
 
         self.setLayout(self.mainLayout)

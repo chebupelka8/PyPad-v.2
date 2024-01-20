@@ -1,6 +1,6 @@
 from scr.scripts import (
     FileLoader, PythonCodeHighlighter, CodeAnalyzer,
-    JsonCodeHighLighter, StyleCodeHighLighter,
+    JsonCodeHighLighter, StyleCodeHighLighter, HtmlCodeHighlighter
 )
 from scr.data import PythonTheme, JsonTheme, StyleTheme
 from .text_area import TextEditorArea
@@ -223,5 +223,10 @@ class HtmlCodeEditorArea(CodeEditorArea):
         self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
         self.setObjectName("code-area")
 
+        if __path != None:
+            self.insertPlainText(FileLoader.load_html(__path))
+
+        HtmlCodeHighlighter(self)
+
     def get_full_path(self):
-        return
+        return self.__path

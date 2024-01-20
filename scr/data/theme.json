@@ -61,7 +61,7 @@
             "bold": false
         },
         "digits": {
-            "color": "#dd6f66",
+            "color": "#8ecae6",
             "italic": false,
             "bold": false
         },
@@ -125,6 +125,25 @@
         },
         "brackets": {
             "color": "#daaa3f",
+            "italic": false,
+            "bold": false
+        }
+    },
+
+    "html-theme": {
+        "default": "#ffffff",
+        "tags": {
+            "color": "#ffffff",
+            "italic": false,
+            "bold": false
+        },
+        "string": {
+            "color": "#52b788",
+            "italic": false,
+            "bold": false
+        },
+        "symbols": {
+            "color": "#ffffff",
             "italic": false,
             "bold": false
         }

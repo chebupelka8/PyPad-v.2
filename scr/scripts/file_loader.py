@@ -38,6 +38,12 @@ class FileLoader:
         return cls.__load_any_text_file(__path)
 
     @classmethod
+    def load_html(cls, __path):
+        FileChecker.verify_html_file(__path)
+
+        return cls.__load_any_text_file(__path)
+
+    @classmethod
     def load_python_file(cls, __path: str) -> str:
         FileChecker.verify_python_file(__path)
 

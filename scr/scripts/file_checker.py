@@ -60,6 +60,10 @@ class FileChecker:
         cls.verify_file_extensions(__path, ".txt", ".md")
 
     @classmethod
+    def verify_html_file(cls, __path: str):
+        cls.verify_file_extensions(__path, ".html")
+
+    @classmethod
     def verify_picture_file(cls, __path: str):
         cls.verify_file_extensions(__path, ".png", ".jpg", ".jpeg")
 

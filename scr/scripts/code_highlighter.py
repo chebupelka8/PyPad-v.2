@@ -1,4 +1,8 @@
-from scr.data import PythonPatterns, PythonTheme, JsonPatterns, JsonTheme, StylePatterns, StyleTheme
+from scr.data import (
+    PythonPatterns, PythonTheme, JsonPatterns,
+    JsonTheme, StylePatterns, StyleTheme,
+    HtmlPatterns, HtmlTheme
+)
 
 from PySide6.QtGui import QSyntaxHighlighter
 
@@ -30,7 +34,7 @@ class PythonCodeHighlighter(CodeHighlighter):
         self.highlight_match(PythonPatterns.NONE_TYPE, PythonTheme.NONE_TYPE, text)
         self.highlight_match(PythonPatterns.DATA_TYPES, PythonTheme.DATA_TYPES, text)
         self.highlight_match(PythonPatterns.BRACKETS, PythonTheme.BRACKETS, text)
-        self.highlight_match(PythonPatterns.SPECIAL_SELF, PythonTheme.SPECIAL, text)
+        self.highlight_match(PythonPatterns.SPECIAL, PythonTheme.SPECIAL, text)
         self.highlight_match(PythonPatterns.DIGITS, PythonTheme.DIGITS, text)
         self.highlight_match(PythonPatterns.PYTHON_SYMBOLS, PythonTheme.SYMBOLS, text)
         self.highlight_match(PythonPatterns.DECORATOR, PythonTheme.DECORATOR, text)
@@ -61,3 +65,13 @@ class StyleCodeHighLighter(CodeHighlighter):
         self.highlight_match(StylePatterns.DIGITS, StyleTheme.DIGITS, text)
         self.highlight_match(StylePatterns.BRACKETS, StyleTheme.BRACKETS, text)
         self.highlight_match(StylePatterns.SYMBOLS, StyleTheme.SYMBOLS, text)
+
+
+class HtmlCodeHighlighter(CodeHighlighter):
+    def __init__(self, target):
+        super().__init__(target.document())
+
+    def highlightBlock(self, text):
+        self.highlight_match(HtmlPatterns.TAGS, HtmlTheme.TAGS, text)
+        self.highlight_match(HtmlPatterns.STRING, HtmlTheme.STRING, text)
+        self.highlight_match(HtmlPatterns.SYMBOLS, HtmlTheme.SYMBOLS, text)

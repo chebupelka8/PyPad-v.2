@@ -46,7 +46,7 @@ class PythonPatterns:
     NONE_TYPE = r"\b(None)\b"
     DATA_TYPES = r"\b(int|float|str|dict|set|tuple|list|bool)\b"
 
-    SPECIAL_SELF = r"\b(self|cls)\b"
+    SPECIAL = r"\b(self|cls)\b"
 
     BRACKETS = r"\(|\)|\[|\]|\{|\}"
     DIGITS = r'\b[+-]?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\b'
@@ -73,6 +73,12 @@ class StylePatterns:
     BRACKETS = r"\[|\]|\{|\}|\(|\)"
     SYMBOLS = r"\,\:"
     DIGITS = r'\b[+-]?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\b'
+
+
+class HtmlPatterns:
+    TAGS = r"<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>"
+    STRING = r'"[^"\\]*(\\.[^"\\]*)*"'
+    SYMBOLS = r""
 
 
 class TextCharCreator:
@@ -133,3 +139,12 @@ class StyleTheme:
     SYMBOLS = TextCharCreator.create_char_format(*theme["symbols"].values())
     DIGITS = TextCharCreator.create_char_format(*theme["digits"].values())
     BRACKETS = TextCharCreator.create_char_format(*theme["brackets"].values())
+
+
+class HtmlTheme:
+    theme = FileLoader.load_json("scr/data/theme.json")["html-theme"]
+
+    DEFAULT = theme["default"]
+    TAGS = TextCharCreator.create_char_format(*theme["tags"].values())
+    STRING = TextCharCreator.create_char_format(*theme["string"].values())
+    SYMBOLS = TextCharCreator.create_char_format(*theme["symbols"].values())
