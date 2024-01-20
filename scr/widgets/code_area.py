@@ -7,10 +7,6 @@ from .text_area import TextEditorArea
 
 from PySide6.QtCore import Qt
 
-from pygments import highlight
-from pygments.lexers import PythonLexer
-from pygments.formatters import HtmlFormatter
-
 
 class CodeEditorArea(TextEditorArea):
     def __init__(self):
@@ -58,11 +54,6 @@ class PythonCodeEditorArea(CodeEditorArea):
 
     def get_full_path(self):
         return self.__path
-
-    def highlight_insert(self, text):
-        self.clear()
-        highlighted_text = highlight(text, PythonLexer(), HtmlFormatter())
-        self.appendHtml(highlighted_text)
 
     def keyPressEvent(self, event):
         self.lineNumberArea.update()  # update number area
