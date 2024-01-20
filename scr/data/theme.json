@@ -1,86 +1,86 @@
 {
     "text-editor-theme": {
-        "default": "#ffffff"
+        "default": "#abb2bf"
     },
 
     "python-theme": {
-        "default": "#ffffff",
+        "default": "#abb2bf",
         "keywords": {
-            "color": "#dd6f66",
+            "color": "#c678dd",
             "italic": false,
             "bold": false
         },
         "string": {
-            "color": "#67d38b",
+            "color": "#98c379",
             "italic": false,
             "bold": false
         },
         "comment": {
-            "color": "#768390",
+            "color": "#7f848e",
             "italic": false,
             "bold": false
         },
         "decorator": {
-            "color": "#dcbdfb",
+            "color": "#61afef",
             "italic": false,
             "bold": false
         },
         "class-names": {
-            "color": "#87bba2",
+            "color": "#e5c07b",
             "italic": false,
             "bold": false
         },
         "func-names": {
-            "color": "#c7bcfa",
+            "color": "#61afef",
             "italic": false,
             "bold": false
         },
         "symbols": {
-            "color": "#dd6f66",
+            "color": "#56b6c2",
             "italic": false,
             "bold": false
         },
         "boolean": {
-            "color": "#dd6f66",
+            "color": "#d19a66",
             "italic": false,
             "bold": false
         },
         "none-type": {
-            "color": "#dd6f66",
+            "color": "#d19a66",
             "italic": false,
             "bold": false
         },
         "data-types": {
-            "color": "#fabd2f",
+            "color": "#56b6c2",
             "italic": false,
             "bold": false
         },
         "functions": {
-            "color": "#fabd2f",
+            "color": "#56b6c2",
             "italic": false,
             "bold": false
         },
         "digits": {
-            "color": "#8ecae6",
+            "color": "#d19a66",
             "italic": false,
             "bold": false
         },
         "brackets": {
-            "color": "#ffffff",
+            "color": "#d19a66",
             "italic": false,
             "bold": false
         },
         "special": {
-            "color": "#f59c47",
+            "color": "#e5c07b",
             "italic": false,
             "bold": false
         }
     },
 
     "json-theme": {
-        "default": "#ffffff",
+        "default": "#abb2bf",
         "string": {
-            "color": "#67d38b",
+            "color": "#98c379",
             "italic": false,
             "bold": false
         },
@@ -90,17 +90,17 @@
             "bold": false
         },
         "symbols": {
-            "color": "#ffffff",
+            "color": "#abb2bf",
             "italic": false,
             "bold": false
         },
         "brackets": {
-            "color": "#daaa3f",
+            "color": "#d19a66",
             "italic": false,
             "bold": false
         },
         "digits": {
-            "color": "#8ecae6",
+            "color": "#d19a66",
             "italic": false,
             "bold": false
         },
@@ -112,38 +112,38 @@
     },
 
     "style-theme": {
-        "default": "#ffffff",
+        "default": "#abb2bf",
         "symbols": {
-            "color": "#ffffff",
+            "color": "#abb2bf",
             "italic": false,
             "bold": false
         },
         "digits": {
-            "color": "#ffffff",
+            "color": "#d19a66",
             "italic": false,
             "bold": false
         },
         "brackets": {
-            "color": "#daaa3f",
+            "color": "#d19a66",
             "italic": false,
             "bold": false
         }
     },
 
     "html-theme": {
-        "default": "#ffffff",
+        "default": "#abb2bf",
         "tags": {
             "color": "#8ddb8c",
             "italic": false,
             "bold": false
         },
         "string": {
-            "color": "#67d38b",
+            "color": "#98c379",
             "italic": false,
             "bold": false
         },
         "symbols": {
-            "color": "#ffffff",
+            "color": "#abb2bf",
             "italic": false,
             "bold": false
         }
