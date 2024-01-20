@@ -35,6 +35,58 @@ class CodeEditorArea(TextEditorArea):
         else:
             return "exception"
 
+    def key_press_filter(
+            self, __event,
+            paren: bool = False,
+            brace: bool = False,
+            bracket: bool = False,
+            quote_dbl: bool = False,
+            apostrophe: bool = False,
+            tag: bool = False
+    ):
+
+        self.lineNumberArea.update()
+
+        if __event.key() == Qt.Key.Key_ParenLeft and paren:
+            self.insert_around_cursor("(", ")")
+
+        elif __event.key() == Qt.Key.Key_ParenRight and paren:
+            if self.pass_duplicate_symbol(")") == "exception":
+                super().keyPressEvent(__event)
+
+        elif __event.key() == Qt.Key.Key_BraceLeft and brace:
+            self.insert_around_cursor("{", "}")
+
+        elif __event.key() == Qt.Key.Key_BraceRight and brace:
+            if self.pass_duplicate_symbol("}") == "exception":
+                super().keyPressEvent(__event)
+
+        elif __event.key() == Qt.Key.Key_BracketLeft and bracket:
+            self.insert_around_cursor("[", "]")
+
+        elif __event.key() == Qt.Key.Key_BracketRight and bracket:
+            if self.pass_duplicate_symbol("]") == "exception":
+                super().keyPressEvent(__event)
+
+        elif __event.key() == Qt.Key.Key_Less and tag:
+            self.insert_around_cursor("<", ">")
+
+        elif __event.key() == Qt.Key.Key_Greater and tag:
+            if self.pass_duplicate_symbol(">") == "exception":
+                super().keyPressEvent(__event)
+
+        elif __event.key() == Qt.Key.Key_QuoteDbl and quote_dbl:
+            self.insert_around_cursor('"', '"')
+
+        elif __event.key() == Qt.Key.Key_Apostrophe and apostrophe:
+            self.insert_around_cursor("'", "'")
+
+        elif __event.key() == Qt.Key.Key_Tab:
+            self.textCursor().insertText("    ")
+
+        else:
+            super().keyPressEvent(__event)
+
 
 class PythonCodeEditorArea(CodeEditorArea):
     def __init__(self, __path: str | None = None):
@@ -56,39 +108,10 @@ class PythonCodeEditorArea(CodeEditorArea):
         return self.__path
 
     def keyPressEvent(self, event):
-        self.lineNumberArea.update()  # update number area
+        key_func = lambda: (
+            self.key_press_filter(event, True, True, True, True, True))
 
-        if event.key() == Qt.Key.Key_ParenLeft:
-            self.insert_around_cursor("(", ")")
-
-        elif event.key() == Qt.Key.Key_BraceLeft:
-            self.insert_around_cursor("{", "}")
-
-        elif event.key() == Qt.Key.Key_BracketLeft:
-            self.insert_around_cursor("[", "]")
-
-        elif event.key() == Qt.Key.Key_QuoteDbl:
-            self.insert_around_cursor('"', '"')
-
-        elif event.key() == Qt.Key.Key_Apostrophe:
-            self.insert_around_cursor("'", "'")
-
-        elif event.key() == Qt.Key.Key_ParenRight:
-            if self.pass_duplicate_symbol(")") == "exception":
-                super().keyPressEvent(event)
-
-        elif event.key() == Qt.Key.Key_BraceRight:
-            if self.pass_duplicate_symbol("}") == "exception":
-                super().keyPressEvent(event)
-
-        elif event.key() == Qt.Key.Key_BracketRight:
-            if self.pass_duplicate_symbol("]") == "exception":
-                super().keyPressEvent(event)
-
-        elif event.key() == Qt.Key.Key_Tab:
-            self.textCursor().insertText("    ")
-
-        elif event.key() == Qt.Key.Key_Return:
+        if event.key() == Qt.Key.Key_Return:
             cursor = self.textCursor()
             previous = self.toPlainText().split("\n")[cursor.blockNumber()]
 
@@ -111,10 +134,10 @@ class PythonCodeEditorArea(CodeEditorArea):
                 cursor.insertText("\n" + ("    " * tab_count))
 
             else:
-                super().keyPressEvent(event)
+                key_func()
 
         else:
-            super().keyPressEvent(event)
+            key_func()
 
 
 class JsonCodeEditorArea(CodeEditorArea):
@@ -136,30 +159,7 @@ class JsonCodeEditorArea(CodeEditorArea):
         return self.__path
 
     def keyPressEvent(self, event):
-        self.lineNumberArea.update()
-
-        if event.key() == Qt.Key.Key_BraceLeft:
-            self.insert_around_cursor("{", "}")
-
-        elif event.key() == Qt.Key.Key_BracketLeft:
-            self.insert_around_cursor("[", "]")
-
-        elif event.key() == Qt.Key.Key_QuoteDbl:
-            self.insert_around_cursor('"', '"')
-
-        elif event.key() == Qt.Key.Key_BraceRight:
-            if self.pass_duplicate_symbol("}") == "exception":
-                super().keyPressEvent(event)
-
-        elif event.key() == Qt.Key.Key_BracketRight:
-            if self.pass_duplicate_symbol("]") == "exception":
-                super().keyPressEvent(event)
-
-        elif event.key() == Qt.Key.Key_Tab:
-            self.textCursor().insertText("    ")
-
-        else:
-            super().keyPressEvent(event)
+        self.key_press_filter(event, False, True, True, True, False)
 
 
 class StyleCodeEditorArea(CodeEditorArea):
@@ -181,37 +181,7 @@ class StyleCodeEditorArea(CodeEditorArea):
         return self.__path
 
     def keyPressEvent(self, event):
-        self.lineNumberArea.update()
-
-        if event.key() == Qt.Key.Key_ParenLeft:
-            self.insert_around_cursor("(", ")")
-
-        elif event.key() == Qt.Key.Key_BraceLeft:
-            self.insert_around_cursor("{", "}")
-
-        elif event.key() == Qt.Key.Key_BracketLeft:
-            self.insert_around_cursor("[", "]")
-
-        elif event.key() == Qt.Key.Key_QuoteDbl:
-            self.insert_around_cursor('"', '"')
-
-        elif event.key() == Qt.Key.Key_ParenRight:
-            if self.pass_duplicate_symbol(")") == "exception":
-                super().keyPressEvent(event)
-
-        elif event.key() == Qt.Key.Key_BraceRight:
-            if self.pass_duplicate_symbol("}") == "exception":
-                super().keyPressEvent(event)
-
-        elif event.key() == Qt.Key.Key_BracketRight:
-            if self.pass_duplicate_symbol("]") == "exception":
-                super().keyPressEvent(event)
-
-        elif event.key() == Qt.Key.Key_Tab:
-            self.textCursor().insertText("    ")
-
-        else:
-            super().keyPressEvent(event)
+        self.key_press_filter(event, True, False, True, True, True)
 
 
 class HtmlCodeEditorArea(CodeEditorArea):
@@ -230,3 +200,6 @@ class HtmlCodeEditorArea(CodeEditorArea):
 
     def get_full_path(self):
         return self.__path
+
+    def keyPressEvent(self, event):
+        self.key_press_filter(event, False, False, False, True, True, True)

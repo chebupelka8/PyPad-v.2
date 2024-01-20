@@ -133,7 +133,7 @@
     "html-theme": {
         "default": "#ffffff",
         "tags": {
-            "color": "#ffffff",
+            "color": "#8ddb8c",
             "italic": false,
             "bold": false
         },

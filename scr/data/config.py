@@ -78,7 +78,7 @@ class StylePatterns:
 class HtmlPatterns:
     TAGS = r"<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>"
     STRING = r'"[^"\\]*(\\.[^"\\]*)*"'
-    SYMBOLS = r""
+    SYMBOLS = r"\<\>\/"
 
 
 class TextCharCreator:
