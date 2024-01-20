@@ -3,7 +3,7 @@ from scr.data import TextEditorTheme
 
 from PySide6.QtWidgets import QPlainTextEdit, QTextEdit, QWidget
 from PySide6.QtGui import QColor, QTextFormat, QPainter, QFont, QPalette
-from PySide6.QtCore import Qt, QRect, QSize, QPoint, QLine
+from PySide6.QtCore import Qt, QRect, QSize, QPoint
 
 
 class TextEditorArea(QPlainTextEdit):

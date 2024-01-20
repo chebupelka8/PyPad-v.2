@@ -111,6 +111,8 @@ class PythonCodeEditorArea(CodeEditorArea):
         key_func = lambda: (
             self.key_press_filter(event, True, True, True, True, True))
 
+        self.lineNumberArea.update()
+
         if event.key() == Qt.Key.Key_Return:
             cursor = self.textCursor()
             previous = self.toPlainText().split("\n")[cursor.blockNumber()]
@@ -124,7 +126,7 @@ class PythonCodeEditorArea(CodeEditorArea):
                     prev[-1]  # checks if there is a character at the end of the line
 
                 except IndexError:
-                    prev = "//none"
+                    prev = "//"
             else:
                 prev = previous
 
