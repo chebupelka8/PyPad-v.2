@@ -1,3 +1,3 @@
 <p align="center">
-  <img src="assets/icons/system_icons/main.png">
+  <img src="assets/icons/system_icons/main.png" width=800>
 </p>
