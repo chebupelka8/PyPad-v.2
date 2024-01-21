@@ -1,8 +1,7 @@
 
 
 <p align="center">
-   <img src="https://img.shields.io/bower/v/:packageName
-" alt="Unity Version">
+   <img src="https://img.shields.io/bower/v/:packageName" alt="Unity Version">
    <img src="" alt="Game Version">
    <img src="" alt="License">
 </p>
