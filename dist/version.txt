@@ -1,2 +1,0 @@
-PyPad --version v.2 alpha
-in Development
