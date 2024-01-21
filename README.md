@@ -18,8 +18,8 @@
 
 <p align="center">
 
-  <img src="pypad_screenshots/1.png">
-  <img src="pypad_screenshots/2.png">
-  <img src="pypad_screenshots/3.png">
+  <img src="screenshots/1.png">
+  <img src="screenshots/2.png">
+  <img src="screenshots/3.png">
   
 </p>
