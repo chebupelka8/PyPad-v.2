@@ -2,7 +2,7 @@ from scr.scripts import (
     FileLoader, PythonCodeHighlighter, CodeAnalyzer,
     JsonCodeHighLighter, StyleCodeHighLighter, HtmlCodeHighlighter
 )
-from scr.data import PythonTheme, JsonTheme, StyleTheme
+from scr.data import PythonTheme, JsonTheme, StyleTheme, HtmlTheme
 from .text_area import TextEditorArea
 
 from PySide6.QtCore import Qt
@@ -131,8 +131,10 @@ class PythonCodeEditorArea(CodeEditorArea):
                 prev = previous
 
             if prev[-1] == ":" or self.toPlainText().split("\n")[cursor.blockNumber()][:4] == "    ":
-                tab_count = (CodeAnalyzer.find_tabs_in_string(previous) +
-                             CodeAnalyzer.check_last_character_is_colon(prev))
+                tab_count = (
+                        CodeAnalyzer.find_tabs_in_string(previous) +
+                        CodeAnalyzer.check_last_character_is_colon(prev)
+                )
                 cursor.insertText("\n" + ("    " * tab_count))
 
             else:
@@ -199,6 +201,7 @@ class HtmlCodeEditorArea(CodeEditorArea):
             self.insertPlainText(FileLoader.load_html(__path))
 
         HtmlCodeHighlighter(self)
+        self.set_default_text_color(HtmlTheme.DEFAULT)
 
     def get_full_path(self):
         return self.__path

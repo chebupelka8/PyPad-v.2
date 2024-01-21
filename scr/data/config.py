@@ -4,7 +4,6 @@ from scr.scripts import FileLoader
 
 
 WINDOW_SIZE = (1200, 800)
-VERSION = "2.0 alpha"
 
 
 class IconPaths:
