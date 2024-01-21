@@ -12,4 +12,6 @@
   <img src="https://img.shields.io/github/watchers/chebupelka8/PyPad-v.2">
   
 </p>
+
+
 PyPad - is a code editor for different programming languages. PyPad supports some languages like a Python, Json, Html and CSS. So far, PyPad is in development.
