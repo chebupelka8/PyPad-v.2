@@ -18,6 +18,6 @@
 
 <p align="center">
 
-  <img src="https://ibb.co/89d01ss">
+  <img src="pypad_screenshots/1.png">
   
 </p>
