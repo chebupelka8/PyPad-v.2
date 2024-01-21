@@ -18,6 +18,6 @@
 
 <p align="center">
 
-  <img src="file:///C:/Users/Дети%20повелителя/Pictures/Screenshots/Снимок%20экрана%20(216).png">
+  <img src="https://ibb.co/89d01ss">
   
 </p>
