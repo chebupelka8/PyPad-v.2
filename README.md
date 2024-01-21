@@ -1,10 +1,6 @@
 
 
-<p align="center">
-   <img src="https://img.shields.io/bower/v/:packageName" alt="Unity Version">
-   <img src="" alt="Game Version">
-   <img src="" alt="License">
-</p>
+[![Latest Version](https://img.shields.io/github/v/tag/<USER>/<REPOSITORY>?sort=semver&label=version)](https://github.com/<USER>/<REPOSITORY>/)
 
 ## About
 
