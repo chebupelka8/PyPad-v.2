@@ -14,4 +14,4 @@
 </p>
 
 
-PyPad - is a code editor for different programming languages. PyPad supports some languages like a Python, Json, Html and CSS. So far, PyPad is in development.
+<b>PyPad</b> - is a code editor for different programming languages. PyPad supports some languages like a Python, Json, Html and CSS. So far, PyPad is in development.
