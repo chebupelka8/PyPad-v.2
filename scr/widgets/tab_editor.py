@@ -17,6 +17,8 @@ class TabEditor(QTabWidget):
         self.setObjectName("tab-editor")
 
         self.setTabsClosable(True)
+        self.setMovable(True)
+        self.setMouseTracking(True)
         self.setIconSize(QSize(20, 20))
         self.tabCloseRequested.connect(self.removeTab)
 

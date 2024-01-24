@@ -1,7 +1,8 @@
 from scr.scripts import FileLoader
 
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel
+from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QFont, QPixmap
 
 
 class WelcomeScreen(QWidget):
@@ -11,7 +12,26 @@ class WelcomeScreen(QWidget):
         self.setStyleSheet(FileLoader.load_style("scr/styles/welcome_screen.css"))
         self.setObjectName("welcome-screen")
 
-        self.mainLayout = QHBoxLayout()
-        self.mainLayout.addWidget(QLabel("Welcome to PyPad"), alignment=Qt.AlignmentFlag.AlignCenter)
+        self.mainLayout = QVBoxLayout()
+        self.mainLayout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
+        logoLabel = self.__label()
+        icon = QPixmap("assets/icons/system_icons/Logo PyPad.png")
+        logoLabel.setPixmap(icon)
+
+        infoLabel = self.__label("""PyPad - is a code editor for different programming languages.
+        PyPad supports some languages like a Python, Json, Html and CSS. So far,
+        PyPad is in development and it is not suitable for use,
+        but you can watch the demo version of the project and test it.""", 17)
+
+        self.mainLayout.addWidget(logoLabel)
+        self.mainLayout.addWidget(infoLabel)
         self.setLayout(self.mainLayout)
+
+    def __label(self, __text: str | None= None, __font_size: int | None = None) -> QLabel:
+        label = QLabel(__text) if __text != None else QLabel()
+        label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        if __font_size != None: label.setFont(QFont("Cascadia mono", __font_size, 1, False))
+        label.setWordWrap(True)
+
+        return label
