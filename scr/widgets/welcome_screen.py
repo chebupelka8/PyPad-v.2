@@ -28,10 +28,11 @@ class WelcomeScreen(QWidget):
         self.mainLayout.addWidget(infoLabel)
         self.setLayout(self.mainLayout)
 
-    def __label(self, __text: str | None= None, __font_size: int | None = None) -> QLabel:
-        label = QLabel(__text) if __text != None else QLabel()
+    @staticmethod
+    def __label(__text: str | None = None, __font_size: int | None = None) -> QLabel:
+        label = QLabel(__text) if __text is not None else QLabel()
         label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        if __font_size != None: label.setFont(QFont("Cascadia mono", __font_size, 1, False))
+        if __font_size is not None: label.setFont(QFont("Cascadia mono", __font_size, 1, False))
         label.setWordWrap(True)
 
         return label
