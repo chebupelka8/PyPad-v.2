@@ -99,7 +99,7 @@ class Window(QMainWindow):
         super().__init__()
 
         self.resize(*WINDOW_SIZE)
-        self.setWindowTitle("PyPad v2.0 alpha")
+        self.setWindowTitle("PyPad v0.1 alpha")
         self.setWindowIcon(QIcon("assets/icons/system_icons/window_icon.png"))
         self.setStyleSheet(FileLoader.load_style("scr/styles/main.css"))
         self.setObjectName("window")
