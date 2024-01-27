@@ -8,7 +8,7 @@ from .text_area import TextEditorArea
 from PySide6.QtCore import Qt
 
 
-class CodeEditorArea(TextEditorArea):
+class _CodeEditorArea(TextEditorArea):
     def __init__(self, __path: str | None = None):
         super().__init__()
 
@@ -93,7 +93,7 @@ class CodeEditorArea(TextEditorArea):
             super().keyPressEvent(__event)
 
 
-class PythonCodeEditorArea(CodeEditorArea):
+class PythonCodeEditorArea(_CodeEditorArea):
     def __init__(self, __path: str | None = None):
         super().__init__(__path)
 
@@ -144,7 +144,7 @@ class PythonCodeEditorArea(CodeEditorArea):
             key_func()
 
 
-class JsonCodeEditorArea(CodeEditorArea):
+class JsonCodeEditorArea(_CodeEditorArea):
     def __init__(self, __path: str | None = None):
         super().__init__(__path)
 
@@ -161,7 +161,7 @@ class JsonCodeEditorArea(CodeEditorArea):
         self.key_press_filter(event, False, True, True, True, False)
 
 
-class StyleCodeEditorArea(CodeEditorArea):
+class StyleCodeEditorArea(_CodeEditorArea):
     def __init__(self, __path: str):
         super().__init__(__path)
 
@@ -178,7 +178,7 @@ class StyleCodeEditorArea(CodeEditorArea):
         self.key_press_filter(event, True, False, True, True, True)
 
 
-class HtmlCodeEditorArea(CodeEditorArea):
+class HtmlCodeEditorArea(_CodeEditorArea):
     def __init__(self, __path: str | None = None):
         super().__init__(__path)
 
@@ -192,4 +192,6 @@ class HtmlCodeEditorArea(CodeEditorArea):
         # self.set_default_text_color(HtmlTheme.DEFAULT)
 
     def keyPressEvent(self, event):
-        self.key_press_filter(event, False, False, False, True, True, True)
+        self.key_press_filter(
+            event, False, False, False, True, True, True
+        )

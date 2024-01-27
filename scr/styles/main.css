@@ -1,3 +1,32 @@
 QMainWindow#window {
     background-color: #1e1e1e;
 }
+
+QMenu {
+    background-color: #252525;
+    color: white;
+    border: 1px solid #2c2c2c;
+    min-width: 100px;
+    border-radius: 4px;
+}
+
+QMenu::item {
+    padding: 2px 15px;
+    border-radius: 4px;
+}
+
+QMenu::item:selected {
+    background-color: #303030;
+}
+
+
+/*      QACTION      */
+/*QAction {
+    color: #fbf1c7;
+    padding: 4px 20px;
+    border-radius: 4px;
+}
+
+QAction:selected {
+    background-color: #333;
+}*/
