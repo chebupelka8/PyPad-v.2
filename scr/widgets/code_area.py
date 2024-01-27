@@ -9,8 +9,13 @@ from PySide6.QtCore import Qt
 
 
 class CodeEditorArea(TextEditorArea):
-    def __init__(self):
+    def __init__(self, __path: str | None = None):
         super().__init__()
+
+        self.__path = __path
+
+    def get_full_path(self):
+        return self.__path
 
     def insert_around_cursor(self, __symbol_1: str, __symbol_2: str) -> None:
         cursor = self.textCursor()
@@ -90,26 +95,21 @@ class CodeEditorArea(TextEditorArea):
 
 class PythonCodeEditorArea(CodeEditorArea):
     def __init__(self, __path: str | None = None):
-        super().__init__()
-
-        self.__path = __path
+        super().__init__(__path)
 
         self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
         self.setObjectName("code-area")
 
-        if __path != None:
-            # self.highlight_insert(FileLoader.load_python_file(__path))
+        if __path is not None:
             self.insertPlainText(FileLoader.load_python_file(__path))
 
         PythonCodeHighlighter(self)  # set highlighter
-        self.set_default_text_color(PythonTheme.DEFAULT)
-
-    def get_full_path(self):
-        return self.__path
+        # self.set_default_text_color(PythonTheme.DEFAULT)
 
     def keyPressEvent(self, event):
         key_func = lambda: (
-            self.key_press_filter(event, True, True, True, True, True))
+            self.key_press_filter(event, True, True, True, True, True)
+        )
 
         self.lineNumberArea.update()
 
@@ -146,21 +146,16 @@ class PythonCodeEditorArea(CodeEditorArea):
 
 class JsonCodeEditorArea(CodeEditorArea):
     def __init__(self, __path: str | None = None):
-        super().__init__()
-
-        self.__path = __path
+        super().__init__(__path)
 
         self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
         self.setObjectName("code-area")
 
-        if __path != None:
+        if __path is not None:
             self.insertPlainText(FileLoader.load_json_text(__path))
 
         JsonCodeHighLighter(self)
-        self.set_default_text_color(JsonTheme.DEFAULT)
-
-    def get_full_path(self):
-        return self.__path
+        # self.set_default_text_color(JsonTheme.DEFAULT)
 
     def keyPressEvent(self, event):
         self.key_press_filter(event, False, True, True, True, False)
@@ -168,21 +163,16 @@ class JsonCodeEditorArea(CodeEditorArea):
 
 class StyleCodeEditorArea(CodeEditorArea):
     def __init__(self, __path: str):
-        super().__init__()
-
-        self.__path = __path
+        super().__init__(__path)
 
         self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
         self.setObjectName("code-area")
 
-        if __path != None:
+        if __path is not None:
             self.insertPlainText(FileLoader.load_style(__path))
 
         StyleCodeHighLighter(self)
         self.set_default_text_color(StyleTheme.DEFAULT)
-
-    def get_full_path(self):
-        return self.__path
 
     def keyPressEvent(self, event):
         self.key_press_filter(event, True, False, True, True, True)
@@ -190,21 +180,16 @@ class StyleCodeEditorArea(CodeEditorArea):
 
 class HtmlCodeEditorArea(CodeEditorArea):
     def __init__(self, __path: str | None = None):
-        super().__init__()
-
-        self.__path = __path
+        super().__init__(__path)
 
         self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
         self.setObjectName("code-area")
 
-        if __path != None:
+        if __path is not None:
             self.insertPlainText(FileLoader.load_html(__path))
 
         HtmlCodeHighlighter(self)
-        self.set_default_text_color(HtmlTheme.DEFAULT)
-
-    def get_full_path(self):
-        return self.__path
+        # self.set_default_text_color(HtmlTheme.DEFAULT)
 
     def keyPressEvent(self, event):
         self.key_press_filter(event, False, False, False, True, True, True)

@@ -15,7 +15,7 @@ class TextEditorArea(QPlainTextEdit):
 
         self.__path = __path
 
-        if __path != None and FileChecker.is_readable(__path):
+        if __path is not None and FileChecker.is_readable(__path):
             self.insertPlainText(FileLoader.load_text(__path))
 
         # self setup
