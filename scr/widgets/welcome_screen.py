@@ -32,5 +32,6 @@ class WelcomeScreen(QWidget):
         label = QLabel(__text) if __text != None else QLabel()
         label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         if __font_size != None: label.setFont(QFont("Cascadia mono", __font_size, 1, False))
+        label.setWordWrap(True)
 
         return label
