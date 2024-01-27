@@ -12,6 +12,7 @@ class FileTree(QTreeView):
 
         self.setStyleSheet(FileLoader.load_style("scr/styles/file_tree.css"))
         self.setObjectName("file-tree")
+        self.setMinimumWidth(300)
 
         self.setAcceptDrops(True)
         self.setDragEnabled(True)

@@ -22,7 +22,7 @@ class WelcomeScreen(QWidget):
         infoLabel = self.__label("""PyPad - is a code editor for different programming languages.
         PyPad supports some languages like a Python, Json, Html and CSS. So far,
         PyPad is in development and it is not suitable for use,
-        but you can watch the demo version of the project and test it.""", 17)
+        but you can watch the demo version of the project and test it.""", 16)
 
         self.mainLayout.addWidget(logoLabel)
         self.mainLayout.addWidget(infoLabel)
@@ -32,6 +32,5 @@ class WelcomeScreen(QWidget):
         label = QLabel(__text) if __text != None else QLabel()
         label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         if __font_size != None: label.setFont(QFont("Cascadia mono", __font_size, 1, False))
-        label.setWordWrap(True)
 
         return label

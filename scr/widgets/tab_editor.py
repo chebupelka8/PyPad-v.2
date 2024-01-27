@@ -15,6 +15,7 @@ class TabEditor(QTabWidget):
 
         self.setStyleSheet(FileLoader.load_style("scr/styles/tab_editor.css"))
         self.setObjectName("tab-editor")
+        self.setMinimumSize(1040, 480)
 
         self.setTabsClosable(True)
         self.setMovable(True)
