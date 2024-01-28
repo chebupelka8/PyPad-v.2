@@ -2,8 +2,8 @@ from scr.scripts import (
     FileLoader, PythonCodeHighlighter, CodeAnalyzer,
     JsonCodeHighLighter, StyleCodeHighLighter, HtmlCodeHighlighter
 )
-from scr.data import PythonTheme, JsonTheme, StyleTheme, HtmlTheme
 from .text_area import TextEditorArea
+from scr.scripts import AutoCompleter
 
 from PySide6.QtCore import Qt
 
@@ -100,6 +100,11 @@ class PythonCodeEditorArea(_CodeEditorArea):
         self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
         self.setObjectName("code-area")
 
+        self.auto_completer = AutoCompleter(__path)
+        self.textChanged.connect(lambda: self.auto_completer.st(self.toPlainText()))
+        # self.textChanged.connect(lambda: print(self.auto_completer.get()))
+        # self.cursorPositionChanged.connect(lambda: self.auto_completer.st(self.get_current_line_text(), 0))
+
         if __path is not None:
             self.insertPlainText(FileLoader.load_python_file(__path))
 
@@ -172,7 +177,7 @@ class StyleCodeEditorArea(_CodeEditorArea):
             self.insertPlainText(FileLoader.load_style(__path))
 
         StyleCodeHighLighter(self)
-        self.set_default_text_color(StyleTheme.DEFAULT)
+        # self.set_default_text_color(StyleTheme.DEFAULT)
 
     def keyPressEvent(self, event):
         self.key_press_filter(event, True, False, True, True, True)
