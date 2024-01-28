@@ -83,6 +83,9 @@ class TextEditorArea(QPlainTextEdit):
     def get_current_line_text(self) -> str:
         return self.toPlainText().split("\n")[self.__current_line]
 
+    def get_text_before_cursor(self) -> str:
+        return self.toPlainText()[:self.textCursor().position()]
+
     def __update_line_number_area_width(self):
         self.setViewportMargins(self.get_number_area_width(), 0, 0, 0)
 

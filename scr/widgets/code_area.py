@@ -101,7 +101,8 @@ class PythonCodeEditorArea(_CodeEditorArea):
         self.setObjectName("code-area")
 
         self.auto_completer = AutoCompleter(__path)
-        self.textChanged.connect(lambda: self.auto_completer.st(self.toPlainText()))
+        self.textChanged.connect(lambda: self.auto_completer.st(self.get_text_before_cursor()))
+        # self.textChanged.connect(lambda: print(self.get_text_before_cursor()))
         # self.textChanged.connect(lambda: print(self.auto_completer.get()))
         # self.cursorPositionChanged.connect(lambda: self.auto_completer.st(self.get_current_line_text(), 0))
 
