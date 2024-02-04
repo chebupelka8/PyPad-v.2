@@ -11,6 +11,7 @@ class Completer(QListWidget):
         self.setWindowFlag(Qt.WindowType.FramelessWindowHint)
 
         self.setStyleSheet(FileLoader.load_style("scr/styles/completer.css"))
+        self.setObjectName("completer")
 
     def set_items(self, __items: list[str]) -> None:
         self.clear()

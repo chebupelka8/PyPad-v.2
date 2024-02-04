@@ -18,6 +18,7 @@ class IconPaths:
         JS = "assets/icons/file_icons/js.png"
         JAVA = "assets/icons/file_icons/java.png"
         README = "assets/icons/file_icons/readme.png"
+        ZIP = "assets/icons/zip-file.png"
 
     class SystemIcons:
         MAIN = "assets/icons/system_icons/window_icon.png"

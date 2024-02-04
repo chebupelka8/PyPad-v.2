@@ -38,14 +38,18 @@ class MainWidget(QWidget):
     def init_ui(self) -> None:
         self.fileTree = FileTree()
         self.tabEditor = TabEditor()
+        self.sideBar = SideBar()
 
+        self.workbenchLayout.addWidget(self.sideBar, stretch=1)
         self.workbenchLayout.addWidget(self.fileTree, stretch=2)
-        self.workbenchLayout.addWidget(self.tabEditor, stretch=5)
+        self.workbenchLayout.addWidget(self.tabEditor, stretch=7)
 
     def setup_ui(self) -> None:
         self.tabEditor.addTab(WelcomeScreen(), "Welcome!", IconPaths.SystemIcons.WELCOME)
 
         self.fileTree.clicked.connect(self.__click_file_tree)
+
+        self.sideBar.file_tree_opener_connect(self.fileTree.show_hide_file_tree)
 
         self.mainLayout.addLayout(self.workbenchLayout)
         self.setLayout(self.mainLayout)
