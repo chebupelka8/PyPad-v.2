@@ -2,150 +2,150 @@
     "name": "PyPad Theme",
 
     "text-editor-theme": {
-        "default": "#abb2bf"
+        "default": "#adbac7"
     },
 
     "python-theme": {
-        "default": "#abb2bf",
+        "default": "#adbac7",
         "keywords": {
-            "color": "#E7C697",
+            "color": "#da7067",
             "italic": false,
             "bold": false
         },
         "string": {
-            "color": "#98c379",
+            "color": "#96d0ff",
             "italic": false,
             "bold": false
         },
         "comment": {
-            "color": "#7f848e",
+            "color": "#768389",
             "italic": false,
             "bold": false
         },
         "decorator": {
-            "color": "#61afef",
+            "color": "#dcbdfb",
             "italic": false,
             "bold": false
         },
         "class-names": {
-            "color": "#e5c07b",
+            "color": "#f69d50",
             "italic": false,
             "bold": false
         },
         "func-names": {
-            "color": "#61afef",
+            "color": "#dcbdfb",
             "italic": false,
             "bold": false
         },
         "symbols": {
-            "color": "#56b6c2",
+            "color": "#adbac7",
             "italic": false,
             "bold": false
         },
         "boolean": {
-            "color": "#d19a66",
+            "color": "#da7067",
             "italic": false,
             "bold": false
         },
         "none-type": {
-            "color": "#d19a66",
+            "color": "#da7067",
             "italic": false,
             "bold": false
         },
         "data-types": {
-            "color": "#56b6c2",
+            "color": "#6cb6cd",
             "italic": false,
             "bold": false
         },
         "functions": {
-            "color": "#56b6c2",
+            "color": "#6cb6cd",
             "italic": false,
             "bold": false
         },
         "digits": {
-            "color": "#d19a66",
+            "color": "#59aeff",
             "italic": false,
             "bold": false
         },
         "brackets": {
-            "color": "#d19a66",
+            "color": "#59aeff",
             "italic": false,
             "bold": false
         },
         "special": {
-            "color": "#e5c07b",
+            "color": "#f69d50",
             "italic": false,
             "bold": false
         }
     },
 
     "json-theme": {
-        "default": "#abb2bf",
+        "default": "#adbac7",
         "string": {
-            "color": "#98c379",
+            "color": "#96d0ff",
             "italic": false,
             "bold": false
         },
         "boolean": {
-            "color": "#dd6f66",
+            "color": "#da7067",
             "italic": false,
             "bold": false
         },
         "symbols": {
-            "color": "#abb2bf",
+            "color": "#adbac7",
             "italic": false,
             "bold": false
         },
         "brackets": {
-            "color": "#d19a66",
+            "color": "#59aeff",
             "italic": false,
             "bold": false
         },
         "digits": {
-            "color": "#d19a66",
+            "color": "#59aeff",
             "italic": false,
             "bold": false
         },
         "null-type": {
-            "color": "#dd6f66",
+            "color": "#da7067",
             "italic": false,
             "bold": false
         }
     },
 
     "style-theme": {
-        "default": "#abb2bf",
+        "default": "#adbac7",
         "symbols": {
-            "color": "#abb2bf",
+            "color": "#adbac7",
             "italic": false,
             "bold": false
         },
         "digits": {
-            "color": "#d19a66",
+            "color": "#59aeff",
             "italic": false,
             "bold": false
         },
         "brackets": {
-            "color": "#d19a66",
+            "color": "#59aeff",
             "italic": false,
             "bold": false
         }
     },
 
     "html-theme": {
-        "default": "#abb2bf",
+        "default": "#adbac7",
         "tags": {
             "color": "#8ddb8c",
             "italic": false,
             "bold": false
         },
         "string": {
-            "color": "#98c379",
+            "color": "#96d0ff",
             "italic": false,
             "bold": false
         },
         "symbols": {
-            "color": "#abb2bf",
+            "color": "#adbac7",
             "italic": false,
             "bold": false
         }

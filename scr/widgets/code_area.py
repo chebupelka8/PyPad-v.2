@@ -4,7 +4,7 @@ from scr.scripts import (
 )
 from .text_area import TextEditorArea
 from scr.scripts import AutoCompleter
-from .completer import Completer
+from scr.subwidgets import Completer
 
 from PySide6.QtCore import Qt
 

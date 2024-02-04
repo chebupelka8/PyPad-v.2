@@ -59,7 +59,7 @@ class MainWidget(QWidget):
         self.sideBar.settings_opener_connect(self.settingActionMenu.show)
         self.sideBar.file_tree_opener_connect(self.fileTree.show_hide_file_tree)
 
-        self.settingActionMenu.connect_by_title("Open Settings...", self.restart)
+        self.settingActionMenu.connect_by_title("Open Settings...", self.theme_changer_test)
 
         self.mainLayout.addLayout(self.workbenchLayout)
         self.setLayout(self.mainLayout)
@@ -106,6 +106,21 @@ class MainWidget(QWidget):
                 pass
 
         self.tabEditor.setCurrentWidget(self.tabEditor.find_by_path(__path))
+
+    def theme_changer_test(self):
+        from random import choice
+        import json
+
+        themes = [f"scr/data/themes/{i}" for i in os.listdir("scr/data/themes")]
+
+        t = FileLoader.load_json("scr/data/settings.json")
+
+        t["theme"]["path"] = choice(themes)
+
+        with open("scr/data/settings.json", "w") as file:
+            json.dump(t, file, indent=4)
+
+        self.restart()
 
     @staticmethod
     def restart():
