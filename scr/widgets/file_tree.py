@@ -17,8 +17,7 @@ class FileTree(QTreeView):
         self.setAcceptDrops(True)
         self.setDragEnabled(True)
         self.setDragDropMode(QAbstractItemView.DragDropMode.InternalMove)
-        self.setIndentation(10)
-        self.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+        self.setIndentation(20)
         self.setSelectionBehavior(QTreeView.SelectionBehavior.SelectRows)
         self.setEditTriggers(QTreeView.EditTrigger.NoEditTriggers)
 
