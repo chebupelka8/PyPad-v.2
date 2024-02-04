@@ -9,7 +9,7 @@ from PySide6.QtGui import QSyntaxHighlighter
 import re
 
 
-class CodeHighlighter(QSyntaxHighlighter):
+class _CodeHighlighter(QSyntaxHighlighter):
     def __init__(self, target):
         super().__init__(target)
 
@@ -21,7 +21,7 @@ class CodeHighlighter(QSyntaxHighlighter):
             self.setFormat(start, count, __format)
 
 
-class PythonCodeHighlighter(CodeHighlighter):
+class PythonCodeHighlighter(_CodeHighlighter):
     def __init__(self, target):
         super().__init__(target.document())
 
@@ -44,7 +44,7 @@ class PythonCodeHighlighter(CodeHighlighter):
         self.highlight_match(PythonPatterns.LONG_STRING, PythonTheme.STRING, text)
 
 
-class JsonCodeHighLighter(CodeHighlighter):
+class JsonCodeHighLighter(_CodeHighlighter):
     def __init__(self, target) -> None:
         super().__init__(target.document())
 
@@ -57,7 +57,7 @@ class JsonCodeHighLighter(CodeHighlighter):
         self.highlight_match(JsonPatterns.STRING, JsonTheme.STRING, text)
 
 
-class StyleCodeHighLighter(CodeHighlighter):
+class StyleCodeHighLighter(_CodeHighlighter):
     def __init__(self, target):
         super().__init__(target.document())
 
@@ -67,7 +67,7 @@ class StyleCodeHighLighter(CodeHighlighter):
         self.highlight_match(StylePatterns.SYMBOLS, StyleTheme.SYMBOLS, text)
 
 
-class HtmlCodeHighlighter(CodeHighlighter):
+class HtmlCodeHighlighter(_CodeHighlighter):
     def __init__(self, target):
         super().__init__(target.document())
 
