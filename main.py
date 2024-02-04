@@ -3,8 +3,7 @@ from scr import (
     SettingsActionMenu, IconPaths, WelcomeScreen,
     FileChecker, FileLoader, PythonCodeEditorArea,
     HtmlCodeEditorArea, StyleCodeEditorArea, JsonCodeEditorArea,
-    ImageViewer, TextEditorArea, WINDOW_SIZE, restart_application,
-    Restarter
+    ImageViewer, TextEditorArea, WINDOW_SIZE, Restarter
 )
 
 import os
