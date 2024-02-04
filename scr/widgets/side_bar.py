@@ -1,5 +1,4 @@
 from PySide6.QtWidgets import QFrame, QVBoxLayout, QPushButton, QSpacerItem, QSizePolicy
-from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap
 
 from scr.scripts import FileLoader
@@ -27,18 +26,21 @@ class SideBar(QFrame):
         self.setLayout(self.mainLayout)
 
         self.menuAppsBtn = SideBarButton("assets/icons/system_icons/apps.png")
-        self.mainLayout.addWidget(self.menuAppsBtn, Qt.AlignmentFlag.AlignHCenter)
+        self.mainLayout.addWidget(self.menuAppsBtn)
 
         self.fileTreeOpenerBtn = SideBarButton("assets/icons/system_icons/folder-open.png")
-        self.mainLayout.addWidget(self.fileTreeOpenerBtn, Qt.AlignmentFlag.AlignHCenter)
+        self.mainLayout.addWidget(self.fileTreeOpenerBtn)
+
+        self.searchBtn = SideBarButton("assets/icons/system_icons/search.png")
+        self.mainLayout.addWidget(self.searchBtn)
 
         self.mainLayout.addItem(QSpacerItem(30, 2000, QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum))
 
         self.runFileBtn = SideBarButton("assets/icons/system_icons/play.png")
-        self.mainLayout.addWidget(self.runFileBtn, Qt.AlignmentFlag.AlignHCenter)
+        self.mainLayout.addWidget(self.runFileBtn)
 
         self.openSettingsBtn = SideBarButton("assets/icons/system_icons/settings.png")
-        self.mainLayout.addWidget(self.openSettingsBtn, Qt.AlignmentFlag.AlignHCenter)
+        self.mainLayout.addWidget(self.openSettingsBtn)
 
     def file_tree_opener_connect(self, __command) -> None:
         self.fileTreeOpenerBtn.clicked.connect(__command)

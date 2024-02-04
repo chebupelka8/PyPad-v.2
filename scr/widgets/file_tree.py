@@ -17,26 +17,20 @@ class FileTree(QTreeView):
         self.setAcceptDrops(True)
         self.setDragEnabled(True)
         self.setDragDropMode(QAbstractItemView.DragDropMode.InternalMove)
+        self.setIndentation(10)
+        self.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+        self.setSelectionBehavior(QTreeView.SelectionBehavior.SelectRows)
+        self.setEditTriggers(QTreeView.EditTrigger.NoEditTriggers)
 
         self.model = QFileSystemModel()
-        self.model.setRootPath("")
+        self.model.setRootPath(os.getcwd())
         self.setModel(self.model)
-        self.setRootIndex(self.model.index(""))
+        self.setRootIndex(self.model.index(os.getcwd()))
         self.setHeaderHidden(True)
         self.model.setIconProvider(IconProvider())
 
         for i in range(1, 4):
             self.header().setSectionHidden(i, True)
-
-    def dragEnterEvent(self, event):
-        if event.mimeData().hasUrls():
-            event.acceptProposedAction()
-
-    def dropEvent(self, event):
-        urls = event.mimeData().urls()
-
-        for url in urls:
-            print(url)
 
     def get_path_by_index(self, __index) -> str:
         return self.model.filePath(__index)
