@@ -40,6 +40,5 @@ class SideBar(QFrame):
         self.openSettingsBtn = SideBarButton("assets/icons/system_icons/settings.png")
         self.mainLayout.addWidget(self.openSettingsBtn, Qt.AlignmentFlag.AlignHCenter)
 
-
     def file_tree_opener_connect(self, __command) -> None:
         self.fileTreeOpenerBtn.clicked.connect(__command)
