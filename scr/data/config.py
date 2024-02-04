@@ -95,13 +95,13 @@ class TextCharCreator:
 
 
 class TextEditorTheme:
-    theme = FileLoader.load_json("scr/data/theme.json")["text-editor-theme"]
+    theme = FileLoader.load_json(FileLoader.load_json("scr/data/settings.json")["theme"]["path"])["text-editor-theme"]
 
     DEFAULT = theme["default"]
 
 
 class PythonTheme:
-    theme = FileLoader.load_json("scr/data/theme.json")["python-theme"]
+    theme = FileLoader.load_json(FileLoader.load_json("scr/data/settings.json")["theme"]["path"])["python-theme"]
 
     DEFAULT = theme["default"]
     KEYWORDS = TextCharCreator.create_char_format(*theme["keywords"].values())
@@ -121,7 +121,7 @@ class PythonTheme:
 
 
 class JsonTheme:
-    theme = FileLoader.load_json("scr/data/theme.json")["json-theme"]
+    theme = FileLoader.load_json(FileLoader.load_json("scr/data/settings.json")["theme"]["path"])["json-theme"]
 
     DEFAULT = theme["default"]
     STRING = TextCharCreator.create_char_format(*theme["string"].values())
@@ -133,7 +133,7 @@ class JsonTheme:
 
 
 class StyleTheme:
-    theme = FileLoader.load_json("scr/data/theme.json")["style-theme"]
+    theme = FileLoader.load_json(FileLoader.load_json("scr/data/settings.json")["theme"]["path"])["style-theme"]
 
     DEFAULT = theme["default"]
     SYMBOLS = TextCharCreator.create_char_format(*theme["symbols"].values())
@@ -142,7 +142,7 @@ class StyleTheme:
 
 
 class HtmlTheme:
-    theme = FileLoader.load_json("scr/data/theme.json")["html-theme"]
+    theme = FileLoader.load_json(FileLoader.load_json("scr/data/settings.json")["theme"]["path"])["html-theme"]
 
     DEFAULT = theme["default"]
     TAGS = TextCharCreator.create_char_format(*theme["tags"].values())

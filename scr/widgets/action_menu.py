@@ -36,3 +36,4 @@ class SettingsActionMenu(_ActionMenu):
 
         self.add_action("Interpreter Settings...", "assets/icons/system_icons/interpreter.png")
         self.add_action("Open Settings...", "assets/icons/system_icons/settings.png")
+        self.add_action("Themes...", "assets/icons/system_icons/themes.png")

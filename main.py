@@ -1,19 +1,25 @@
-import os.path
+from scr import (
+    FileDialog, FileTree, TabEditor, SideBar,
+    SettingsActionMenu, IconPaths, WelcomeScreen,
+    FileChecker, FileLoader, PythonCodeEditorArea,
+    HtmlCodeEditorArea, StyleCodeEditorArea, JsonCodeEditorArea,
+    ImageViewer, TextEditorArea, WINDOW_SIZE
+)
 
-from scr import *
-
+import os
 import sys
+
 from PySide6.QtWidgets import (
     QWidget, QApplication, QMainWindow,
     QHBoxLayout, QVBoxLayout
 )
-from PySide6.QtCore import QModelIndex
+from PySide6.QtCore import QModelIndex, Qt
 from PySide6.QtGui import QIcon
 
 
 class MainWidget(QWidget):
-    def __init__(self, parent) -> None:
-        super().__init__(parent)
+    def __init__(self) -> None:
+        super().__init__()
 
         # Self
         self.setObjectName("main-widget")
@@ -105,13 +111,41 @@ class Window(QMainWindow):
         super().__init__()
 
         self.resize(*WINDOW_SIZE)
-        self.setWindowTitle("PyPad v0.1 alpha")
+        self.setWindowTitle("PyPad")
         self.setWindowIcon(QIcon("assets/icons/system_icons/window_icon.png"))
         self.setStyleSheet(FileLoader.load_style("scr/styles/main.css"))
         self.setObjectName("window")
 
-        self.mainWidget = MainWidget(self)
+        self.setup()
+
+    def setup(self):
+        self.mainWidget = MainWidget()
+
+        self.mainWidget.settingActionMenu.connect_by_title("Themes...", self.theme_changer_test)
         self.setCentralWidget(self.mainWidget)
+
+    def restart(self):
+        self.close()
+
+        window = self
+        window.setup()
+        window.show()
+
+    def theme_changer_test(self):
+        from random import choice
+        import json
+
+        themes = [f"scr/data/themes/{i}" for i in os.listdir("scr/data/themes")]
+
+        t = FileLoader.load_json("scr/data/settings.json")
+
+        t["theme"]["path"] = choice(themes)
+        print(t)
+
+        with open("scr/data/settings.json", "w") as file:
+            json.dump(t, file, indent=4)
+
+        self.restart()
 
 
 if __name__ == "__main__":

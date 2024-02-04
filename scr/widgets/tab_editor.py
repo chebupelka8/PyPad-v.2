@@ -66,5 +66,5 @@ class TabEditor(QTabWidget):
         else:
             super().addTab(widget, arg__2)
 
-        if icon != None:
+        if icon is not None:
             self.setTabIcon(self.indexOf(widget), QIcon(icon))

@@ -4,5 +4,8 @@
         "size": 17,
         "bold": false,
         "italic": false
+    },
+    "theme": {
+        "path": "scr/data/themes/pypad.json"
     }
 }
