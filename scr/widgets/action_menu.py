@@ -34,5 +34,5 @@ class SettingsActionMenu(_ActionMenu):
     def __init__(self) -> None:
         super().__init__(200)
 
-        self.add_action("Open Settings")
-        self.add_action("Interpreter Settings")
+        self.add_action("Interpreter Settings...", "assets/icons/system_icons/interpreter.png")
+        self.add_action("Open Settings...", "assets/icons/system_icons/settings.png")
