@@ -6,6 +6,6 @@
         "italic": false
     },
     "theme": {
-        "path": "scr/data/themes/pypad.json"
+        "path": "scr/data/themes/one-dark.json"
     }
 }
