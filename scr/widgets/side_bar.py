@@ -1,5 +1,5 @@
-from PySide6.QtWidgets import QWidget, QFrame, QVBoxLayout, QPushButton, QSpacerItem, QSizePolicy
-from PySide6.QtCore import Qt, QSize
+from PySide6.QtWidgets import QFrame, QVBoxLayout, QPushButton, QSpacerItem, QSizePolicy
+from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap
 
 from scr.scripts import FileLoader
@@ -32,10 +32,14 @@ class SideBar(QFrame):
         self.fileTreeOpenerBtn = SideBarButton("assets/icons/system_icons/folder-open.png")
         self.mainLayout.addWidget(self.fileTreeOpenerBtn, Qt.AlignmentFlag.AlignHCenter)
 
+        self.mainLayout.addItem(QSpacerItem(30, 2000, QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum))
+
+        self.runFileBtn = SideBarButton("assets/icons/system_icons/play.png")
+        self.mainLayout.addWidget(self.runFileBtn, Qt.AlignmentFlag.AlignHCenter)
+
         self.openSettingsBtn = SideBarButton("assets/icons/system_icons/settings.png")
         self.mainLayout.addWidget(self.openSettingsBtn, Qt.AlignmentFlag.AlignHCenter)
 
-        self.mainLayout.addItem(QSpacerItem(30, 2000, QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum))
 
     def file_tree_opener_connect(self, __command) -> None:
         self.fileTreeOpenerBtn.clicked.connect(__command)
