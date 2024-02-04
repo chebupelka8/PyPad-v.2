@@ -39,13 +39,16 @@ class AutoCompleter(QThread):
 
         self.__completer = Completer(__path)
 
+    def get(self) -> list[str]:
+        return self.__completer.get()
+
     def run(self):
         self.__completer.get_completions(self.__completer.text)
 
-        print(self.__completer.get())
         self.finished.emit()
 
     def st(self, __text: str):
         self.__completer.text = __text
 
+        self.quit()
         self.start()

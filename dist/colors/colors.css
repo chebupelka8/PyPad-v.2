@@ -1,0 +1,50 @@
+:root {
+    /* !Const */
+    /* Background colors & vars */
+    --main-background-color: #1e1e1e;
+    
+    /* Widgets */
+    --code-area-background-color: #272727;
+    --file-manager-background-color: #232323;
+    
+    /* Button */
+    --button-default-background-color: #232323;
+    --button-hover-background-color: #303030;
+    --button-pressed-background-color: #323232;
+    
+    /* Handle of scrollbar */
+    --scrollbar-default-background-color: #424242;
+    --scrollbar-hover-background-color: #484848;
+    --scrollbar-pressed-background-color: #525252;
+    
+    /* Borders */
+    --border-color: #2c2c2c;
+    --border-default-radius: 4px;
+    
+    
+    /* !Text colors */
+    --main-text-color: #ffffff;
+    --placeholder-text-color: #757575;
+    --second-text-color: #b3b3b3;
+    --inactive-text-color: #4e4e4e;
+    --line-numbering-color: #7f7f7f;
+    
+    
+    /* !Other special */
+    --dark-color: #191919;
+    --creamy-white-color: #b6b6b6;
+    --sep-color: #2f2f2f;
+    
+    --info-text: #309764;
+    --info-text-1: #e3631b;
+
+    /* !Fonts */
+    /* 
+    Cascadia code - @import url('https://fonts.cdnfonts.com/css/cascadia-code');
+    JetBrains mono - @import url('https://fonts.cdnfonts.com/css/jetbrains-mono-2');
+    Poppins - @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500&display=swap');
+    Inter - @import url('https://fonts.cdnfonts.com/css/inter');
+    */
+    --main-editor-font: "Cascadia mono", sans-serif;
+    --main-appearance-font: "Inter", sans-serif;
+}

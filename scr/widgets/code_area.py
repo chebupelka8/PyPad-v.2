@@ -4,6 +4,7 @@ from scr.scripts import (
 )
 from .text_area import TextEditorArea
 from scr.scripts import AutoCompleter
+from .completer import Completer
 
 from PySide6.QtCore import Qt
 
@@ -100,11 +101,12 @@ class PythonCodeEditorArea(_CodeEditorArea):
         self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
         self.setObjectName("code-area")
 
-        self.auto_completer = AutoCompleter(__path)
-        self.textChanged.connect(lambda: self.auto_completer.st(self.get_text_before_cursor()))
-        # self.textChanged.connect(lambda: print(self.get_text_before_cursor()))
-        # self.textChanged.connect(lambda: print(self.auto_completer.get()))
-        # self.cursorPositionChanged.connect(lambda: self.auto_completer.st(self.get_current_line_text(), 0))
+        # self.completer = Completer()
+        # self.completer.show()
+
+        # self.auto_completer = AutoCompleter(__path)
+        # self.textChanged.connect(lambda: self.auto_completer.st(self.get_text_before_cursor()))
+        # self.textChanged.connect(lambda: self.completer.set_items(self.auto_completer.get()))
 
         if __path is not None:
             self.insertPlainText(FileLoader.load_python_file(__path))
