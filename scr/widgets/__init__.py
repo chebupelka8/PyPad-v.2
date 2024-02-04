@@ -6,3 +6,4 @@ from .tab_editor import *
 from .welcome_screen import *
 from .completer import *
 from .side_bar import *
+from .action_menu import *

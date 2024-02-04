@@ -39,6 +39,7 @@ class MainWidget(QWidget):
         self.fileTree = FileTree()
         self.tabEditor = TabEditor()
         self.sideBar = SideBar()
+        self.settingActionMenu = SettingsActionMenu()
 
         self.workbenchLayout.addWidget(self.sideBar, stretch=1)
         self.workbenchLayout.addWidget(self.fileTree, stretch=2)
@@ -49,6 +50,7 @@ class MainWidget(QWidget):
 
         self.fileTree.clicked.connect(self.__click_file_tree)
 
+        self.sideBar.settings_opener_connect(self.settingActionMenu.show)
         self.sideBar.file_tree_opener_connect(self.fileTree.show_hide_file_tree)
 
         self.mainLayout.addLayout(self.workbenchLayout)

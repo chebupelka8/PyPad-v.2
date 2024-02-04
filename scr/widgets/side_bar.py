@@ -44,3 +44,6 @@ class SideBar(QFrame):
 
     def file_tree_opener_connect(self, __command) -> None:
         self.fileTreeOpenerBtn.clicked.connect(__command)
+
+    def settings_opener_connect(self, __command) -> None:
+        self.openSettingsBtn.clicked.connect(__command)

@@ -1,0 +1,15 @@
+QMenu {
+    background-color: #252525;
+    color: white;
+    border: 1px solid #2c2c2c;
+    border-radius: 4px;
+}
+
+QMenu::item {
+    padding: 2px 15px;
+    border-radius: 4px;
+}
+
+QMenu::item:selected {
+    background-color: #303030;
+}
