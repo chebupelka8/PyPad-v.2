@@ -3,7 +3,8 @@ from scr import (
     SettingsActionMenu, IconPaths, WelcomeScreen,
     FileChecker, FileLoader, PythonCodeEditorArea,
     HtmlCodeEditorArea, StyleCodeEditorArea, JsonCodeEditorArea,
-    ImageViewer, TextEditorArea, WINDOW_SIZE
+    ImageViewer, TextEditorArea, WINDOW_SIZE, restart_application,
+    Restarter
 )
 
 import os
@@ -46,6 +47,7 @@ class MainWidget(QWidget):
         self.tabEditor = TabEditor()
         self.sideBar = SideBar()
         self.settingActionMenu = SettingsActionMenu()
+        self.restarter = Restarter()
 
         self.workbenchLayout.addWidget(self.sideBar, stretch=1)
         self.workbenchLayout.addWidget(self.fileTree, stretch=2)
@@ -59,7 +61,7 @@ class MainWidget(QWidget):
         self.sideBar.settings_opener_connect(self.settingActionMenu.show)
         self.sideBar.file_tree_opener_connect(self.fileTree.show_hide_file_tree)
 
-        self.settingActionMenu.connect_by_title("Open Settings...", self.theme_changer_test)
+        self.settingActionMenu.connect_by_title("Themes...", self._theme_changer_test)
 
         self.mainLayout.addLayout(self.workbenchLayout)
         self.setLayout(self.mainLayout)
@@ -107,7 +109,7 @@ class MainWidget(QWidget):
 
         self.tabEditor.setCurrentWidget(self.tabEditor.find_by_path(__path))
 
-    def theme_changer_test(self):
+    def _theme_changer_test(self):
         from random import choice
         import json
 
@@ -120,11 +122,7 @@ class MainWidget(QWidget):
         with open("scr/data/settings.json", "w") as file:
             json.dump(t, file, indent=4)
 
-        self.restart()
-
-    @staticmethod
-    def restart():
-        os.execv(sys.executable, ['python'] + sys.argv)
+        self.restarter.show()
 
 
 class Window(QMainWindow):
