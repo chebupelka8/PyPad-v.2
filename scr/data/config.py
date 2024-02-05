@@ -99,17 +99,17 @@ class _AbstractTheme:
 
     @classmethod
     def reload_theme(cls) -> None:
-        cls.theme = FileLoader.load_json(FileLoader.load_json("scr/data/settings.json")["theme"]["path"])
+        cls.theme = _AbstractTheme.theme
 
 
-class TextEditorTheme:
-    theme = FileLoader.load_json(FileLoader.load_json("scr/data/settings.json")["theme"]["path"])["text-editor-theme"]
+class TextEditorTheme(_AbstractTheme):
+    theme = _AbstractTheme.theme["text-editor-theme"]
 
     DEFAULT = theme["default"]
 
 
 class PythonTheme(_AbstractTheme):
-    theme = FileLoader.load_json(FileLoader.load_json("scr/data/settings.json")["theme"]["path"])["python-theme"]
+    theme = _AbstractTheme.theme["python-theme"]
 
     DEFAULT = theme["default"]
     KEYWORDS = TextCharCreator.create_char_format(*theme["keywords"].values())
@@ -127,29 +127,9 @@ class PythonTheme(_AbstractTheme):
     BRACKETS = TextCharCreator.create_char_format(*theme["brackets"].values())
     SPECIAL = TextCharCreator.create_char_format(*theme["special"].values())
 
-    @classmethod
-    def update(cls):
-        # cls.reload_theme()
 
-        cls.DEFAULT = cls.theme["default"]
-        cls.KEYWORDS = TextCharCreator.create_char_format(*cls.theme["keywords"].values())
-        cls.STRING = TextCharCreator.create_char_format(*cls.theme["string"].values())
-        cls.COMMENT = TextCharCreator.create_char_format(*cls.theme["comment"].values())
-        cls.DECORATOR = TextCharCreator.create_char_format(*cls.theme["decorator"].values())
-        cls.CLASS_NAMES = TextCharCreator.create_char_format(*cls.theme["class-names"].values())
-        cls.FUNC_NAMES = TextCharCreator.create_char_format(*cls.theme["func-names"].values())
-        cls.SYMBOLS = TextCharCreator.create_char_format(*cls.theme["symbols"].values())
-        cls.BOOLEAN = TextCharCreator.create_char_format(*cls.theme["boolean"].values())
-        cls.NONE_TYPE = TextCharCreator.create_char_format(*cls.theme["none-type"].values())
-        cls.DATA_TYPES = TextCharCreator.create_char_format(*cls.theme["data-types"].values())
-        cls.FUNCTIONS = TextCharCreator.create_char_format(*cls.theme["functions"].values())
-        cls.DIGITS = TextCharCreator.create_char_format(*cls.theme["digits"].values())
-        cls.BRACKETS = TextCharCreator.create_char_format(*cls.theme["brackets"].values())
-        cls.SPECIAL = TextCharCreator.create_char_format(*cls.theme["special"].values())
-
-
-class JsonTheme:
-    theme = FileLoader.load_json(FileLoader.load_json("scr/data/settings.json")["theme"]["path"])["json-theme"]
+class JsonTheme(_AbstractTheme):
+    theme = _AbstractTheme.theme["json-theme"]
 
     DEFAULT = theme["default"]
     STRING = TextCharCreator.create_char_format(*theme["string"].values())
@@ -160,8 +140,8 @@ class JsonTheme:
     NULL_TYPE = TextCharCreator.create_char_format(*theme["null-type"].values())
 
 
-class StyleTheme:
-    theme = FileLoader.load_json(FileLoader.load_json("scr/data/settings.json")["theme"]["path"])["style-theme"]
+class StyleTheme(_AbstractTheme):
+    theme = _AbstractTheme.theme["style-theme"]
 
     DEFAULT = theme["default"]
     SYMBOLS = TextCharCreator.create_char_format(*theme["symbols"].values())
@@ -169,8 +149,8 @@ class StyleTheme:
     BRACKETS = TextCharCreator.create_char_format(*theme["brackets"].values())
 
 
-class HtmlTheme:
-    theme = FileLoader.load_json(FileLoader.load_json("scr/data/settings.json")["theme"]["path"])["html-theme"]
+class HtmlTheme(_AbstractTheme):
+    theme = _AbstractTheme.theme["html-theme"]
 
     DEFAULT = theme["default"]
     TAGS = TextCharCreator.create_char_format(*theme["tags"].values())
