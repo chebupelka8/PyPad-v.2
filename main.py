@@ -3,7 +3,8 @@ from scr import (
     SettingsActionMenu, IconPaths, WelcomeScreen,
     FileChecker, FileLoader, PythonCodeEditorArea,
     HtmlCodeEditorArea, StyleCodeEditorArea, JsonCodeEditorArea,
-    ImageViewer, TextEditorArea, WINDOW_SIZE, Restarter
+    ImageViewer, TextEditorArea, WINDOW_SIZE, Restarter,
+    PythonTheme
 )
 
 import os
@@ -120,6 +121,8 @@ class MainWidget(QWidget):
 
         with open("scr/data/settings.json", "w") as file:
             json.dump(t, file, indent=4)
+
+        # PythonTheme.update()
 
         self.restarter.show()
 

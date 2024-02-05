@@ -103,7 +103,7 @@ class PythonCodeEditorArea(_CodeEditorArea):
 
         # self.completer = Completer()
         # self.completer.show()
-
+        #
         # self.auto_completer = AutoCompleter(__path)
         # self.textChanged.connect(lambda: self.auto_completer.st(self.get_text_before_cursor()))
         # self.textChanged.connect(lambda: self.completer.set_items(self.auto_completer.get()))

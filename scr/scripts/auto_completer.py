@@ -50,5 +50,5 @@ class AutoCompleter(QThread):
     def st(self, __text: str):
         self.__completer.text = __text
 
-        self.quit()
+        # self.quit()
         self.start()
