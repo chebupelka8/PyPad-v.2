@@ -4,7 +4,7 @@ from scr.scripts import (
 )
 from .text_area import TextEditorArea
 from scr.scripts import AutoCompleter
-from scr.subwidgets import Completer
+from scr.subwidgets import Completer, WindowCompleter
 
 from PySide6.QtCore import Qt, QThreadPool
 
@@ -103,10 +103,13 @@ class PythonCodeEditorArea(_CodeEditorArea):
 
         self.thread_pool = QThreadPool()
 
-        self.completer = Completer()
+        self.completer = WindowCompleter(self)
         self.completer.show()
+        self.completer.setVisible(False)
 
         self.textChanged.connect(self.__auto_completer_run)
+        self.cursorPositionChanged.connect(self.__auto_completer_run)
+        # print(self.font())
 
         if __path is not None:
             self.insertPlainText(FileLoader.load_python_file(__path))
@@ -115,9 +118,32 @@ class PythonCodeEditorArea(_CodeEditorArea):
         # self.set_default_text_color(PythonTheme.DEFAULT)
 
     def __auto_completer_run(self):
-        s = AutoCompleter(self.get_full_path(), self.get_text_before_cursor())
-        s.signal.res.connect(lambda items: self.completer.set_items(items))
-        self.thread_pool.start(s)
+        self.completer.move(
+            self.cursorRect().x() + self.font().pointSize() + self.get_number_area_width(),
+            self.cursorRect().y() + self.font().pointSize() * 1.2
+        )
+        cursor = self.textCursor()
+
+        auto_completer = AutoCompleter(
+            self.get_full_path(),
+            self.toPlainText(),
+            self.get_current_line(),
+            cursor.positionInBlock()
+        )
+        auto_completer.signal.res.connect(self.__show_completer)
+        self.thread_pool.clear()
+        self.thread_pool.start(auto_completer)
+
+    def __show_completer(self, __items) -> None:
+        self.completer.clear()
+
+        if len(__items) == 0:
+            self.completer.setVisible(False)
+            return
+
+        self.completer.set_items(__items)
+        self.completer.setVisible(True)
+        self.completer.setFocus()
 
     def keyPressEvent(self, event):
         key_func = lambda: (

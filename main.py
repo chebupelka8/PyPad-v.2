@@ -46,7 +46,7 @@ class MainWidget(QWidget):
         self.tabEditor = TabEditor()
         self.sideBar = SideBar()
         self.settingActionMenu = SettingsActionMenu()
-        self.restarter = Restarter()
+        self.restarter = Restarter(self)
 
         self.workbenchLayout.addWidget(self.sideBar, stretch=1)
         self.workbenchLayout.addWidget(self.fileTree, stretch=2)

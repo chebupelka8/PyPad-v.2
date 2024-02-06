@@ -5,8 +5,8 @@ from PySide6.QtCore import Qt
 
 
 class _Dialog(QDialog):
-    def __init__(self, __message: str, accept_title: str = "Ok", reject_title: str = "Cancel") -> None:
-        super().__init__(f=Qt.WindowType.FramelessWindowHint)
+    def __init__(self, __parent, __message: str, accept_title: str = "Ok", reject_title: str = "Cancel") -> None:
+        super().__init__(__parent, f=Qt.WindowType.FramelessWindowHint)
 
         self.setWindowTitle("PyPad")
         self.setStyleSheet(FileLoader.load_style("scr/styles/dialog.css"))
@@ -34,8 +34,8 @@ class _Dialog(QDialog):
 
 
 class Restarter(_Dialog):
-    def __init__(self) -> None:
-        super().__init__("Do you want to restart the IDE to save the changes", "Restart")
+    def __init__(self, __parent) -> None:
+        super().__init__(__parent, "Do you want to restart the IDE to save the changes", "Restart")
 
         self.setMinimumWidth(500)
 

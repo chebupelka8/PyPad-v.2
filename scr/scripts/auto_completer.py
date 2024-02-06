@@ -7,20 +7,22 @@ class CompleterSignal(QObject):
 
 
 class AutoCompleter(QRunnable):
-    def __init__(self, __path: str, __text: str) -> None:
+    def __init__(self, __path: str, __text: str, __line: int, __column: int) -> None:
         super().__init__()
 
         self.__path = __path
         self.__text = __text
+        self.__line = __line
+        self.__column = __column
         self.signal = CompleterSignal()
 
         self.__completions = []
 
-    def get_completions(self, __text: str) -> list[str] | None:
+    def get_completions(self, __text: str, __line: int, __column: int) -> list[str] | None:
         if __text.strip("\n").strip(" ") == "": return
 
         script = Script(__text, path=self.__path)
-        completions = script.complete()
+        completions = script.complete(__line + 1, __column)
         res = [i.name for i in completions]
 
         return res
@@ -28,8 +30,13 @@ class AutoCompleter(QRunnable):
     def get(self):
         return self.__completions
 
+    def set_values(self, __text: str, __line: int, __column):
+        self.__text = __text
+        self.__line = __line
+        self.__column = __column
+
     @Slot()
     def run(self):
-        self.__completions = self.get_completions(self.__text)
+        self.__completions = self.get_completions(self.__text, self.__line, self.__column)
         # print(self.__completions)
         self.signal.res.emit(self.__completions)
