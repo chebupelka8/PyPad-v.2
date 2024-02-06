@@ -6,7 +6,7 @@ from .text_area import TextEditorArea
 from scr.scripts import AutoCompleter
 from scr.subwidgets import Completer
 
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QThreadPool, Slot
 
 
 class _CodeEditorArea(TextEditorArea):
@@ -101,18 +101,23 @@ class PythonCodeEditorArea(_CodeEditorArea):
         self.setStyleSheet(FileLoader.load_style("scr/styles/editor_area.css"))
         self.setObjectName("code-area")
 
-        # self.completer = Completer()
-        # self.completer.show()
-        #
-        # self.auto_completer = AutoCompleter(__path)
-        # self.textChanged.connect(lambda: self.auto_completer.st(self.get_text_before_cursor()))
-        # self.textChanged.connect(lambda: self.completer.set_items(self.auto_completer.get()))
+        self.thread_pool = QThreadPool()
+
+        self.completer = Completer()
+        self.completer.show()
+
+        self.textChanged.connect(self.__auto_completer_run)
 
         if __path is not None:
             self.insertPlainText(FileLoader.load_python_file(__path))
 
         PythonCodeHighlighter(self)  # set highlighter
         # self.set_default_text_color(PythonTheme.DEFAULT)
+
+    def __auto_completer_run(self):
+        s = AutoCompleter(self.get_full_path(), self.get_text_before_cursor())
+        s.signal.res.connect(lambda items: self.completer.set_items(items))
+        self.thread_pool.start(s)
 
     def keyPressEvent(self, event):
         key_func = lambda: (
