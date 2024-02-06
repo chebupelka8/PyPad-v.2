@@ -131,7 +131,7 @@ class Window(QMainWindow):
         self.resize(*WINDOW_SIZE)
         self.setWindowTitle("PyPad")
         self.setWindowIcon(QIcon("assets/icons/system_icons/window_icon.png"))
-        self.setStyleSheet(FileLoader.load_style("scr/styles/main.css"))
+        self.setStyleSheet(FileLoader.load_style("scr/styles/main.css") + FileLoader.load_style("scr/styles/action_menu.css"))
         self.setObjectName("window")
 
         self.mainWidget = MainWidget()

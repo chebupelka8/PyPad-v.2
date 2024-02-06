@@ -13,7 +13,7 @@ class _ActionMenu(QMenu):
 
     def add_action(self, __title: str, __path_to_icon: str | None = None):
         action = QAction(__title, self)
-        if __path_to_icon is not None: action.setIcon(QIcon(__path_to_icon))
+        # if __path_to_icon is not None: action.setIcon(QIcon(__path_to_icon))
 
         self.addAction(action)
 
