@@ -121,8 +121,6 @@ class MainWidget(QWidget):
         with open("scr/data/settings.json", "w") as file:
             json.dump(t, file, indent=4)
 
-        # PythonTheme.update()
-
         self.restarter.show()
 
 

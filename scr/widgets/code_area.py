@@ -6,7 +6,7 @@ from .text_area import TextEditorArea
 from scr.scripts import AutoCompleter
 from scr.subwidgets import Completer
 
-from PySide6.QtCore import Qt, QThreadPool, Slot
+from PySide6.QtCore import Qt, QThreadPool
 
 
 class _CodeEditorArea(TextEditorArea):

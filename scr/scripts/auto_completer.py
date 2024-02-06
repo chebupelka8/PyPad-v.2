@@ -1,5 +1,5 @@
 from jedi import Script
-from PySide6.QtCore import QRunnable, QObject, Slot, Signal, QThreadPool
+from PySide6.QtCore import QRunnable, QObject, Slot, Signal
 
 
 class CompleterSignal(QObject):
