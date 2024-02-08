@@ -102,6 +102,7 @@ class PythonCodeEditorArea(_CodeEditorArea):
         self.setObjectName("code-area")
 
         self.thread_pool = QThreadPool()
+        self.thread_pool.setMaxThreadCount(1)
 
         self.completer = WindowCompleter(self)
         self.completer.show()
@@ -118,6 +119,7 @@ class PythonCodeEditorArea(_CodeEditorArea):
         # self.set_default_text_color(PythonTheme.DEFAULT)
 
     def __auto_completer_run(self):
+        print("i")
         self.completer.move(
             self.cursorRect().x() + self.font().pointSize() + self.get_number_area_width(),
             self.cursorRect().y() + self.font().pointSize() * 1.2
