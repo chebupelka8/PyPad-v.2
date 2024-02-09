@@ -1,12 +1,13 @@
 class CodeAnalyzer:
 
     @staticmethod
-    def find_tabs_in_string(string: str) -> int:
+    def find_tabs_in_string(string: str, __cursor_index: int) -> int:
         res = 0
 
-        for letter in string:
-            if letter == " ":
+        for i, letter in enumerate(string):
+            if letter == " " and i < __cursor_index:
                 res += 1
+
             else:
                 break
 

@@ -4,9 +4,11 @@ from scr.scripts import (
 )
 from .text_area import TextEditorArea
 from scr.scripts import AutoCompleter
-from scr.subwidgets import Completer, WindowCompleter
+from scr.subwidgets import WindowCompleter
 
 from PySide6.QtCore import Qt, QThreadPool
+
+from jedi import Script
 
 
 class _CodeEditorArea(TextEditorArea):
@@ -40,6 +42,9 @@ class _CodeEditorArea(TextEditorArea):
 
         else:
             return "exception"
+
+    def get_last_word_of_current_line(self):
+        ...
 
     def key_press_filter(
             self, __event,
@@ -110,7 +115,6 @@ class PythonCodeEditorArea(_CodeEditorArea):
 
         self.textChanged.connect(self.__auto_completer_run)
         self.cursorPositionChanged.connect(self.__auto_completer_run)
-        # print(self.font())
 
         if __path is not None:
             self.insertPlainText(FileLoader.load_python_file(__path))
@@ -119,33 +123,31 @@ class PythonCodeEditorArea(_CodeEditorArea):
         # self.set_default_text_color(PythonTheme.DEFAULT)
 
     def __auto_completer_run(self):
-        print("i")
         self.completer.move(
             self.cursorRect().x() + self.font().pointSize() + self.get_number_area_width(),
             self.cursorRect().y() + self.font().pointSize() * 1.2
         )
-        cursor = self.textCursor()
 
         auto_completer = AutoCompleter(
             self.get_full_path(),
             self.toPlainText(),
             self.get_current_line(),
-            cursor.positionInBlock()
+            self.textCursor().positionInBlock()
         )
+
         auto_completer.signal.res.connect(self.__show_completer)
-        self.thread_pool.clear()
         self.thread_pool.start(auto_completer)
 
     def __show_completer(self, __items) -> None:
         self.completer.clear()
 
-        if len(__items) == 0:
+        if __items is None or len(__items) == 0:
             self.completer.setVisible(False)
             return
 
         self.completer.set_items(__items)
         self.completer.setVisible(True)
-        self.completer.setFocus()
+        # self.completer.setFocus()
 
     def keyPressEvent(self, event):
         key_func = lambda: (
@@ -156,12 +158,12 @@ class PythonCodeEditorArea(_CodeEditorArea):
 
         if event.key() == Qt.Key.Key_Return:
             cursor = self.textCursor()
-            previous = self.toPlainText().split("\n")[cursor.blockNumber()]
+            previous = self.get_current_line_text()
 
             if previous == "":
                 prev = "//"  # it's need for remove exception - list has no index -1
 
-            elif not previous.isspace() and previous.replace(" ", "") != "":
+            elif not previous.isspace() and previous.strip(" ") != "":
                 try:
                     prev = previous[:cursor.positionInBlock()].rstrip()
                     prev[-1]  # checks if there is a character at the end of the line
@@ -171,10 +173,10 @@ class PythonCodeEditorArea(_CodeEditorArea):
             else:
                 prev = previous
 
-            if prev[-1] == ":" or self.toPlainText().split("\n")[cursor.blockNumber()][:4] == "    ":
+            if prev[-1] == ":" or self.get_current_line_text()[:4] == "    ":
                 tab_count = (
-                        CodeAnalyzer.find_tabs_in_string(previous) +
-                        CodeAnalyzer.check_last_character_is_colon(prev)
+                    CodeAnalyzer.find_tabs_in_string(previous, cursor.positionInBlock()) +
+                    CodeAnalyzer.check_last_character_is_colon(prev)
                 )
                 cursor.insertText("\n" + ("    " * tab_count))
 
