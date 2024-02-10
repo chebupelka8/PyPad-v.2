@@ -15,6 +15,14 @@ class FileChecker:
                 raise WrongFileExtension(f"File extension must be in {__extensions}")
 
     @staticmethod
+    def check_exist(__path: str) -> bool:
+        try:
+            return os.path.exists(__path)
+
+        except Exception:
+            return False
+
+    @staticmethod
     def is_python_file(__path: str) -> bool:
         return os.path.splitext(__path)[1].lower() == ".py"
 

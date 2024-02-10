@@ -1,4 +1,4 @@
-from scr.scripts import FileLoader
+from scr.scripts import FileLoader, FileChecker
 from scr.config import IconPaths
 from .welcome_screen import WelcomeScreen
 
@@ -23,6 +23,12 @@ class TabEditor(QTabWidget):
         self.setMouseTracking(True)
         self.setIconSize(QSize(20, 20))
         self.tabCloseRequested.connect(self.removeTab)
+
+    def check_tab_paths_exist(self):
+        for i in range(self.count()):
+            if hasattr(self.widget(i), "get_full_path"):
+                if not FileChecker.check_exist(self.widget(i).get_full_path()):
+                    self.removeTab(i)
 
     def find_by_path(self, __path: str):
         for i in range(self.count()):
@@ -50,7 +56,7 @@ class TabEditor(QTabWidget):
         else:
             return ""  # it's need for remove exception
 
-    def removeTab(self, __index):
+    def removeTab(self, __index: int):
         super().removeTab(__index)
 
         if self.count() == 0:

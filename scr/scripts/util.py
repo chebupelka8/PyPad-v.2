@@ -8,4 +8,4 @@ def restart_application() -> None:
 
 
 def get_all_font_families() -> list[str]:
-    return [f.name for f in matplotlib.font_manager.fontManager.ttflist]
+    return [font.name for font in matplotlib.font_manager.fontManager.ttflist]
