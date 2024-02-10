@@ -118,7 +118,7 @@ class MainWidget(QWidget):
 
         self.themeChanger.show()
         self.themeChanger.add_items(*themes)
-        self.themeChanger.listWidget.itemClicked.connect(lambda str: print(str.text()))
+        self.themeChanger.listWidget.itemClicked.connect(lambda str: self.themeChanger.change_theme(str.text()))
 
         # t = FileLoader.load_json("scr/data/settings.json")
         #

@@ -7,6 +7,8 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt
 
+import os
+
 
 class _DialogWindow(QDialog):
     def __init__(self, __parent) -> None:
@@ -126,3 +128,17 @@ class Restarter(_Dialog):
 class ThemeChanger(_ListChanger):
     def __init__(self, __parent, *__theme_names: str) -> None:
         super().__init__(__parent, *__theme_names)
+
+    def change_theme(self, __name: str) -> None:
+        print(self.get_path_by_name(__name))
+
+    def get_path_by_name(self, __name: str) -> str:
+        themes = {
+            FileLoader.load_json(f"scr/data/themes/{i}")["name"] : f"scr/data/themes/{i}"
+            for i in os.listdir("scr/data/themes")
+        }
+        print(themes)
+
+        for i in range(self.listWidget.count()):
+            if self.listWidget.item(i).text() == __name:
+                return themes[__name]
