@@ -17,6 +17,13 @@ class _DialogWindow(QDialog):
 
         self.setStyleSheet(FileLoader.load_style("scr/styles/ui.css"))
 
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_Escape:
+            self.close()
+
+        else:
+            super().keyPressEvent(event)
+
 
 class _Dialog(_DialogWindow):
     def __init__(self, __parent, __message: str, accept_title: str = "Ok", reject_title: str = "Cancel") -> None:
@@ -42,6 +49,13 @@ class _Dialog(_DialogWindow):
         self.buttonLayout.addWidget(self.rejectBtn, alignment=Qt.AlignmentFlag.AlignLeft)
 
         self.setLayout(self.mainLayout)
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_Return:
+            self.accept()
+
+        else:
+            super().keyPressEvent(event)
 
 
 class _InputDialog(_DialogWindow):
@@ -100,14 +114,14 @@ class _ListChanger(_DialogWindow):
         self.setLayout(self.mainLayout)
 
     def keyPressEvent(self, event):
-        if event.key() == Qt.Key.Key_Escape:
-            self.close()
-
-        elif event.key() == Qt.Key.Key_Down:
+        if event.key() == Qt.Key.Key_Down:
             self.listWidget.setCurrentRow(self.listWidget.currentRow() + 1)
 
         elif event.key() == Qt.Key.Key_Up:
             self.listWidget.setCurrentRow(self.listWidget.currentRow() - 1)
+
+        elif event.key() == Qt.Key.Key_Return:
+            self.accept()
 
         else:
             super().keyPressEvent(event)
@@ -125,6 +139,9 @@ class _ListChanger(_DialogWindow):
     def show(self):
         super().show()
 
+    def get_current_item(self):
+        return self.listWidget.currentItem()
+
 
 class Restarter(_Dialog):
     def __init__(self, __parent) -> None:
@@ -133,21 +150,15 @@ class Restarter(_Dialog):
         self.setMinimumWidth(500)
         self.__command = None
 
-    def keyPressEvent(self, event):
-        if event.key() == Qt.Key.Key_Return:
-            self.accept()
-
-        elif event.key() == Qt.Key.Key_Escape:
-            self.close()
-
-        else:
-            super().keyPressEvent(event)
-
     def set_command_after_restart(self, __command):
+        """This command will be reset after one use"""
+
         self.__command = __command
 
     def accept(self):
         self.__command()
+        self.__command = None  # reset command
+
         restart_application()
 
 
@@ -184,15 +195,11 @@ class ThemeChanger(_ListChanger):
             if self.listWidget.item(i).text() == __name:
                 return themes[__name]
 
-    def keyPressEvent(self, event):
-        if event.key() == Qt.Key.Key_Return:
-            self.change_theme(self.listWidget.currentItem().text())
-
-        else:
-            super().keyPressEvent(event)
-
     def show(self):
         current_theme = FileLoader.load_json("scr/data/settings.json")["theme"]["name"]
 
         super().show()
         self.listWidget.setCurrentItem(self.get_item_by_text(current_theme))
+
+    def accept(self):
+        self.change_theme(self.get_current_item().text())
