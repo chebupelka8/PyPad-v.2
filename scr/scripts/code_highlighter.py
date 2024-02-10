@@ -65,6 +65,7 @@ class StyleCodeHighLighter(_CodeHighlighter):
         self.highlight_match(StylePatterns.DIGITS, StyleTheme.DIGITS, text)
         self.highlight_match(StylePatterns.BRACKETS, StyleTheme.BRACKETS, text)
         self.highlight_match(StylePatterns.SYMBOLS, StyleTheme.SYMBOLS, text)
+        self.highlight_match(StylePatterns.COMMENT, StyleTheme.COMMENT, text)
 
 
 class HtmlCodeHighlighter(_CodeHighlighter):

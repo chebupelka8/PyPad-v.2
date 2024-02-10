@@ -73,6 +73,7 @@ class StylePatterns:
     BRACKETS = r"\[|\]|\{|\}|\(|\)"
     SYMBOLS = r"\,\:"
     DIGITS = r'\b[+-]?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\b'
+    COMMENT = r'\/*[^"\\]*(\\.[^"\\]*)*\*\/'
 
 
 class HtmlPatterns:
@@ -147,6 +148,7 @@ class StyleTheme(_AbstractTheme):
     SYMBOLS = TextCharCreator.create_char_format(*theme["symbols"].values())
     DIGITS = TextCharCreator.create_char_format(*theme["digits"].values())
     BRACKETS = TextCharCreator.create_char_format(*theme["brackets"].values())
+    COMMENT = TextCharCreator.create_char_format(*theme["comment"].values())
 
 
 class HtmlTheme(_AbstractTheme):

@@ -129,6 +129,11 @@
             "color": "#d19a66",
             "italic": false,
             "bold": false
+        },
+        "comment": {
+            "color": "#768389",
+            "italic": false,
+            "bold": false
         }
     },
 
