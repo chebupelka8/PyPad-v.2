@@ -88,18 +88,16 @@ class _ListChanger(_DialogWindow):
         super().__init__(__parent)
 
         self.setMinimumSize(width, height)
+        self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
 
         self.mainLayout = QVBoxLayout()
 
         self.listWidget = QListWidget()
+        self.listWidget.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.listWidget.addItems([*__values])
         self.mainLayout.addWidget(self.listWidget)
 
         self.setLayout(self.mainLayout)
-
-    def show(self):
-        self.listWidget.setFocus()
-        super().show()
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_Escape:
@@ -114,6 +112,16 @@ class _ListChanger(_DialogWindow):
     def add_items(self, *__labels: str) -> None:
         self.listWidget.clear()
         self.listWidget.addItems([*__labels])
+
+    def get_item_by_text(self, __label: str):
+        for i in range(self.listWidget.count()):
+
+            if self.listWidget.item(i).text() == __label:
+                return self.listWidget.item(i)
+
+    def show(self):
+        super().show()
+        self.listWidget.setFocus()
 
 
 class Restarter(_Dialog):
@@ -135,7 +143,10 @@ class ThemeChanger(_ListChanger):
 
     def change_theme(self, __name: str) -> None:
         settings = FileLoader.load_json("scr/data/settings.json")
-        settings["theme"]["path"] = self.get_path_by_name(__name)
+        settings["theme"] = {
+            "path": self.get_path_by_name(__name),
+            "name": __name
+        }
 
         with open("scr/data/settings.json", "w") as file:
             json.dump(settings, file, indent=4)
@@ -144,10 +155,16 @@ class ThemeChanger(_ListChanger):
 
     def get_path_by_name(self, __name: str) -> str:
         themes = {
-            FileLoader.load_json(f"scr/data/themes/{i}")["name"] : f"scr/data/themes/{i}"
+            FileLoader.load_json(f"scr/data/themes/{i}")["name"]: f"scr/data/themes/{i}"
             for i in os.listdir("scr/data/themes")
         }
 
         for i in range(self.listWidget.count()):
             if self.listWidget.item(i).text() == __name:
                 return themes[__name]
+
+    def show(self):
+        current_theme = FileLoader.load_json("scr/data/settings.json")["theme"]["name"]
+
+        super().show()
+        self.listWidget.setCurrentItem(self.get_item_by_text(current_theme))

@@ -18,6 +18,7 @@ QListWidget {
 QListWidget::item {
     padding: 2px 15px;
     border-radius: 4px;
+    color: white;
 }
 
 QListWidget::item:selected {

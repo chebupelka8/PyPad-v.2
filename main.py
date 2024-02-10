@@ -113,8 +113,8 @@ class MainWidget(QWidget):
     def show_theme_changer(self):
         themes = [FileLoader.load_json(f"scr/data/themes/{i}")["name"] for i in os.listdir("scr/data/themes")]
 
-        self.themeChanger.show()
         self.themeChanger.add_items(*themes)
+        self.themeChanger.show()
 
 
 class Window(QMainWindow):

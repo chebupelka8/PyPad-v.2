@@ -4,7 +4,7 @@ from .welcome_screen import WelcomeScreen
 
 from PySide6.QtWidgets import QTabWidget
 from PySide6.QtGui import QIcon
-from PySide6.QtCore import QSize
+from PySide6.QtCore import QSize, Qt
 
 from typing import Any
 
@@ -16,6 +16,7 @@ class TabEditor(QTabWidget):
         self.setStyleSheet(FileLoader.load_style("scr/styles/tab_editor.css"))
         self.setObjectName("tab-editor")
         self.setMinimumSize(1040, 480)
+        self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
 
         self.setTabsClosable(True)
         self.setMovable(True)

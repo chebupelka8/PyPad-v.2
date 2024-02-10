@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QFrame, QVBoxLayout, QPushButton, QSpacerItem, QSizePolicy
 from PySide6.QtGui import QPixmap
+from PySide6.QtCore import Qt
 
 from scr.scripts import FileLoader
 
@@ -8,6 +9,7 @@ class SideBarButton(QPushButton):
     def __init__(self, __path_to_icon: str) -> None:
         super().__init__()
 
+        self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.setFixedSize(30, 30)
         self.setIcon(QPixmap(__path_to_icon))
         self.setIconSize(self.iconSize() * 1.2)

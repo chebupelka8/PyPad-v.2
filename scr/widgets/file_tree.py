@@ -4,6 +4,7 @@ from scr.exceptions import NotDirectoryError
 import os
 
 from PySide6.QtWidgets import QTreeView, QFileSystemModel, QAbstractItemView
+from PySide6.QtCore import Qt
 
 
 class FileTree(QTreeView):
@@ -20,6 +21,7 @@ class FileTree(QTreeView):
         self.setIndentation(20)
         self.setSelectionBehavior(QTreeView.SelectionBehavior.SelectRows)
         self.setEditTriggers(QTreeView.EditTrigger.NoEditTriggers)
+        self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
 
         self.model = QFileSystemModel()
         self.model.setRootPath(os.getcwd())

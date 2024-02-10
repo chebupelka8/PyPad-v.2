@@ -6,6 +6,7 @@
         "italic": false
     },
     "theme": {
-        "path": "scr/data/themes/github-theme.json"
+        "path": "scr/data/themes/one-dark.json",
+        "name": "One Dark"
     }
 }
