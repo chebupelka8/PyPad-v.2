@@ -32,16 +32,6 @@ class MainWidget(QWidget):
         self.init_ui()
         self.setup_ui()
 
-    def keyPressEvent(self, event):
-        if event.key() == Qt.Key.Key_O:
-            self.fileTree.open_directory(FileDialog.get_open_directory())
-
-        elif event.key() == Qt.Key.Key_P:
-            self.fileTree.open_file(FileDialog.get_open_file_name())
-
-        else:
-            super().keyPressEvent(event)
-
     def init_ui(self) -> None:
         self.fileTree = FileTree()
         self.tabEditor = TabEditor()
@@ -145,7 +135,19 @@ class Window(QMainWindow):
         )
         self.setObjectName("window")
 
-        self.setCentralWidget(MainWidget())
+        self.mainWidget = MainWidget()
+
+        self.setCentralWidget(self.mainWidget)
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_O:
+            self.mainWidget.fileTree.open_directory(FileDialog.get_open_directory())
+
+        elif event.key() == Qt.Key.Key_P:
+            self.mainWidget.fileTree.open_file(FileDialog.get_open_file_name())
+
+        else:
+            super().keyPressEvent(event)
 
 
 if __name__ == "__main__":
