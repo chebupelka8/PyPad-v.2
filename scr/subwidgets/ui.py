@@ -8,11 +8,16 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt
 
 
-class _Dialog(QDialog):
-    def __init__(self, __parent, __message: str, accept_title: str = "Ok", reject_title: str = "Cancel") -> None:
+class _DialogWindow(QDialog):
+    def __init__(self, __parent) -> None:
         super().__init__(__parent, f=Qt.WindowType.FramelessWindowHint)
 
         self.setStyleSheet(FileLoader.load_style("scr/styles/ui.css"))
+
+
+class _Dialog(_DialogWindow):
+    def __init__(self, __parent, __message: str, accept_title: str = "Ok", reject_title: str = "Cancel") -> None:
+        super().__init__(__parent)
 
         self.mainLayout = QVBoxLayout()
         self.buttonLayout = QHBoxLayout()
@@ -36,16 +41,14 @@ class _Dialog(QDialog):
         self.setLayout(self.mainLayout)
 
 
-class _InputDialog(QDialog):
+class _InputDialog(_DialogWindow):
     def __init__(
             self, __parent,
             __message: str,
             pasted_text: str = "", place_holder_text: str = "",
             accept_title: str = "Ok", reject_title: str = "Cancel"
     ) -> None:
-        super().__init__(__parent, f=Qt.WindowType.FramelessWindowHint)
-
-        self.setStyleSheet(FileLoader.load_style("scr/styles/ui.css"))
+        super().__init__(__parent)
 
         self.mainLayout = QVBoxLayout()
         self.buttonLayout = QHBoxLayout()
@@ -77,25 +80,37 @@ class _InputDialog(QDialog):
         self.setLayout(self.mainLayout)
 
 
-class _ListChanger(QListWidget):
+class _ListChanger(_DialogWindow):
     def __init__(self, __parent, *__values, width: int = 200, height: int = 400) -> None:
         super().__init__(__parent)
 
         self.setMinimumSize(width, height)
-        self.setGeometry((__parent.width() - self.width()) / 2, (__parent.height() - self.height()) / 2, 200, 400)
-        self.setStyleSheet(FileLoader.load_style("scr/styles/ui.css"))
-        self.addItems([*__values])
+
+        self.mainLayout = QVBoxLayout()
+
+        self.listWidget = QListWidget()
+        self.listWidget.addItems([*__values])
+        self.mainLayout.addWidget(self.listWidget)
+
+        self.setLayout(self.mainLayout)
 
     def show(self):
-        self.setFocus()
+        self.listWidget.setFocus()
         super().show()
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_Escape:
-            self.hide()
+            self.close()
+
+        elif event.key() == Qt.Key.Key_Return:
+            self.close()
 
         else:
             super().keyPressEvent(event)
+
+    def add_items(self, *__labels: str) -> None:
+        self.listWidget.clear()
+        self.listWidget.addItems([*__labels])
 
 
 class Restarter(_Dialog):

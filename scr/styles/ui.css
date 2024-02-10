@@ -11,8 +11,7 @@ QDialog {
 QListWidget {
     background-color: #252525;
     color: white;
-    border: 1px solid #3c3c3c;
-    border-radius: 6px;
+    border: none;
     padding: 4px;
 }
 
