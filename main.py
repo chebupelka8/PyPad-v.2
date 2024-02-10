@@ -15,7 +15,7 @@ from PySide6.QtWidgets import (
     QHBoxLayout, QVBoxLayout
 )
 from PySide6.QtCore import QModelIndex, Qt
-from PySide6.QtGui import QIcon
+from PySide6.QtGui import QIcon, QKeySequence, QShortcut
 
 
 class MainWidget(QWidget):
@@ -47,6 +47,7 @@ class MainWidget(QWidget):
     def setup_ui(self) -> None:
         self.tabEditor.addTab(WelcomeScreen(), "Welcome!", IconPaths.SystemIcons.WELCOME)
 
+        # connections
         self.fileTree.clicked.connect(self.__click_file_tree)
 
         self.sideBar.settings_opener_connect(self.settingActionMenu.show)
@@ -55,6 +56,14 @@ class MainWidget(QWidget):
         self.settingActionMenu.connect_by_title("Themes...", self.show_theme_changer)
         self.settingActionMenu.connect_by_title("Open Settings...", self._random_font_test)
 
+        QShortcut("Ctrl+O", self).activated.connect(
+            lambda: self.fileTree.open_directory(FileDialog.get_open_directory())
+        )
+        QShortcut("Ctrl+P", self).activated.connect(
+            lambda: self.fileTree.open_file(FileDialog.get_open_file_name())
+        )
+
+        # to layouts
         self.mainLayout.addLayout(self.workbenchLayout)
         self.setLayout(self.mainLayout)
 
@@ -138,16 +147,6 @@ class Window(QMainWindow):
         self.mainWidget = MainWidget()
 
         self.setCentralWidget(self.mainWidget)
-
-    def keyPressEvent(self, event):
-        if event.key() == Qt.Key.Key_O:
-            self.mainWidget.fileTree.open_directory(FileDialog.get_open_directory())
-
-        elif event.key() == Qt.Key.Key_P:
-            self.mainWidget.fileTree.open_file(FileDialog.get_open_file_name())
-
-        else:
-            super().keyPressEvent(event)
 
 
 if __name__ == "__main__":
