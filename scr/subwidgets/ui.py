@@ -131,6 +131,7 @@ class Restarter(_Dialog):
         super().__init__(__parent, "Do you want to restart the IDE to save the changes", "Restart")
 
         self.setMinimumWidth(500)
+        self.__command = None
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_Return:
@@ -142,7 +143,11 @@ class Restarter(_Dialog):
         else:
             super().keyPressEvent(event)
 
+    def set_command_after_restart(self, __command):
+        self.__command = __command
+
     def accept(self):
+        self.__command()
         restart_application()
 
 
@@ -153,6 +158,10 @@ class ThemeChanger(_ListChanger):
         self.restarter = restarter
         self.listWidget.itemClicked.connect(lambda name: self.change_theme(name.text()))
 
+    def __save(self, __arg):
+        with open("scr/data/settings.json", "w") as file:
+            json.dump(__arg, file, indent=4)
+
     def change_theme(self, __name: str) -> None:
         self.close()
 
@@ -162,9 +171,7 @@ class ThemeChanger(_ListChanger):
             "name": __name
         }
 
-        with open("scr/data/settings.json", "w") as file:
-            json.dump(settings, file, indent=4)
-
+        self.restarter.set_command_after_restart(lambda: self.__save(settings))
         self.restarter.show()
 
     def get_theme_path_by_name(self, __name: str) -> str:
