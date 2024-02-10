@@ -76,3 +76,4 @@ class HtmlCodeHighlighter(_CodeHighlighter):
         self.highlight_match(HtmlPatterns.TAGS, HtmlTheme.TAGS, text)
         self.highlight_match(HtmlPatterns.STRING, HtmlTheme.STRING, text)
         self.highlight_match(HtmlPatterns.SYMBOLS, HtmlTheme.SYMBOLS, text)
+        self.highlight_match(HtmlPatterns.COMMENT, HtmlTheme.COMMENT, text)

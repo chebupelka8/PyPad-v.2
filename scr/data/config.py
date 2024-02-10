@@ -80,6 +80,7 @@ class HtmlPatterns:
     TAGS = r"<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>"
     STRING = r'"[^"\\]*(\\.[^"\\]*)*"'
     SYMBOLS = r"\<\>\/"
+    COMMENT = r"\<\!\-\-[^'\\]*(\\.[^'\\]*)*\-\-\>"
 
 
 class TextCharCreator:
@@ -158,3 +159,4 @@ class HtmlTheme(_AbstractTheme):
     TAGS = TextCharCreator.create_char_format(*theme["tags"].values())
     STRING = TextCharCreator.create_char_format(*theme["string"].values())
     SYMBOLS = TextCharCreator.create_char_format(*theme["symbols"].values())
+    COMMENT = TextCharCreator.create_char_format(*theme["comment"].values())

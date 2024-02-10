@@ -153,6 +153,11 @@
             "color": "#adbac7",
             "italic": false,
             "bold": false
+        },
+        "comment": {
+            "color": "#768389",
+            "italic": false,
+            "bold": false
         }
     }
 }
