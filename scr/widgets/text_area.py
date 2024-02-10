@@ -45,6 +45,14 @@ class TextEditorArea(QPlainTextEdit):
         # variables
         self.__current_line = 0
 
+    def update_font(self):
+        font = FileLoader.load_json("scr/data/settings.json")["font"]
+        self.__main_font = QFont(font["family"], font["size"], 1, font["italic"])
+        self.__main_font.setBold(font["bold"])
+        self.setFont(self.__main_font)
+
+        self.__update_line_number_area_width()
+
     def get_full_path(self):
         return self.__path
 

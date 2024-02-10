@@ -4,7 +4,7 @@ from scr import (
     FileChecker, FileLoader, PythonCodeEditorArea,
     HtmlCodeEditorArea, StyleCodeEditorArea, JsonCodeEditorArea,
     ImageViewer, TextEditorArea, WINDOW_SIZE, Restarter,
-    ThemeChanger
+    ThemeChanger, get_all_font_families
 )
 
 import os
@@ -63,6 +63,7 @@ class MainWidget(QWidget):
         self.sideBar.file_tree_opener_connect(self.fileTree.show_hide_file_tree)
 
         self.settingActionMenu.connect_by_title("Themes...", self.show_theme_changer)
+        self.settingActionMenu.connect_by_title("Open Settings...", self._random_font_test)
 
         self.mainLayout.addLayout(self.workbenchLayout)
         self.setLayout(self.mainLayout)
@@ -115,6 +116,21 @@ class MainWidget(QWidget):
 
         self.themeChanger.add_items(*themes)
         self.themeChanger.show()
+
+    def _random_font_test(self):
+        from random import choice, randint
+        import json
+
+        i = FileLoader.load_json("scr/data/settings.json")
+        i["font"]["family"] = choice(get_all_font_families())
+        i["font"]["size"] = randint(10, 50)
+
+        with open("scr/data/settings.json", "w") as file:
+            json.dump(i, file, indent=4)
+
+        for i in range(self.tabEditor.count()):
+            if hasattr(self.tabEditor.widget(i), "update_font"):
+                self.tabEditor.widget(i).update_font()
 
 
 class Window(QMainWindow):

@@ -1,7 +1,7 @@
 {
     "font": {
-        "family": "Cascadia mono",
-        "size": 17,
+        "family": "Consolas",
+        "size": 20,
         "bold": false,
         "italic": false
     },
