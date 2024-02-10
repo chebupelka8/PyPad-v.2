@@ -1,12 +1,12 @@
 {
     "font": {
-        "family": "Comic Sans MS",
-        "size": 16,
+        "family": "Consolas",
+        "size": 20,
         "bold": false,
         "italic": false
     },
     "theme": {
-        "path": "scr/data/themes/pypad-theme.json",
-        "name": "PyPad Theme"
+        "path": "scr/data/themes/github-theme.json",
+        "name": "GitHub Theme"
     }
 }

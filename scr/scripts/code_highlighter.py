@@ -1,4 +1,4 @@
-from scr.data import (
+from scr.config import (
     PythonPatterns, PythonTheme, JsonPatterns,
     JsonTheme, StylePatterns, StyleTheme,
     HtmlPatterns, HtmlTheme

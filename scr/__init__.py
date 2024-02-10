@@ -1,5 +1,5 @@
 from .scripts import *
 from .widgets import *
 from .exceptions import *
-from .data import *
+from .config import *
 from .subwidgets import *
