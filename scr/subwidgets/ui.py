@@ -114,10 +114,10 @@ class _ListChanger(_DialogWindow):
         self.setLayout(self.mainLayout)
 
     def keyPressEvent(self, event):
-        if event.key() == Qt.Key.Key_Down:
+        if event.key() == Qt.Key.Key_Down and self.listWidget.currentRow() + 1 < self.listWidget.count():
             self.listWidget.setCurrentRow(self.listWidget.currentRow() + 1)
 
-        elif event.key() == Qt.Key.Key_Up:
+        elif event.key() == Qt.Key.Key_Up and self.listWidget.currentRow() > 0:
             self.listWidget.setCurrentRow(self.listWidget.currentRow() - 1)
 
         elif event.key() == Qt.Key.Key_Return:
@@ -167,7 +167,7 @@ class ThemeChanger(_ListChanger):
         super().__init__(__parent)
 
         self.restarter = restarter
-        self.listWidget.itemClicked.connect(lambda name: self.change_theme(name.text()))
+        self.listWidget.itemClicked.connect(self.accept)
 
     def __save(self, __arg):
         with open("scr/data/settings.json", "w") as file:
