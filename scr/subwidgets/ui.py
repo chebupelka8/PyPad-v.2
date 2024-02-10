@@ -103,8 +103,11 @@ class _ListChanger(_DialogWindow):
         if event.key() == Qt.Key.Key_Escape:
             self.close()
 
-        elif event.key() == Qt.Key.Key_Return:
-            self.close()
+        elif event.key() == Qt.Key.Key_Down:
+            self.listWidget.setCurrentRow(self.listWidget.currentRow() + 1)
+
+        elif event.key() == Qt.Key.Key_Up:
+            self.listWidget.setCurrentRow(self.listWidget.currentRow() - 1)
 
         else:
             super().keyPressEvent(event)
@@ -121,7 +124,6 @@ class _ListChanger(_DialogWindow):
 
     def show(self):
         super().show()
-        self.listWidget.setFocus()
 
 
 class Restarter(_Dialog):
@@ -129,6 +131,16 @@ class Restarter(_Dialog):
         super().__init__(__parent, "Do you want to restart the IDE to save the changes", "Restart")
 
         self.setMinimumWidth(500)
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_Return:
+            self.accept()
+
+        elif event.key() == Qt.Key.Key_Escape:
+            self.close()
+
+        else:
+            super().keyPressEvent(event)
 
     def accept(self):
         restart_application()
@@ -142,9 +154,11 @@ class ThemeChanger(_ListChanger):
         self.listWidget.itemClicked.connect(lambda name: self.change_theme(name.text()))
 
     def change_theme(self, __name: str) -> None:
+        self.close()
+
         settings = FileLoader.load_json("scr/data/settings.json")
         settings["theme"] = {
-            "path": self.get_path_by_name(__name),
+            "path": self.get_theme_path_by_name(__name),
             "name": __name
         }
 
@@ -153,7 +167,7 @@ class ThemeChanger(_ListChanger):
 
         self.restarter.show()
 
-    def get_path_by_name(self, __name: str) -> str:
+    def get_theme_path_by_name(self, __name: str) -> str:
         themes = {
             FileLoader.load_json(f"scr/data/themes/{i}")["name"]: f"scr/data/themes/{i}"
             for i in os.listdir("scr/data/themes")
@@ -162,6 +176,13 @@ class ThemeChanger(_ListChanger):
         for i in range(self.listWidget.count()):
             if self.listWidget.item(i).text() == __name:
                 return themes[__name]
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_Return:
+            self.change_theme(self.listWidget.currentItem().text())
+
+        else:
+            super().keyPressEvent(event)
 
     def show(self):
         current_theme = FileLoader.load_json("scr/data/settings.json")["theme"]["name"]
