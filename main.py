@@ -64,7 +64,7 @@ class MainWidget(QWidget):
             lambda: self.fileTree.open_directory(FileDialog.get_open_directory())
         )
         QShortcut("Ctrl+P", self).activated.connect(
-            lambda: self.fileTree.open_file(FileDialog.get_open_file_name())
+            lambda: self.__click_file_tree(self.fileTree.open_file(FileDialog.get_open_file_name()))
         )
 
         # set layout (draw)

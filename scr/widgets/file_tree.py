@@ -36,6 +36,9 @@ class FileTree(QTreeView):
     def get_path_by_index(self, __index) -> str:
         return self.model.filePath(__index)
 
+    def get_index_by_path(self, __path: str):
+        return self.model.index(__path, 0)
+
     def get_file_icon(self, __index):
         return self.model.fileIcon(__index)
 
@@ -46,8 +49,10 @@ class FileTree(QTreeView):
         self.model.setRootPath(__path)
         self.setRootIndex(self.model.index(__path))
 
-    def open_file(self, __path: str) -> None:
+    def open_file(self, __path: str):
         self.open_directory(os.path.dirname(__path))
+
+        return self.get_index_by_path(__path)
 
     def open_directory(self, __path: str) -> None:
         self.model.setRootPath(__path)
