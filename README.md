@@ -18,9 +18,14 @@
 
 <p align="center">
 
-  <img src="screenshots/5.png">
-  <img src="screenshots/1.png">
-  <img src="screenshots/2.png">
-  <img src="screenshots/3.png">
+  <img src="screenshots/welcome.png">
+  <img src="screenshots/prev.png">
+  <img src="screenshots/code_preview.png">
+  <img src="screenshots/jason.png">
+  <img src="screenshots/theme_changer.png">
+  <img src="screenshots/hello.png">
+  <img src="screenshots/image.png">
+  <img src="screenshots/code-one.png">
+  <img src="screenshots/one-dark.png">
   
 </p>
