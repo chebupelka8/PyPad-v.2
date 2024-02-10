@@ -3,7 +3,8 @@ from scr import (
     SettingsActionMenu, IconPaths, WelcomeScreen,
     FileChecker, FileLoader, PythonCodeEditorArea,
     HtmlCodeEditorArea, StyleCodeEditorArea, JsonCodeEditorArea,
-    ImageViewer, TextEditorArea, WINDOW_SIZE, Restarter
+    ImageViewer, TextEditorArea, WINDOW_SIZE, Restarter,
+    ThemeChanger
 )
 
 import os
@@ -112,16 +113,21 @@ class MainWidget(QWidget):
         from random import choice
         import json
 
-        themes = [f"scr/data/themes/{i}" for i in os.listdir("scr/data/themes")]
+        theme_paths = [f"scr/data/themes/{i}" for i in os.listdir("scr/data/themes")]
+        themes = [FileLoader.load_json(f"scr/data/themes/{i}")["name"] for i in os.listdir("scr/data/themes")]
+        print(themes)
 
-        t = FileLoader.load_json("scr/data/settings.json")
+        wid = ThemeChanger(self, *themes)
+        wid.show()
 
-        t["theme"]["path"] = choice(themes)
-
-        with open("scr/data/settings.json", "w") as file:
-            json.dump(t, file, indent=4)
-
-        self.restarter.show()
+        # t = FileLoader.load_json("scr/data/settings.json")
+        #
+        # t["theme"]["path"] = choice(theme_paths)
+        #
+        # with open("scr/data/settings.json", "w") as file:
+        #     json.dump(t, file, indent=4)
+        #
+        # self.restarter.show()
 
 
 class Window(QMainWindow):

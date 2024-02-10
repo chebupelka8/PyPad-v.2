@@ -78,11 +78,24 @@ class _InputDialog(QDialog):
 
 
 class _ListChanger(QListWidget):
-    def __init__(self, __parent, *__values) -> None:
+    def __init__(self, __parent, *__values, width: int = 200, height: int = 400) -> None:
         super().__init__(__parent)
 
+        self.setMinimumSize(width, height)
+        self.setGeometry((__parent.width() - self.width()) / 2, (__parent.height() - self.height()) / 2, 200, 400)
         self.setStyleSheet(FileLoader.load_style("scr/styles/ui.css"))
         self.addItems([*__values])
+
+    def show(self):
+        self.setFocus()
+        super().show()
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_Escape:
+            self.hide()
+
+        else:
+            super().keyPressEvent(event)
 
 
 class Restarter(_Dialog):
@@ -93,3 +106,8 @@ class Restarter(_Dialog):
 
     def accept(self):
         restart_application()
+
+
+class ThemeChanger(_ListChanger):
+    def __init__(self, __parent, *__theme_names: str) -> None:
+        super().__init__(__parent, *__theme_names)
