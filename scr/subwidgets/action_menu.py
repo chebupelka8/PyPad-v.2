@@ -26,7 +26,7 @@ class _ActionMenu(QMenu):
         self.get_action_by_title(__title).triggered.connect(__command)
 
     def show(self):
-        self.move(self.cursor().pos())
+        self.popup(self.cursor().pos())
         super().show()
 
 
