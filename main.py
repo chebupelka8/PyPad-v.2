@@ -25,7 +25,7 @@ class MainWidget(QWidget):
         # self
         self.setObjectName("main-widget")
 
-        # Init layouts
+        # init layouts
         self.mainLayout = QVBoxLayout()
         self.workbenchLayout = QHBoxLayout()
 
@@ -145,9 +145,7 @@ class Window(QMainWindow):
         )
         self.setObjectName("window")
 
-        self.mainWidget = MainWidget()
-
-        self.setCentralWidget(self.mainWidget)
+        self.setCentralWidget(MainWidget())
 
 
 if __name__ == "__main__":
