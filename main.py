@@ -14,8 +14,8 @@ from PySide6.QtWidgets import (
     QWidget, QApplication, QMainWindow,
     QHBoxLayout, QVBoxLayout
 )
-from PySide6.QtCore import QModelIndex, Qt
-from PySide6.QtGui import QIcon, QKeySequence, QShortcut
+from PySide6.QtCore import QModelIndex
+from PySide6.QtGui import QIcon, QShortcut
 
 
 class MainWidget(QWidget):
@@ -33,6 +33,7 @@ class MainWidget(QWidget):
         self.setup_ui()
 
     def init_ui(self) -> None:
+        # init
         self.fileTree = FileTree()
         self.tabEditor = TabEditor()
         self.sideBar = SideBar()
@@ -40,9 +41,12 @@ class MainWidget(QWidget):
         self.restarter = Restarter(self)
         self.themeChanger = ThemeChanger(self, restarter=self.restarter)
 
+        # layouts
         self.workbenchLayout.addWidget(self.sideBar, stretch=1)
         self.workbenchLayout.addWidget(self.fileTree, stretch=2)
         self.workbenchLayout.addWidget(self.tabEditor, stretch=7)
+
+        self.mainLayout.addLayout(self.workbenchLayout)
 
     def setup_ui(self) -> None:
         self.tabEditor.addTab(WelcomeScreen(), "Welcome!", IconPaths.SystemIcons.WELCOME)
@@ -63,8 +67,7 @@ class MainWidget(QWidget):
             lambda: self.fileTree.open_file(FileDialog.get_open_file_name())
         )
 
-        # to layouts
-        self.mainLayout.addLayout(self.workbenchLayout)
+        # set layout (draw)
         self.setLayout(self.mainLayout)
 
     def __click_file_tree(self, __index: QModelIndex) -> None:
