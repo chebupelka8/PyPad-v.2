@@ -9,17 +9,17 @@
         "default": "#adbac7",
         "keywords": {
             "color": "#da7067",
-            "italic": false,
+            "italic": true,
             "bold": false
         },
         "string": {
             "color": "#96d0ff",
-            "italic": false,
+            "italic": true,
             "bold": false
         },
         "comment": {
             "color": "#768389",
-            "italic": false,
+            "italic": true,
             "bold": false
         },
         "decorator": {
@@ -45,12 +45,12 @@
         "boolean": {
             "color": "#da7067",
             "italic": false,
-            "bold": false
+            "bold": true
         },
         "none-type": {
             "color": "#da7067",
             "italic": false,
-            "bold": false
+            "bold": true
         },
         "data-types": {
             "color": "#6cb6cd",
@@ -74,7 +74,7 @@
         },
         "special": {
             "color": "#f69d50",
-            "italic": false,
+            "italic": true,
             "bold": false
         }
     },
