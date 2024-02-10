@@ -26,7 +26,7 @@ class WindowCompleter(QWidget):
         super().__init__(__parent)
 
         self.setStyleSheet(
-            FileLoader.load_style("scr/styles/completer.css") + FileLoader.load_style("scr/styles/ui.css")
+            FileLoader.load_style("scr/styles/completer.css")
         )
         self.setObjectName("window-completer")
         self.setMinimumWidth(400)
