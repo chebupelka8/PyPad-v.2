@@ -50,7 +50,12 @@ class FileTree(QTreeView):
         self.setRootIndex(self.model.index(__path))
 
     def open_file(self, __path: str):
-        self.open_directory(os.path.dirname(__path))
+        """returns the index of this path to open it in the editor"""
+        try:
+            self.open_directory(os.path.dirname(__path))
+
+        except TypeError:
+            ...
 
         return self.get_index_by_path(__path)
 
