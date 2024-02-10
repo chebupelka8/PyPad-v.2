@@ -8,6 +8,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt
 
 import os
+import json
 
 
 class _DialogWindow(QDialog):
@@ -126,18 +127,26 @@ class Restarter(_Dialog):
 
 
 class ThemeChanger(_ListChanger):
-    def __init__(self, __parent, *__theme_names: str) -> None:
-        super().__init__(__parent, *__theme_names)
+    def __init__(self, __parent, restarter) -> None:
+        super().__init__(__parent)
+
+        self.restarter = restarter
+        self.listWidget.itemClicked.connect(lambda name: self.change_theme(name.text()))
 
     def change_theme(self, __name: str) -> None:
-        print(self.get_path_by_name(__name))
+        settings = FileLoader.load_json("scr/data/settings.json")
+        settings["theme"]["path"] = self.get_path_by_name(__name)
+
+        with open("scr/data/settings.json", "w") as file:
+            json.dump(settings, file, indent=4)
+
+        self.restarter.show()
 
     def get_path_by_name(self, __name: str) -> str:
         themes = {
             FileLoader.load_json(f"scr/data/themes/{i}")["name"] : f"scr/data/themes/{i}"
             for i in os.listdir("scr/data/themes")
         }
-        print(themes)
 
         for i in range(self.listWidget.count()):
             if self.listWidget.item(i).text() == __name:

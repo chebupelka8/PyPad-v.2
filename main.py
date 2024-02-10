@@ -48,7 +48,7 @@ class MainWidget(QWidget):
         self.sideBar = SideBar()
         self.settingActionMenu = SettingsActionMenu()
         self.restarter = Restarter(self)
-        self.themeChanger = ThemeChanger(self)
+        self.themeChanger = ThemeChanger(self, restarter=self.restarter)
 
         self.workbenchLayout.addWidget(self.sideBar, stretch=1)
         self.workbenchLayout.addWidget(self.fileTree, stretch=2)
@@ -62,7 +62,7 @@ class MainWidget(QWidget):
         self.sideBar.settings_opener_connect(self.settingActionMenu.show)
         self.sideBar.file_tree_opener_connect(self.fileTree.show_hide_file_tree)
 
-        self.settingActionMenu.connect_by_title("Themes...", self._theme_changer_test)
+        self.settingActionMenu.connect_by_title("Themes...", self.show_theme_changer)
 
         self.mainLayout.addLayout(self.workbenchLayout)
         self.setLayout(self.mainLayout)
@@ -110,24 +110,11 @@ class MainWidget(QWidget):
 
         self.tabEditor.setCurrentWidget(self.tabEditor.find_by_path(__path))
 
-    def _theme_changer_test(self):
-        import json
-
-        theme_paths = [f"scr/data/themes/{i}" for i in os.listdir("scr/data/themes")]
+    def show_theme_changer(self):
         themes = [FileLoader.load_json(f"scr/data/themes/{i}")["name"] for i in os.listdir("scr/data/themes")]
 
         self.themeChanger.show()
         self.themeChanger.add_items(*themes)
-        self.themeChanger.listWidget.itemClicked.connect(lambda str: self.themeChanger.change_theme(str.text()))
-
-        # t = FileLoader.load_json("scr/data/settings.json")
-        #
-        # t["theme"]["path"] = choice(theme_paths)
-        #
-        # with open("scr/data/settings.json", "w") as file:
-        #     json.dump(t, file, indent=4)
-        #
-        self.restarter.show()
 
 
 class Window(QMainWindow):
