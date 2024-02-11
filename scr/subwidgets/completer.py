@@ -1,7 +1,6 @@
 from PySide6.QtWidgets import QListWidget, QWidget, QHBoxLayout
-from PySide6.QtGui import QFont
 
-from scr.scripts import FileLoader
+from scr.scripts import FileLoader, FontManager
 
 
 class Completer(QListWidget):
@@ -9,9 +8,9 @@ class Completer(QListWidget):
         super().__init__()
 
         # font setup
-        font = FileLoader.load_json("scr/data/settings.json")["font"]
-        self.__main_font = QFont(font["family"], font["size"] * 0.8, 1, font["italic"])
-        self.__main_font.setBold(font["bold"])
+        self.__main_font = FontManager.get_system_font(
+            FontManager.get_current_family(), FontManager.get_current_font_size() * 0.8
+        )
         self.setFont(self.__main_font)
 
         self.setObjectName("completer")
