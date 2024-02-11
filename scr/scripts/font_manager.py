@@ -50,8 +50,18 @@ class FontManager:
         if cls.__font_updater is not None: cls.__font_updater()
 
     @staticmethod
-    def get_font_by_path(__path: str, __size: int) -> QFont:
+    def get_font_by_path(__path: str, __size: int, __bold: bool = False, __italic: bool = False) -> QFont:
         __id = QFontDatabase.addApplicationFont(__path)
         families = QFontDatabase.applicationFontFamilies(__id)
 
-        return QFont(families[0], __size, 1, False)
+        font = QFont(families[0], __size, 1, __italic)
+        font.setBold(__bold)
+
+        return font
+
+    @staticmethod
+    def get_system_font(__family: str, __size: int, __bold: bool = False, __italic: bool = False) -> QFont:
+        font = QFont(__family, __size, 1, __italic)
+        font.setBold(__bold)
+
+        return font

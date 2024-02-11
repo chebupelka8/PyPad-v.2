@@ -6,6 +6,10 @@ QComboBox {
     border-radius: 4px;
 }
 
+QComboBox:hover {
+    background-color: #303030;
+}
+
 QComboBox::down-arrow {
     image: none;
     border: none;
@@ -17,4 +21,17 @@ QComboBox QAbstractItemView {
     color: white;
     border: 1px solid #3c3c3c;
     border-radius: 4px;
+}
+
+QSpinBox {
+    background-color: #252525;
+    padding: 2px;
+    color: white;
+    border: 1px solid #3c3c3c;
+    border-radius: 4px;
+    min-width: 30px;
+}
+
+QSpinBox:hover {
+    background-color: #303030;
 }
