@@ -1,4 +1,4 @@
-from scr.scripts import FileLoader, FileChecker
+from scr.scripts import FileLoader, FileChecker, FontManager
 from scr.config import TextEditorTheme
 
 from PySide6.QtWidgets import QPlainTextEdit, QTextEdit, QWidget
@@ -22,7 +22,7 @@ class TextEditorArea(QPlainTextEdit):
         self.setLineWrapMode(QPlainTextEdit.LineWrapMode.NoWrap)
 
         # font setup
-        font = FileLoader.load_json("scr/data/settings.json")["font"]
+        font = FontManager.get_current_font()
         self.__main_font = QFont(font["family"], font["size"], 1, font["italic"])
         self.__main_font.setBold(font["bold"])
         self.setFont(self.__main_font)
@@ -46,7 +46,7 @@ class TextEditorArea(QPlainTextEdit):
         self.__current_line = 0
 
     def update_font(self):
-        font = FileLoader.load_json("scr/data/settings.json")["font"]
+        font = FontManager.get_current_font()
         self.__main_font = QFont(font["family"], font["size"], 1, font["italic"])
         self.__main_font.setBold(font["bold"])
         self.setFont(self.__main_font)

@@ -1,11 +1,53 @@
 from PySide6.QtGui import QFontDatabase, QFont
 
+from scr.scripts import FileLoader
+
+import json
+
 
 class FontManager:
+    __font_changer = None
 
     @staticmethod
     def get_all_font_families() -> list[str]:
         return QFontDatabase.families()
+
+    @staticmethod
+    def get_current_font() -> dict:
+        return FileLoader.load_json("scr/data/settings.json")["font"]
+
+    @staticmethod
+    def get_current_family() -> str:
+        return FileLoader.load_json("scr/data/settings.json")["font"]["family"]
+
+    @staticmethod
+    def get_current_font_size() -> int:
+        return FileLoader.load_json("scr/data/settings.json")["font"]["size"]
+
+    @classmethod
+    def set_font_changer(cls, __changer):
+        cls.__font_changer = __changer
+
+    @classmethod
+    def set_current_font(cls, family: str | None = None, size: int | None = None, bold: bool | None = None, italic: bool | None = None):
+        data = FileLoader.load_json("scr/data/settings.json")
+
+        if family is None: family = cls.get_current_family()
+        if size is None: size = cls.get_current_font_size()
+        if bold is None: bold = data["font"]["bold"]
+        if italic is None: italic = data["font"]["italic"]
+
+        data["font"] = {
+            "family": family,
+            "size": size,
+            "bold": bold,
+            "italic": italic,
+        }
+
+        with open("scr/data/settings.json", "w") as file:
+            json.dump(data, file, indent=4)
+
+        if cls.__font_changer is not None: cls.__font_changer()
 
     @staticmethod
     def get_font_by_path(__path: str, __size: int) -> QFont:

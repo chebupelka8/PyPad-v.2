@@ -12,8 +12,9 @@ import json
 
 
 class _DialogWindow(QDialog):
-    def __init__(self, __parent) -> None:
-        super().__init__(__parent, f=Qt.WindowType.FramelessWindowHint)
+    def __init__(self, __parent, frameless: bool = True) -> None:
+        if frameless: super().__init__(__parent, f=Qt.WindowType.FramelessWindowHint)
+        else: super().__init__(__parent)
 
         self.setStyleSheet(FileLoader.load_style("scr/styles/ui.css"))
 

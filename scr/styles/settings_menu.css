@@ -1,0 +1,20 @@
+QComboBox {
+    padding: 2px;
+    background-color: #252525;
+    color: white;
+    border: 1px solid #3c3c3c;
+    border-radius: 4px;
+}
+
+QComboBox::down-arrow {
+    image: none;
+    border: none;
+}
+
+QComboBox QAbstractItemView {
+    padding: 4px;
+    background-color: #252525;
+    color: white;
+    border: 1px solid #3c3c3c;
+    border-radius: 4px;
+}

@@ -4,7 +4,7 @@ from scr import (
     FileChecker, FileLoader, PythonCodeEditorArea,
     HtmlCodeEditorArea, StyleCodeEditorArea, JsonCodeEditorArea,
     ImageViewer, TextEditorArea, WINDOW_SIZE, Restarter,
-    ThemeChanger, FontManager
+    ThemeChanger, FontManager, SettingsMenu
 )
 
 import os
@@ -40,6 +40,7 @@ class MainWidget(QWidget):
         self.settingActionMenu = SettingsActionMenu()
         self.restarter = Restarter(self)
         self.themeChanger = ThemeChanger(self, restarter=self.restarter)
+        self.settingsMenu = SettingsMenu(self)
 
         # layouts
         self.workbenchLayout.addWidget(self.sideBar, stretch=1)
@@ -58,7 +59,9 @@ class MainWidget(QWidget):
         self.sideBar.file_tree_opener_connect(self.fileTree.show_hide_file_tree)
 
         self.settingActionMenu.connect_by_title("Themes...", self.show_theme_changer)
-        self.settingActionMenu.connect_by_title("Open Settings...", self._random_font_test)
+        self.settingActionMenu.connect_by_title("Open Settings...", self.settingsMenu.show)
+
+        FontManager.set_font_changer(self.tabEditor.update_all_tabs_font)
 
         QShortcut("Ctrl+O", self).activated.connect(
             lambda: self.fileTree.open_directory(FileDialog.get_open_directory())
@@ -118,21 +121,6 @@ class MainWidget(QWidget):
 
         self.themeChanger.add_items(*themes)
         self.themeChanger.show()
-
-    def _random_font_test(self):
-        from random import choice, randint
-        import json
-
-        i = FileLoader.load_json("scr/data/settings.json")
-        i["font"]["family"] = choice(FontManager.get_all_font_families())
-        i["font"]["size"] = randint(15, 25)
-
-        with open("scr/data/settings.json", "w") as file:
-            json.dump(i, file, indent=4)
-
-        for i in range(self.tabEditor.count()):
-            if hasattr(self.tabEditor.widget(i), "update_font"):
-                self.tabEditor.widget(i).update_font()
 
 
 class Window(QMainWindow):
