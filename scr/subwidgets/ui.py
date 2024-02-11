@@ -17,13 +17,6 @@ class _DialogWindow(QDialog):
 
         self.setStyleSheet(FileLoader.load_style("scr/styles/ui.css"))
 
-    def keyPressEvent(self, event):
-        if event.key() == Qt.Key.Key_Escape:
-            self.close()
-
-        else:
-            super().keyPressEvent(event)
-
 
 class _Dialog(_DialogWindow):
     def __init__(self, __parent, __message: str, accept_title: str = "Ok", reject_title: str = "Cancel") -> None:
@@ -163,13 +156,14 @@ class Restarter(_Dialog):
 
 
 class ThemeChanger(_ListChanger):
-    def __init__(self, __parent, restarter) -> None:
+    def __init__(self, __parent, restarter: Restarter) -> None:
         super().__init__(__parent)
 
         self.restarter = restarter
         self.listWidget.itemClicked.connect(self.accept)
 
-    def __save(self, __arg):
+    @staticmethod
+    def __save(__arg):
         with open("scr/data/settings.json", "w") as file:
             json.dump(__arg, file, indent=4)
 

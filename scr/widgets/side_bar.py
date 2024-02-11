@@ -36,7 +36,7 @@ class SideBar(QFrame):
         self.searchBtn = SideBarButton("assets/icons/system_icons/search.png")
         self.mainLayout.addWidget(self.searchBtn)
 
-        self.mainLayout.addItem(QSpacerItem(30, 2000, QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum))
+        self.mainLayout.addItem(QSpacerItem(30, 0, QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Expanding))
 
         self.runFileBtn = SideBarButton("assets/icons/system_icons/play.png")
         self.mainLayout.addWidget(self.runFileBtn)

@@ -2,7 +2,7 @@ from scr.scripts import FileLoader, FontManager
 
 from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QFont, QPixmap
+from PySide6.QtGui import QPixmap
 
 
 class WelcomeScreen(QWidget):
