@@ -24,6 +24,14 @@ class FontManager:
     def get_current_font_size() -> int:
         return FileLoader.load_json("scr/data/settings.json")["font"]["size"]
 
+    @staticmethod
+    def is_current_bold() -> bool:
+        return FileLoader.load_json("scr/data/settings.json")["font"]["bold"]
+
+    @staticmethod
+    def is_current_italic() -> bool:
+        return FileLoader.load_json("scr/data/settings.json")["font"]["italic"]
+
     @classmethod
     def set_font_updater(cls, __changer):
         cls.__font_updater = __changer
