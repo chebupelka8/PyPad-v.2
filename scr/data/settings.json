@@ -1,12 +1,12 @@
 {
     "font": {
         "family": "Consolas",
-        "size": 20,
+        "size": 18,
         "bold": false,
         "italic": false
     },
     "theme": {
-        "path": "scr/data/themes/github-theme.json",
-        "name": "GitHub Theme"
+        "path": "scr/data/themes/one-dark.json",
+        "name": "One Dark"
     }
 }

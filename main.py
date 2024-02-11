@@ -4,7 +4,7 @@ from scr import (
     FileChecker, FileLoader, PythonCodeEditorArea,
     HtmlCodeEditorArea, StyleCodeEditorArea, JsonCodeEditorArea,
     ImageViewer, TextEditorArea, WINDOW_SIZE, Restarter,
-    ThemeChanger, get_all_font_families
+    ThemeChanger, FontManager
 )
 
 import os
@@ -124,8 +124,8 @@ class MainWidget(QWidget):
         import json
 
         i = FileLoader.load_json("scr/data/settings.json")
-        i["font"]["family"] = choice(get_all_font_families())
-        i["font"]["size"] = randint(10, 50)
+        i["font"]["family"] = choice(FontManager.get_all_font_families())
+        i["font"]["size"] = randint(15, 25)
 
         with open("scr/data/settings.json", "w") as file:
             json.dump(i, file, indent=4)

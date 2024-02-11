@@ -1,4 +1,4 @@
-from scr.scripts import FileLoader
+from scr.scripts import FileLoader, FontManager
 
 from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout
 from PySide6.QtCore import Qt
@@ -32,7 +32,8 @@ class WelcomeScreen(QWidget):
     def __label(__text: str | None = None, __font_size: int | None = None) -> QLabel:
         label = QLabel(__text) if __text is not None else QLabel()
         label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        if __font_size is not None: label.setFont(QFont("Cascadia mono", __font_size, 1, False))
+        if __font_size is not None:
+            label.setFont(FontManager.get_font_by_path("assets/fonts/CascadiaMono.ttf", __font_size))
         label.setWordWrap(True)
 
         return label
