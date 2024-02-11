@@ -61,14 +61,14 @@ class MainWidget(QWidget):
         self.settingActionMenu.connect_by_title("Themes...", self.show_theme_changer)
         self.settingActionMenu.connect_by_title("Open Settings...", self.settingsMenu.show)
 
-        FontManager.set_font_changer(self.tabEditor.update_all_tabs_font)
-
         QShortcut("Ctrl+O", self).activated.connect(
             lambda: self.fileTree.open_directory(FileDialog.get_open_directory())
         )
         QShortcut("Ctrl+P", self).activated.connect(
             lambda: self.__click_file_tree(self.fileTree.open_file(FileDialog.get_open_file_name()))
         )
+
+        FontManager.set_font_updater(self.tabEditor.update_all_tabs_font)
 
         # set layout (draw)
         self.setLayout(self.mainLayout)

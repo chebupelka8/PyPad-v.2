@@ -6,7 +6,7 @@ import json
 
 
 class FontManager:
-    __font_changer = None
+    __font_updater = None
 
     @staticmethod
     def get_all_font_families() -> list[str]:
@@ -25,8 +25,8 @@ class FontManager:
         return FileLoader.load_json("scr/data/settings.json")["font"]["size"]
 
     @classmethod
-    def set_font_changer(cls, __changer):
-        cls.__font_changer = __changer
+    def set_font_updater(cls, __changer):
+        cls.__font_updater = __changer
 
     @classmethod
     def set_current_font(cls, family: str | None = None, size: int | None = None, bold: bool | None = None, italic: bool | None = None):
@@ -47,7 +47,7 @@ class FontManager:
         with open("scr/data/settings.json", "w") as file:
             json.dump(data, file, indent=4)
 
-        if cls.__font_changer is not None: cls.__font_changer()
+        if cls.__font_updater is not None: cls.__font_updater()
 
     @staticmethod
     def get_font_by_path(__path: str, __size: int) -> QFont:
