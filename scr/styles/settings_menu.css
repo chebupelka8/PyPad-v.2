@@ -23,6 +23,10 @@ QComboBox QAbstractItemView {
     border-radius: 4px;
 }
 
+QComboBox::drop-down {
+    border: none;
+}
+
 QSpinBox {
     background-color: #252525;
     padding: 2px;

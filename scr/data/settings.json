@@ -1,12 +1,12 @@
 {
     "font": {
-        "family": "Cascadia Code SemiLight",
-        "size": 20,
+        "family": "Cascadia Mono",
+        "size": 18,
         "bold": false,
         "italic": false
     },
     "theme": {
-        "path": "scr/data/themes/pypad-theme.json",
-        "name": "PyPad Theme"
+        "path": "scr/data/themes/github-theme.json",
+        "name": "GitHub Theme"
     }
 }

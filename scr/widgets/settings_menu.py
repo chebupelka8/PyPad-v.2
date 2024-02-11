@@ -24,6 +24,7 @@ class SettingsMenu(QDialog):
         self.mainLayout.addWidget(self.__h1_label("Font"))
 
         self.font_changer = QComboBox()
+        # self.font_changer.setItemDelegate()
         self.font_changer.addItems(FontManager.get_all_font_families())
         self.fontLayout.addWidget(self.__name_label("Family:"))
 
