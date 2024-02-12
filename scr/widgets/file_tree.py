@@ -23,13 +23,8 @@ class FileTree(QTreeView):
         self.setEditTriggers(QTreeView.EditTrigger.NoEditTriggers)
         self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
 
-        self.__main_font = Font.get_system_font(
-            WorkbenchFontManager.get_current_family(), WorkbenchFontManager.get_current_font_size()
-        )
-        self.setFont(self.__main_font)
-
-        icon_size = WorkbenchFontManager.get_current_font_size() * 1.7
-        self.setIconSize(QSize(icon_size, icon_size))
+        # font & icon size
+        self.update_font()
 
         self.model = QFileSystemModel()
         self.model.setRootPath(os.getcwd())
@@ -40,6 +35,15 @@ class FileTree(QTreeView):
 
         for i in range(1, 4):
             self.header().setSectionHidden(i, True)
+
+    def update_font(self):
+        self.__main_font = Font.get_system_font(
+            WorkbenchFontManager.get_current_family(), WorkbenchFontManager.get_current_font_size()
+        )
+        self.setFont(self.__main_font)
+
+        icon_size = WorkbenchFontManager.get_current_font_size() * 1.7
+        self.setIconSize(QSize(icon_size, icon_size))
 
     def get_path_by_index(self, __index) -> str:
         return self.model.filePath(__index)

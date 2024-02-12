@@ -68,8 +68,8 @@ class MainWidget(QWidget):
             lambda: self.__click_file_tree(self.fileTree.open_file(FileDialog.get_open_file_name()))
         )
 
-        EditorFontManager.set_font_updater(self.tabEditor.update_all_tabs_font)
-        WorkbenchFontManager.set_font_updater(self.restarter.show)
+        EditorFontManager.add_font_updater(self.tabEditor.update_all_tabs_font)
+        WorkbenchFontManager.add_font_updater(self.fileTree.update_font)
 
         # set layout (draw)
         self.setLayout(self.mainLayout)

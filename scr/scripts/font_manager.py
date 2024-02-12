@@ -4,7 +4,7 @@ import json
 
 
 class _FontManager:
-    font_updater = None
+    font_updaters = None
     directory = None
 
     @classmethod
@@ -28,8 +28,8 @@ class _FontManager:
         return FileLoader.load_json("scr/data/settings.json")[cls.directory]["font"]["italic"]
 
     @classmethod
-    def set_font_updater(cls, __changer):
-        cls.font_updater = __changer
+    def add_font_updater(cls, *__updaters):
+        for i in __updaters: cls.font_updaters.append(i)
 
     @classmethod
     def set_current_font(cls, family: str | None = None, size: int | None = None, bold: bool | None = None, italic: bool | None = None):
@@ -50,12 +50,15 @@ class _FontManager:
         with open("scr/data/settings.json", "w") as file:
             json.dump(data, file, indent=4)
 
-        if cls.font_updater is not None: cls.font_updater()
+        for updater in cls.font_updaters:
+            updater()
 
 
 class EditorFontManager(_FontManager):
+    font_updaters = []
     directory = "editor"
 
 
 class WorkbenchFontManager(_FontManager):
+    font_updaters = []
     directory = "workbench"
