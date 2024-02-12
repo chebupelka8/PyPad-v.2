@@ -3,9 +3,38 @@ from scr.scripts import EditorFontManager, FileLoader, Font
 from PySide6.QtWidgets import (
     QVBoxLayout, QHBoxLayout,
     QComboBox, QLabel, QSizePolicy, QSpinBox,
-    QSpacerItem, QDialog, QCheckBox
+    QSpacerItem, QDialog, QCheckBox, QFrame
 )
 from PySide6.QtCore import Qt
+
+
+class SettingFrame(QFrame):
+    def __init__(self, __title: str, __description: str) -> None:
+        super().__init__()
+
+        self.setObjectName("setting-frame")
+        self.mainLayout = QVBoxLayout()
+
+        self.mainLayout.addWidget(self.__title(__title))
+        self.mainLayout.addWidget(self.__description(__description))
+        q = QComboBox()
+        q.setFixedWidth(200)
+        q.addItems(Font.get_all_font_families())
+        self.mainLayout.addWidget(q)
+
+        self.setLayout(self.mainLayout)
+
+    def __title(self, __text: str) -> QLabel:
+        label = QLabel(__text)
+        label.setFont(Font.get_font_by_path("assets/fonts/CascadiaMono.ttf", 14))
+
+        return label
+
+    def __description(self, __text: str) -> QLabel:
+        label = QLabel(__text)
+        label.setFont(Font.get_font_by_path("assets/fonts/CascadiaMono.ttf", 10))
+
+        return label
 
 
 class SettingsMenu(QDialog):
@@ -23,6 +52,10 @@ class SettingsMenu(QDialog):
         self.sizeFontLayout = QHBoxLayout()
         self.boldLayout = QHBoxLayout()
         self.italicLayout = QHBoxLayout()
+
+        self.mainLayout.addWidget(SettingFrame("Editor: <b>Font Size</b>", "Defines the font size in pixels"))
+        self.mainLayout.addWidget(SettingFrame("Editor: <b>Family</b>", "Defines the font family"))
+        self.mainLayout.addWidget(SettingFrame("Editor: <b>Cursor</b>", "Controls the cursor"))
 
         self.font_changer = QComboBox()
         self.font_changer.addItems(Font.get_all_font_families())

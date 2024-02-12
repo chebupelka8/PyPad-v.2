@@ -1,9 +1,10 @@
 QComboBox {
     padding: 2px;
+    padding-left: 5px;
     background-color: #252525;
     color: white;
     border: 1px solid #3c3c3c;
-    border-radius: 4px;
+    border-radius: 3px;
 }
 
 QComboBox:hover {
@@ -43,4 +44,15 @@ QSpinBox:hover {
 QCheckBox::indicator {
     width: 20px;
     height: 20px;
+}
+
+QFrame#setting-frame {
+    border: none;
+    border-radius: 4px;
+    background-color: #252525;
+    padding: 4px;
+}
+
+QFrame#setting-frame:hover {
+    background-color: #303030;
 }
