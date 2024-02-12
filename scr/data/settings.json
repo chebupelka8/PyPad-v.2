@@ -1,8 +1,8 @@
 {
     "workbench": {
         "font": {
-            "family": "Cascadia Mono",
-            "size": 17,
+            "family": "Segoe UI",
+            "size": 15,
             "bold": false,
             "italic": false
         }

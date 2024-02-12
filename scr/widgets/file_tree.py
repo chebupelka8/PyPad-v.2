@@ -1,4 +1,4 @@
-from scr.scripts import FileLoader, IconProvider, Font
+from scr.scripts import FileLoader, IconProvider, Font, WorkbenchFontManager
 from scr.exceptions import NotDirectoryError
 
 import os
@@ -23,10 +23,13 @@ class FileTree(QTreeView):
         self.setEditTriggers(QTreeView.EditTrigger.NoEditTriggers)
         self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
 
-        self.__main_font = Font.get_system_font("Segoe UI", 12)
+        self.__main_font = Font.get_system_font(
+            WorkbenchFontManager.get_current_family(), WorkbenchFontManager.get_current_font_size()
+        )
         self.setFont(self.__main_font)
 
-        self.setIconSize(QSize(12 * 1.5, 12 * 1.5))
+        icon_size = WorkbenchFontManager.get_current_font_size() * 1.7
+        self.setIconSize(QSize(icon_size, icon_size))
 
         self.model = QFileSystemModel()
         self.model.setRootPath(os.getcwd())
