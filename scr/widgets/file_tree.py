@@ -1,10 +1,10 @@
-from scr.scripts import FileLoader, IconProvider
+from scr.scripts import FileLoader, IconProvider, Font
 from scr.exceptions import NotDirectoryError
 
 import os
 
 from PySide6.QtWidgets import QTreeView, QFileSystemModel, QAbstractItemView
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QSize
 
 
 class FileTree(QTreeView):
@@ -22,6 +22,11 @@ class FileTree(QTreeView):
         self.setSelectionBehavior(QTreeView.SelectionBehavior.SelectRows)
         self.setEditTriggers(QTreeView.EditTrigger.NoEditTriggers)
         self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+
+        self.__main_font = Font.get_system_font("Segoe UI", 12)
+        self.setFont(self.__main_font)
+
+        self.setIconSize(QSize(12 * 1.5, 12 * 1.5))
 
         self.model = QFileSystemModel()
         self.model.setRootPath(os.getcwd())

@@ -1,40 +1,35 @@
-from PySide6.QtGui import QFontDatabase, QFont
-
 from scr.scripts import FileLoader
 
 import json
 
 
-class FontManager:
-    __font_updater = None
+class _FontManager:
+    font_updater = None
+    directory = None
 
-    @staticmethod
-    def get_all_font_families() -> list[str]:
-        return QFontDatabase.families()
+    @classmethod
+    def get_current_font(cls) -> dict:
+        return FileLoader.load_json("scr/data/settings.json")[cls.directory]["font"]
 
-    @staticmethod
-    def get_current_font() -> dict:
-        return FileLoader.load_json("scr/data/settings.json")["font"]
+    @classmethod
+    def get_current_family(cls) -> str:
+        return FileLoader.load_json("scr/data/settings.json")[cls.directory]["font"]["family"]
 
-    @staticmethod
-    def get_current_family() -> str:
-        return FileLoader.load_json("scr/data/settings.json")["font"]["family"]
+    @classmethod
+    def get_current_font_size(cls) -> int:
+        return FileLoader.load_json("scr/data/settings.json")[cls.directory]["font"]["size"]
 
-    @staticmethod
-    def get_current_font_size() -> int:
-        return FileLoader.load_json("scr/data/settings.json")["font"]["size"]
+    @classmethod
+    def is_current_bold(cls) -> bool:
+        return FileLoader.load_json("scr/data/settings.json")[cls.directory]["font"]["bold"]
 
-    @staticmethod
-    def is_current_bold() -> bool:
-        return FileLoader.load_json("scr/data/settings.json")["font"]["bold"]
-
-    @staticmethod
-    def is_current_italic() -> bool:
-        return FileLoader.load_json("scr/data/settings.json")["font"]["italic"]
+    @classmethod
+    def is_current_italic(cls) -> bool:
+        return FileLoader.load_json("scr/data/settings.json")[cls.directory]["font"]["italic"]
 
     @classmethod
     def set_font_updater(cls, __changer):
-        cls.__font_updater = __changer
+        cls.font_updater = __changer
 
     @classmethod
     def set_current_font(cls, family: str | None = None, size: int | None = None, bold: bool | None = None, italic: bool | None = None):
@@ -42,10 +37,10 @@ class FontManager:
 
         if family is None: family = cls.get_current_family()
         if size is None: size = cls.get_current_font_size()
-        if bold is None: bold = data["font"]["bold"]
-        if italic is None: italic = data["font"]["italic"]
+        if bold is None: bold = data[cls.directory]["font"]["bold"]
+        if italic is None: italic = data[cls.directory]["font"]["italic"]
 
-        data["font"] = {
+        data[cls.directory]["font"] = {
             "family": family,
             "size": size,
             "bold": bold,
@@ -55,21 +50,12 @@ class FontManager:
         with open("scr/data/settings.json", "w") as file:
             json.dump(data, file, indent=4)
 
-        if cls.__font_updater is not None: cls.__font_updater()
+        if cls.font_updater is not None: cls.font_updater()
 
-    @staticmethod
-    def get_font_by_path(__path: str, __size: int | float, __bold: bool = False, __italic: bool = False) -> QFont:
-        __id = QFontDatabase.addApplicationFont(__path)
-        families = QFontDatabase.applicationFontFamilies(__id)
 
-        font = QFont(families[0], __size, 1, __italic)
-        font.setBold(__bold)
+class EditorFontManager(_FontManager):
+    directory = "editor"
 
-        return font
 
-    @staticmethod
-    def get_system_font(__family: str, __size: int | float, __bold: bool = False, __italic: bool = False) -> QFont:
-        font = QFont(__family, __size, 1, __italic)
-        font.setBold(__bold)
-
-        return font
+class WorkbenchFontManager(_FontManager):
+    directory = "workbench"

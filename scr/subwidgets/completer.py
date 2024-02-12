@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QListWidget, QWidget, QHBoxLayout
 
-from scr.scripts import FileLoader, FontManager
+from scr.scripts import FileLoader, EditorFontManager, Font
 
 
 class Completer(QListWidget):
@@ -8,8 +8,8 @@ class Completer(QListWidget):
         super().__init__()
 
         # font setup
-        self.__main_font = FontManager.get_system_font(
-            FontManager.get_current_family(), FontManager.get_current_font_size() * 0.8
+        self.__main_font = Font.get_system_font(
+            EditorFontManager.get_current_family(), EditorFontManager.get_current_font_size() * 0.8
         )
         self.setFont(self.__main_font)
 

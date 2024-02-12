@@ -1,4 +1,4 @@
-from scr.scripts import FileLoader, FileChecker, FontManager
+from scr.scripts import FileLoader, FileChecker, EditorFontManager, Font
 from scr.config import TextEditorTheme
 
 from PySide6.QtWidgets import QPlainTextEdit, QTextEdit, QWidget
@@ -22,7 +22,7 @@ class TextEditorArea(QPlainTextEdit):
         self.setLineWrapMode(QPlainTextEdit.LineWrapMode.NoWrap)
 
         # font setup
-        self.__main_font = FontManager.get_system_font(*FontManager.get_current_font().values())
+        self.__main_font = Font.get_system_font(*EditorFontManager.get_current_font().values())
         self.setFont(self.__main_font)
 
         # color setup
@@ -44,7 +44,7 @@ class TextEditorArea(QPlainTextEdit):
         self.__current_line = 0
 
     def update_font(self):
-        self.__main_font = FontManager.get_system_font(*FontManager.get_current_font().values())
+        self.__main_font = Font.get_system_font(*EditorFontManager.get_current_font().values())
         self.setFont(self.__main_font)
 
         self.__update_line_number_area_width()
