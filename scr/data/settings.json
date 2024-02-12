@@ -2,21 +2,21 @@
     "workbench": {
         "font": {
             "family": "Segoe UI",
-            "size": 15,
+            "size": 12,
             "bold": false,
             "italic": false
         }
     },
     "editor": {
         "font": {
-            "family": "Calibri",
+            "family": "Cascadia Mono",
             "size": 17,
             "bold": false,
             "italic": false
         }
     },
     "theme": {
-        "path": "scr/data/themes/github-theme.json",
-        "name": "GitHub Theme"
+        "path": "scr/data/themes/one-dark.json",
+        "name": "One Dark"
     }
 }

@@ -4,7 +4,7 @@ from scr import (
     FileChecker, FileLoader, PythonCodeEditorArea,
     HtmlCodeEditorArea, StyleCodeEditorArea, JsonCodeEditorArea,
     ImageViewer, TextEditorArea, WINDOW_SIZE, Restarter,
-    ThemeChanger, EditorFontManager, SettingsMenu
+    ThemeChanger, EditorFontManager, SettingsMenu, WorkbenchFontManager
 )
 
 import os
@@ -69,6 +69,7 @@ class MainWidget(QWidget):
         )
 
         EditorFontManager.set_font_updater(self.tabEditor.update_all_tabs_font)
+        WorkbenchFontManager.set_font_updater(self.restarter.show)
 
         # set layout (draw)
         self.setLayout(self.mainLayout)
