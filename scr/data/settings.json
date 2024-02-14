@@ -1,7 +1,7 @@
 {
     "workbench": {
         "font": {
-            "family": "Segoe UI",
+            "family": "Cascadia mono",
             "size": 13,
             "bold": false,
             "italic": false
@@ -9,7 +9,7 @@
     },
     "editor": {
         "font": {
-            "family": "Malgun Gothic Semilight",
+            "family": "Cascadia mono",
             "size": 21,
             "bold": false,
             "italic": false

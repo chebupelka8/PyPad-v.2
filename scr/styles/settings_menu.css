@@ -77,6 +77,27 @@ QFrame#setting-frame:hover {
     background-color: #272727;
 }
 
+QListWidget {
+    border: none;
+    background-color: #252525;
+    border-right: 1px solid #3c3c3c;
+    padding: 2px;
+}
+
+QListWidget:item {
+    color: white;
+    padding: 2px 0;
+}
+
+QListWidget:item:hover {
+    background-color: #303030;
+}
+
+QListWidget:item:selected {
+    background-color: #303030;
+    padding-left: 15px;
+}
+
 /*  SCROLLBAR:VERTICAL  */
 QScrollBar:vertical {
     border: none;

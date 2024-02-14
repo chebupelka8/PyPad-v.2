@@ -1,10 +1,10 @@
-from scr.scripts import EditorFontManager, FileLoader, Font
+from scr.scripts import EditorFontManager, FileLoader, Font, WorkbenchFontManager
 
 from PySide6.QtWidgets import (
     QVBoxLayout, QHBoxLayout,
     QComboBox, QLabel, QSizePolicy, QSpinBox,
     QSpacerItem, QDialog, QCheckBox, QFrame,
-    QScrollArea, QWidget
+    QScrollArea, QWidget, QListWidget
 )
 from PySide6.QtCore import Qt
 
@@ -64,6 +64,20 @@ class MainSettingsWidget(QWidget):
         # self.setLayout(self.mainLayout)
 
 
+class SettingTree(QListWidget):
+    def __init__(self):
+        super().__init__()
+
+        self.update_font()
+        self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+
+    def update_font(self) -> None:
+        self.__main_font = Font.get_system_font(
+            WorkbenchFontManager.get_current_family(), WorkbenchFontManager.get_current_font_size()
+        )
+        self.setFont(self.__main_font)
+
+
 class SettingsMenu(QDialog):
     def __init__(self, __parent) -> None:
         super().__init__(__parent)
@@ -73,12 +87,17 @@ class SettingsMenu(QDialog):
         self.setStyleSheet(FileLoader.load_style("scr/styles/settings_menu.css"))
 
         self.settingsArea = QScrollArea()
+        self.settingsArea.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
         self.mainSettingsWidget = MainSettingsWidget()
         self.settingsArea.setWidget(self.mainSettingsWidget)
 
-        self.mainLayout = QVBoxLayout()
-        self.mainLayout.addWidget(self.settingsArea)
+        self.settingTree = SettingTree()
+        self.settingTree.addItems(["Main", "Editor", "Theme", "Interpreter"])
+
+        self.mainLayout = QHBoxLayout()
+        self.mainLayout.addWidget(self.settingTree, stretch=1)
+        self.mainLayout.addWidget(self.settingsArea, stretch=3)
 
         self.setLayout(self.mainLayout)
         # self.fontLayout = QHBoxLayout()
