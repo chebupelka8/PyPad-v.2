@@ -14,7 +14,7 @@ from PySide6.QtWidgets import (
     QWidget, QApplication, QMainWindow,
     QHBoxLayout, QVBoxLayout
 )
-from PySide6.QtCore import QModelIndex
+from PySide6.QtCore import QModelIndex, Qt
 from PySide6.QtGui import QIcon, QShortcut
 
 
@@ -140,11 +140,21 @@ class Window(QMainWindow):
 
         self.setCentralWidget(self.mainWidget)
 
+    def __toggleFullScreen(self):
+        if self.isFullScreen():
+            self.showMaximized()
+        else:
+            self.showFullScreen()
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_F11:
+            self.__toggleFullScreen()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     window = Window()
-    window.show()
+    window.showMaximized()
 
     app.exec()
