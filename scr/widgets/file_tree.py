@@ -1,4 +1,4 @@
-from scr.scripts import FileLoader, IconProvider, Font, WorkbenchFontManager, FIconProvider
+from scr.scripts import FileLoader, IconProvider, Font, WorkbenchFontManager
 from scr.exceptions import NotDirectoryError
 
 import os
