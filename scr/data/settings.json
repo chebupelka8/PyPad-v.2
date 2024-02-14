@@ -1,16 +1,16 @@
 {
     "workbench": {
         "font": {
-            "family": "Cascadia mono",
-            "size": 13,
+            "family": "Segoe UI",
+            "size": 10,
             "bold": false,
             "italic": false
         }
     },
     "editor": {
         "font": {
-            "family": "Cascadia mono",
-            "size": 21,
+            "family": "Consolas",
+            "size": 17,
             "bold": false,
             "italic": false
         }

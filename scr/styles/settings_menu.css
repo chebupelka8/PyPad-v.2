@@ -9,7 +9,7 @@ QScrollArea {
     border: none;
 }
 
-QWidget#main-settings-widget {
+QWidget#settings-widget {
     background-color: #252525;
     border: none;
 }
@@ -87,15 +87,16 @@ QListWidget {
 QListWidget:item {
     color: white;
     padding: 2px 0;
+    border-radius: 4px;
 }
 
 QListWidget:item:hover {
-    background-color: #303030;
+    background-color: #282828;
 }
 
 QListWidget:item:selected {
     background-color: #303030;
-    padding-left: 15px;
+    padding-left: 20px;
 }
 
 /*  SCROLLBAR:VERTICAL  */

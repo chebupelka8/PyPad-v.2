@@ -8,7 +8,6 @@ QTreeView#file-tree {
 
 QTreeView#file-tree:item {
     color: white;
-    padding: 1px 0;
     border: none;
 }
 

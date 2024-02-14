@@ -9,7 +9,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt
 
 
-class SettingFrame(QFrame):
+class _SettingFrame(QFrame):
     def __init__(self, __title: str, __description: str) -> None:
         super().__init__()
 
@@ -42,26 +42,32 @@ class SettingFrame(QFrame):
         return label
 
 
-class MainSettingsWidget(QWidget):
-    def __init__(self) -> None:
+class _SettingsWidget(QWidget):
+    def __init__(self):
         super().__init__()
 
         self.mainLayout = QVBoxLayout()
-        self.setObjectName("main-settings-widget")
         self.setMinimumWidth(800)
-
-        self.mainLayout.addWidget(SettingFrame("Editor: <b>Font Size</b>", "Defines the font size in pixels"))
-        self.mainLayout.addWidget(SettingFrame("Editor: <b>Family</b>", "Defines the font family"))
-        self.mainLayout.addWidget(SettingFrame("Editor: <b>Cursor</b>", "Controls the cursor"))
-        self.mainLayout.addWidget(SettingFrame("Editor: <b>Cursor</b>", "Controls the cursor"))
-        self.mainLayout.addWidget(SettingFrame("Editor: <b>Cursor</b>", "Controls the cursor"))
-        self.mainLayout.addWidget(SettingFrame("Editor: <b>Cursor</b>", "Controls the cursor"))
-        self.mainLayout.addWidget(SettingFrame("Editor: <b>Cursor</b>", "Controls the cursor"))
-        # self.mainLayout.addItem(QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding))
+        self.setObjectName("settings-widget")
 
         self.setLayout(self.mainLayout)
 
-        # self.setLayout(self.mainLayout)
+
+class MainSettingsWidget(_SettingsWidget):
+    def __init__(self) -> None:
+        super().__init__()
+
+        self.mainLayout.addWidget(_SettingFrame("Main: <b>Font Size</b>", "Defines the font size in pixels"))
+        self.mainLayout.addWidget(_SettingFrame("Main: <b>Family</b>", "Defines the font family"))
+
+
+class EditorSettingsWidget(_SettingsWidget):
+    def __init__(self) -> None:
+        super().__init__()
+
+        self.mainLayout.addWidget(_SettingFrame("Editor: <b>Font Size</b>", "Defines the font size in pixels"))
+        self.mainLayout.addWidget(_SettingFrame("Editor: <b>Family</b>", "Defines the font family"))
+        self.mainLayout.addWidget(_SettingFrame("Editor: <b>Cursor</b>", "Controls the cursor"))
 
 
 class SettingTree(QListWidget):
@@ -69,7 +75,15 @@ class SettingTree(QListWidget):
         super().__init__()
 
         self.update_font()
+
+        self.addItems(["Main", "Editor", "Theme", "Interpreter"])
+        self.setCurrentRow(0)
         self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+
+        self.__commands: dict = {}
+        self.currentTextChanged.connect(self.__connection)
+
+        WorkbenchFontManager.add_font_updater(self.update_font)
 
     def update_font(self) -> None:
         self.__main_font = Font.get_system_font(
@@ -77,29 +91,48 @@ class SettingTree(QListWidget):
         )
         self.setFont(self.__main_font)
 
+    def connect_by_title(self, __title: str, __command):
+        try:
+            self.__commands[__title] = __command
+
+        except TypeError:
+            ...
+
+    def __connection(self, __text):
+        if __text not in list(self.__commands.keys()): return
+
+        self.__commands[__text]()
+
 
 class SettingsMenu(QDialog):
     def __init__(self, __parent) -> None:
         super().__init__(__parent)
 
         self.setWindowTitle("Settings")
-        self.setMinimumSize(840, 400)
+        self.setMinimumSize(1000, 700)
         self.setStyleSheet(FileLoader.load_style("scr/styles/settings_menu.css"))
 
         self.settingsArea = QScrollArea()
+        self.settingsArea.setMinimumWidth(800)
         self.settingsArea.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-
-        self.mainSettingsWidget = MainSettingsWidget()
-        self.settingsArea.setWidget(self.mainSettingsWidget)
+        self.settingsArea.setWidget(MainSettingsWidget())
 
         self.settingTree = SettingTree()
-        self.settingTree.addItems(["Main", "Editor", "Theme", "Interpreter"])
+        self.settingTree.connect_by_title(
+            "Main", lambda: self.settingsArea.setWidget(MainSettingsWidget())
+        )
+        self.settingTree.connect_by_title(
+            "Editor", lambda: self.settingsArea.setWidget(EditorSettingsWidget())
+        )
 
         self.mainLayout = QHBoxLayout()
         self.mainLayout.addWidget(self.settingTree, stretch=1)
         self.mainLayout.addWidget(self.settingsArea, stretch=3)
 
         self.setLayout(self.mainLayout)
+
+
+
         # self.fontLayout = QHBoxLayout()
         # self.sizeFontLayout = QHBoxLayout()
         # self.boldLayout = QHBoxLayout()
