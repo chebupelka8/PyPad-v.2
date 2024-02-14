@@ -1,5 +1,6 @@
 from PySide6.QtGui import QIcon, QAbstractFileIconProvider
-from PySide6.QtCore import QFileInfo
+from PySide6.QtWidgets import QFileIconProvider, QApplication, QStyle
+from PySide6.QtCore import QFileInfo, QMimeDatabase
 
 from scr.config import IconPaths
 
@@ -39,7 +40,37 @@ class IconProvider(QAbstractFileIconProvider):
                 elif __info.suffix().lower() == "md":
                     return QIcon(IconPaths.FileIcons.README)
 
+                else:
+                    return QIcon(IconPaths.FileIcons.DEFAULT)
+
         except AttributeError:
             pass
 
         return super().icon(__info)
+
+
+class FileIconProvider(QFileIconProvider):
+    def icon(self, _input):
+        if isinstance(_input, QFileInfo):
+            if _input.isDir():
+                return QApplication.style().standardIcon(QStyle.SP_DirIcon)
+            elif _input.isFile():
+                return QApplication.style().standardIcon(QStyle.SP_FileIcon)
+        else:
+            if _input == QAbstractFileIconProvider.Folder:
+                return QApplication.style().standardIcon(QStyle.SP_DirIcon)
+            elif _input == QAbstractFileIconProvider.File:
+                return QApplication.style().standardIcon(QStyle.SP_FileIcon)
+        return super().icon(_input)
+
+class FIconProvider(QFileIconProvider):
+    def __init__(self):
+        super().__init__()
+        self.mimeDatabase = QMimeDatabase()
+
+    def icon(self, info: QFileInfo):
+        if isinstance(info, QFileInfo):
+            mimeType = self.mimeDatabase.mimeTypeForFile(info)
+            return QIcon.fromTheme(mimeType.iconName())
+
+        return super().icon(info)

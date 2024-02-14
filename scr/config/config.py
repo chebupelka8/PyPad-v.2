@@ -19,6 +19,7 @@ class IconPaths:
         JAVA = "assets/icons/file_icons/java.png"
         README = "assets/icons/file_icons/readme.png"
         ZIP = "assets/icons/zip-file.png"
+        DEFAULT = "assets/icons/symbol.png"
 
     class SystemIcons:
         MAIN = "assets/icons/system_icons/window_icon.png"
