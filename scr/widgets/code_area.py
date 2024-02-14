@@ -8,7 +8,7 @@ from scr.subwidgets import WindowCompleter
 
 from PySide6.QtCore import Qt, QThreadPool
 
-from jedi import Script
+# from jedi import Script
 
 
 class _CodeEditorArea(TextEditorArea):

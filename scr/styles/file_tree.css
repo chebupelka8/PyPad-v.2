@@ -6,6 +6,20 @@ QTreeView#file-tree {
     color: #ffffff;
 }
 
+QTreeView#file-tree:item {
+    color: white;
+    padding: 1px 0;
+    border: none;
+}
+
+QTreeView#file-tree:item:hover {
+    background-color: #282828;
+}
+
+QTreeView#file-tree:item:selected {
+    background-color: #303030;
+}
+
 /*  SCROLLBAR:VERTICAL  */
 QScrollBar:vertical {
     border: none;

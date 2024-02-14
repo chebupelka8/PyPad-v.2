@@ -39,6 +39,9 @@ class IconProvider(QAbstractFileIconProvider):
                 elif __info.suffix().lower() == "md":
                     return QIcon(IconPaths.FileIcons.README)
 
+                else:
+                    return QIcon(IconPaths.FileIcons.DEFAULT)
+
         except AttributeError:
             pass
 

@@ -42,7 +42,7 @@ class FileTree(QTreeView):
         )
         self.setFont(self.__main_font)
 
-        icon_size = WorkbenchFontManager.get_current_font_size() * 1.7
+        icon_size = WorkbenchFontManager.get_current_font_size() * 1.5
         self.setIconSize(QSize(icon_size, icon_size))
 
     def get_path_by_index(self, __index) -> str:
