@@ -34,18 +34,20 @@ class IconPaths:
 class PythonPatterns:
     KEYWORDS = r"""\b(and|as|assert|async|await|break|class|continue
     |def|del|elif|else|except|finally|for|from|global|if|import|in|is|lambda|nonlocal
-    |not|or|pass|raise|return|try|while|with|yield|case)\b"""
+    |not|or|pass|raise|return|try|while|with|yield|case|match)\b"""
 
     CLASS_NAME = r'\bclass\b\s*(\w+)'
 
     FUNCTION_NAME = r'\bdef\b\s*(\w+)'
 
     PYTHON_FUNCTIONS = r"""\b(divmod|map|filter|zip|super|open|help|hex|abs|eval|exec|ord|chr|sorted
-    |reversed|enumerate|range|sum|repr|round|type|all|any)\b"""
+    |reversed|enumerate|range|sum|repr|round|type|all|any|print|input|len|max|min|hash|dir|bytearray
+    |bytes|callable|hasattr|delattr|format|frozenset|getattr|id|issubclass|isinstance|locals|memoryview
+    |next|oct|pow|property|repr|staticmethod|vars|setattr|slice|compile|complex|classmethod|globals)\b"""
 
     BOOLEAN = r"\b(True|False)\b"
     NONE_TYPE = r"\b(None)\b"
-    DATA_TYPES = r"\b(int|float|str|dict|set|tuple|list|bool)\b"
+    DATA_TYPES = r"\b(int|float|str|dict|set|tuple|list|bool|iter|object)\b"
 
     SPECIAL = r"\b(self|cls)\b"
 

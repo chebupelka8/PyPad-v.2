@@ -7,9 +7,6 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt
 
-import os
-import json
-
 
 class _DialogWindow(QDialog):
     def __init__(self, __parent, frameless: bool = True) -> None:
