@@ -140,7 +140,7 @@ class Window(QMainWindow):
 
         self.setCentralWidget(self.mainWidget)
 
-    def __toggleFullScreen(self):
+    def __toggle_full_screen(self):
         if self.isFullScreen():
             self.showMaximized()
         else:
@@ -148,7 +148,7 @@ class Window(QMainWindow):
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_F11:
-            self.__toggleFullScreen()
+            self.__toggle_full_screen()
 
 
 if __name__ == "__main__":

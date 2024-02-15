@@ -2,8 +2,8 @@ from scr.scripts import EditorFontManager, FileLoader, Font, WorkbenchFontManage
 from scr.subwidgets import ThemeChanger
 
 from PySide6.QtWidgets import (
-    QVBoxLayout, QHBoxLayout,
-    QComboBox, QLabel, QSpinBox,QDialog, QFrame,
+    QVBoxLayout, QHBoxLayout, QComboBox, QLabel,
+    QSpinBox, QDialog, QFrame,
     QScrollArea, QWidget, QListWidget, QPushButton
 )
 from PySide6.QtCore import Qt
@@ -59,6 +59,7 @@ class _SettingFrame(QFrame):
         combobox = QComboBox()
         combobox.addItems(__values)
         combobox.setFixedWidth(__width)
+        combobox.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         combobox.view().setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
         self.mainLayout.addWidget(combobox)
@@ -72,6 +73,7 @@ class _SettingFrame(QFrame):
     ) -> None | QSpinBox:
 
         spinbox = QSpinBox()
+        spinbox.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         spinbox.setRange(*__range)
         spinbox.setFixedWidth(__width)
         spinbox.setButtonSymbols(QSpinBox.ButtonSymbols.NoButtons)
@@ -89,6 +91,7 @@ class _SettingFrame(QFrame):
     def add_button(self, __text: str, __width: int = 200, is_highlighted: bool = False):
         btn = QPushButton(__text)
         btn.setFixedWidth(__width)
+        btn.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         if is_highlighted: btn.setObjectName("highlighted-btn")
 
         self.mainLayout.addWidget(btn)

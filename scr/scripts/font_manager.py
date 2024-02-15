@@ -32,7 +32,13 @@ class _FontManager:
         for i in __updaters: cls.font_updaters.append(i)
 
     @classmethod
-    def set_current_font(cls, family: str | None = None, size: int | None = None, bold: bool | None = None, italic: bool | None = None):
+    def set_current_font(
+            cls,
+            family: str | None = None,
+            size: int | None = None,
+            bold: bool | None = None,
+            italic: bool | None = None
+    ) -> None:
         data = FileLoader.load_json("scr/data/settings.json")
 
         if family is None: family = cls.get_current_family()
