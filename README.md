@@ -26,14 +26,18 @@ Ctrl+P - Open file
 
 <p align="center">
 
-  <img src="screenshots/welcome.png">
-  <img src="screenshots/prev.png">
-  <img src="screenshots/code_preview.png">
-  <img src="screenshots/jason.png">
-  <img src="screenshots/theme_changer.png">
-  <img src="screenshots/hello.png">
-  <img src="screenshots/image.png">
-  <img src="screenshots/code-one.png">
-  <img src="screenshots/one-dark.png">
+  <img src="screenshots/screen5.png">
+  <img src="screenshots/screen6.png">
+  <img src="screenshots/screen3.png">
+  <img src="screenshots/screen1.png">
+  <img src="screenshots/screen0.png">
+  <img src="screenshots/screen2.png">
+  <img src="screenshots/screen4.png">
+  <img src="screenshots/screen7.png">
+  <img src="screenshots/screen8.png">
+  <img src="screenshots/screen10.png">
+  <img src="screenshots/screen9.png">
+  <img src="screenshots/screen12.png">
+  <img src="screenshots/screen11.png">
   
 </p>
