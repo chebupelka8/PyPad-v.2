@@ -12,6 +12,30 @@ from PySide6.QtCore import Qt
 import os
 
 
+class _UI:
+
+    @staticmethod
+    def title(__text: str) -> QLabel:
+        label = QLabel(__text)
+        label.setFont(Font.get_font_by_path("assets/fonts/CascadiaMono.ttf", 17, True))
+
+        return label
+
+    @staticmethod
+    def subtitle(__text: str) -> QLabel:
+        label = QLabel(__text)
+        label.setFont(Font.get_font_by_path("assets/fonts/CascadiaMono.ttf", 14, False))
+
+        return label
+
+    @staticmethod
+    def description(__text: str) -> QLabel:
+        label = QLabel(__text)
+        label.setFont(Font.get_font_by_path("assets/fonts/CascadiaMono.ttf", 10))
+
+        return label
+
+
 class _SettingFrame(QFrame):
     def __init__(self, __title: str, __description: str) -> None:
         super().__init__()
@@ -19,31 +43,18 @@ class _SettingFrame(QFrame):
         self.setObjectName("setting-frame")
         self.mainLayout = QVBoxLayout()
         self.setMinimumHeight(100)
+        self.setContentsMargins(10, 0, 0, 0)
 
-        self.add_title(__title)
+        self.add_subtitle(__title)
         self.add_description(__description)
 
         self.setLayout(self.mainLayout)
 
-    @staticmethod
-    def __title(__text: str) -> QLabel:
-        label = QLabel(__text)
-        label.setFont(Font.get_font_by_path("assets/fonts/CascadiaMono.ttf", 14))
-
-        return label
-
-    @staticmethod
-    def __description(__text: str) -> QLabel:
-        label = QLabel(__text)
-        label.setFont(Font.get_font_by_path("assets/fonts/CascadiaMono.ttf", 10))
-
-        return label
-
-    def add_title(self, __text: str) -> None:
-        self.mainLayout.addWidget(self.__title(__text))
+    def add_subtitle(self, __text: str) -> None:
+        self.mainLayout.addWidget(_UI.subtitle(__text))
 
     def add_description(self, __text: str) -> None:
-        self.mainLayout.addWidget(self.__description(__text))
+        self.mainLayout.addWidget(_UI.description(__text))
 
     def add_combobox(self, __values: list, __width: int = 200, *, should_return: bool = True) -> None | QComboBox:
         combobox = QComboBox()
@@ -101,16 +112,17 @@ class MainSettingsWidget(_SettingsWidget):
     def __init__(self) -> None:
         super().__init__()
 
-        self.font_family_changer = _SettingFrame("<b>Font Family</b>", "Defines the font family")
+        self.font_family_changer = _SettingFrame("Font Family", "Defines the font family")
         self.font_family_combo = self.font_family_changer.add_combobox(Font.get_all_font_families(), 200)
         self.font_family_combo.currentTextChanged.connect(lambda fam: WorkbenchFontManager.set_current_font(family=fam))
 
-        self.font_size_changer = _SettingFrame("<b>Font Size</b>", "Defines the font size in pixels")
+        self.font_size_changer = _SettingFrame("Font Size", "Defines the font size in pixels")
         self.font_size_spin = self.font_size_changer.add_spinbox((1, 100))
         self.font_size_spin.valueChanged.connect(lambda value: WorkbenchFontManager.set_current_font(size=value))
 
         self.update_values()
 
+        self.mainLayout.addWidget(_UI.title("Font Settings"))
         self.mainLayout.addWidget(self.font_family_changer)
         self.mainLayout.addWidget(self.font_size_changer)
 
@@ -123,16 +135,17 @@ class EditorSettingsWidget(_SettingsWidget):
     def __init__(self) -> None:
         super().__init__()
 
-        self.font_family_changer = _SettingFrame("<b>Font Family</b>", "Defines the font family")
+        self.font_family_changer = _SettingFrame("Font Family", "Defines the font family")
         self.font_family_combo = self.font_family_changer.add_combobox(Font.get_all_font_families(), 200)
         self.font_family_combo.currentTextChanged.connect(lambda fam: EditorFontManager.set_current_font(family=fam))
 
-        self.font_size_changer = _SettingFrame("<b>Font Size</b>", "Defines the font size in pixels")
+        self.font_size_changer = _SettingFrame("Font Size", "Defines the font size in pixels")
         self.font_size_spin = self.font_size_changer.add_spinbox((1, 100))
         self.font_size_spin.valueChanged.connect(lambda value: EditorFontManager.set_current_font(size=value))
 
         self.update_values()
 
+        self.mainLayout.addWidget(_UI.title("Font Settings"))
         self.mainLayout.addWidget(self.font_family_changer)
         self.mainLayout.addWidget(self.font_size_changer)
 
@@ -147,10 +160,11 @@ class ThemeSettingsWidget(_SettingsWidget):
 
         self.themeChanger = ThemeChanger(self, restarter=__restarter)
 
-        self.font_theme_changer = _SettingFrame("<b>Color Theme</b>", "Defines the current color theme")
+        self.font_theme_changer = _SettingFrame("Color Theme", "Defines the current color theme")
         self.change_theme = self.font_theme_changer.add_button("Change color theme...", is_highlighted=True)
         self.change_theme.clicked.connect(self.show_theme_changer)
 
+        self.mainLayout.addWidget(_UI.title("Theme Settings"))
         self.mainLayout.addWidget(self.font_theme_changer)
 
     def show_theme_changer(self):
@@ -166,7 +180,7 @@ class SettingTree(QListWidget):
 
         self.update_font()
 
-        self.addItems(["Main", "Editor", "Theme", "Interpreter"])
+        self.addItems(["Main", "Editor", "Theme"])
         self.setCurrentRow(0)
         self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
 
