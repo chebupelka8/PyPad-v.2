@@ -26,6 +26,8 @@ Ctrl+P - Open file
 
 <p align="center">
 
+  <video src="screenshots/preview.mp4">
+
   <img src="screenshots/screen5.png">
   <img src="screenshots/screen6.png">
   <img src="screenshots/screen3.png">
