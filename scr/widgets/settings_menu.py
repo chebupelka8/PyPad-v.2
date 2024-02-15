@@ -3,8 +3,7 @@ from scr.subwidgets import ThemeChanger
 
 from PySide6.QtWidgets import (
     QVBoxLayout, QHBoxLayout,
-    QComboBox, QLabel, QSizePolicy, QSpinBox,
-    QSpacerItem, QDialog, QCheckBox, QFrame,
+    QComboBox, QLabel, QSpinBox,QDialog, QFrame,
     QScrollArea, QWidget, QListWidget, QPushButton
 )
 from PySide6.QtCore import Qt

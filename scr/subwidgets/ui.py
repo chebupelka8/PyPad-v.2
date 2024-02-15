@@ -1,4 +1,4 @@
-from scr.scripts import FileLoader, restart_application
+from scr.scripts import FileLoader, restart_application, ThemeManager
 
 from PySide6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout,
@@ -163,38 +163,17 @@ class ThemeChanger(_ListChanger):
         self.restarter = restarter
         self.listWidget.itemClicked.connect(self.accept)
 
-    @staticmethod
-    def __save(__arg):
-        with open("scr/data/settings.json", "w") as file:
-            json.dump(__arg, file, indent=4)
-
     def change_theme(self, __name: str) -> None:
         self.close()
 
-        settings = FileLoader.load_json("scr/data/settings.json")
-        settings["theme"] = {
-            "path": self.get_theme_path_by_name(__name),
-            "name": __name
-        }
+        ThemeManager.set_current_theme_by_name(__name)
 
-        self.restarter.set_command_after_restart(lambda: self.__save(settings))
+        self.restarter.set_command_after_restart(ThemeManager.save)
         self.restarter.show()
 
-    def get_theme_path_by_name(self, __name: str) -> str:
-        themes = {
-            FileLoader.load_json(f"scr/data/themes/{i}")["name"]: f"scr/data/themes/{i}"
-            for i in os.listdir("scr/data/themes")
-        }
-
-        for i in range(self.listWidget.count()):
-            if self.listWidget.item(i).text() == __name:
-                return themes[__name]
-
     def show(self):
-        current_theme = FileLoader.load_json("scr/data/settings.json")["theme"]["name"]
-
         super().show()
-        self.listWidget.setCurrentItem(self.get_item_by_text(current_theme))
+        self.listWidget.setCurrentItem(self.get_item_by_text(ThemeManager.get_current_theme_name()))
 
     def accept(self):
         self.change_theme(self.get_current_item().text())
