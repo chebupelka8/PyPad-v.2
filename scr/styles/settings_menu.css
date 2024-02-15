@@ -41,7 +41,7 @@ QComboBox QAbstractItemView {
     background-color: #252525;
     color: white;
     border: 1px solid #3c3c3c;
-    border-radius: 4px;
+    border-radius: 3px;
 }
 
 QComboBox::drop-down {
@@ -53,7 +53,7 @@ QSpinBox {
     padding: 2px;
     color: white;
     border: 1px solid #3c3c3c;
-    border-radius: 4px;
+    border-radius: 3px;
     min-width: 30px;
 }
 
@@ -115,7 +115,7 @@ QListWidget:item {
 
 QListWidget:item:hover {
     background-color: #282828;
-    color: #909090;
+    color: #969ca2;
 }
 
 QListWidget:item:selected {

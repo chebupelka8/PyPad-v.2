@@ -1,15 +1,15 @@
 {
     "workbench": {
         "font": {
-            "family": "Cascadia Mono SemiLight",
-            "size": 16,
+            "family": "Cascadia Code Light",
+            "size": 14,
             "bold": false,
             "italic": false
         }
     },
     "editor": {
         "font": {
-            "family": "Cascadia Mono",
+            "family": "Cascadia Code SemiLight",
             "size": 17,
             "bold": false,
             "italic": false
@@ -19,7 +19,7 @@
         }
     },
     "theme": {
-        "path": "scr/data/themes/one-dark.json",
-        "name": "One Dark"
+        "path": "scr/data/themes/github-theme.json",
+        "name": "GitHub Theme"
     }
 }
