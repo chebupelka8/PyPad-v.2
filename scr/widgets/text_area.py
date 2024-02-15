@@ -39,6 +39,7 @@ class TextEditorArea(QPlainTextEdit):
         self.__update_line_number_area_width()
         self.__update_cursor_width()
         self.update_settings()
+
         self.blockCountChanged.connect(self.__update_line_number_area_width)
         self.cursorPositionChanged.connect(self.__update_current_line)
         self.cursorPositionChanged.connect(self.__highlight_current_line)
@@ -77,6 +78,9 @@ class TextEditorArea(QPlainTextEdit):
 
         self.__tab_width = EditorSettingsUpdater.get_tab_width()
         self.setTabStopDistance(QFontMetrics(self.__main_font).horizontalAdvanceChar(" ") * self.__tab_width)
+
+    def get_current_tab_width(self) -> int:
+        return self.__tab_width
 
     def get_full_path(self):
         return self.__path

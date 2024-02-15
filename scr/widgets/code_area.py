@@ -170,10 +170,13 @@ class PythonCodeEditorArea(_CodeEditorArea):
             else:
                 prev = previous
 
-            if prev[-1] == ":" or self.get_current_line_text()[:1] == "\t":
+            if prev[-1] == ":" or self.get_current_line_text()[:1] == "\t" or self.get_current_line_text()[:4] == "    ":
                 tab_count = (
                     CodeAnalyzer.find_tabs_in_string(previous, cursor.positionInBlock()) +
-                    CodeAnalyzer.check_last_character_is_colon(prev)
+                    CodeAnalyzer.check_last_character_is_colon(prev) +
+                    CodeAnalyzer.find_tabs_in_string_by_spaces(
+                        previous, cursor.positionInBlock(), self.get_current_tab_width()
+                    )
                 )
                 cursor.insertText("\n" + ("\t" * tab_count))
 
