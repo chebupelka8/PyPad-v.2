@@ -37,8 +37,23 @@ class EditorSettingsUpdater(_SettingsUpdater):
         cls.call_updaters()
 
     @classmethod
+    def set_tab_width(cls, __width: int) -> None:
+        settings = FileLoader.load_json("scr/data/settings.json")
+
+        settings["editor"]["tab-width"] = __width
+
+        with open("scr/data/settings.json", "w", encoding="utf-8") as file:
+            json.dump(settings, file, indent=4)
+
+        cls.call_updaters()
+
+    @classmethod
     def get_cursor_style(cls) -> str:
         return cls.get_settings()["cursor"]["style"]
+
+    @classmethod
+    def get_tab_width(cls) -> int:
+        return cls.get_settings()["tab-width"]
 
 
 class WorkbenchSettingsUpdater(_SettingsUpdater):

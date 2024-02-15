@@ -149,6 +149,10 @@ class EditorSettingsWidget(_SettingsWidget):
         self.cursor_style_combo = self.cursor_style_changer.add_combobox(["line", "block"])
         self.cursor_style_combo.currentTextChanged.connect(lambda style: EditorSettingsUpdater.set_cursor_style(style))
 
+        self.tab_width_changer = _SettingFrame("Tab Width", "Defines the tab width")
+        self.tab_width_combo = self.tab_width_changer.add_combobox(["2", "3", "4", "8"], 50)
+        self.tab_width_combo.currentTextChanged.connect(lambda wid: EditorSettingsUpdater.set_tab_width(int(wid)))
+
         self.update_values()
 
         self.mainLayout.addWidget(_UI.title("Font Settings"))
@@ -156,11 +160,14 @@ class EditorSettingsWidget(_SettingsWidget):
         self.mainLayout.addWidget(self.font_size_changer)
         self.mainLayout.addWidget(_UI.title("Cursor Settings"))
         self.mainLayout.addWidget(self.cursor_style_changer)
+        self.mainLayout.addWidget(_UI.title("Tab Settings"))
+        self.mainLayout.addWidget(self.tab_width_changer)
 
     def update_values(self):
         self.font_family_combo.setCurrentText(EditorFontManager.get_current_family())
         self.font_size_spin.setValue(EditorFontManager.get_current_font_size())
         self.cursor_style_combo.setCurrentText(EditorSettingsUpdater.get_cursor_style())
+        self.tab_width_combo.setCurrentText(str(EditorSettingsUpdater.get_tab_width()))
 
 
 class ThemeSettingsWidget(_SettingsWidget):

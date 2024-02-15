@@ -26,6 +26,7 @@ class TextEditorArea(QPlainTextEdit):
         self.setFont(self.__main_font)
 
         self.__cursor_style = EditorSettingsUpdater.get_cursor_style()
+        self.__tab_width = EditorSettingsUpdater.get_tab_width()
 
         # color setup
         self.set_default_text_color(TextEditorTheme.DEFAULT)
@@ -37,6 +38,7 @@ class TextEditorArea(QPlainTextEdit):
         self.__highlight_current_line()
         self.__update_line_number_area_width()
         self.__update_cursor_width()
+        self.update_settings()
         self.blockCountChanged.connect(self.__update_line_number_area_width)
         self.cursorPositionChanged.connect(self.__update_current_line)
         self.cursorPositionChanged.connect(self.__highlight_current_line)
@@ -54,6 +56,7 @@ class TextEditorArea(QPlainTextEdit):
 
             try:
                 symbol = cursor.block().text()[cursor.positionInBlock()]
+                if symbol == "\t": symbol = " "
             except IndexError:
                 symbol = " "
 
@@ -71,6 +74,9 @@ class TextEditorArea(QPlainTextEdit):
     def update_settings(self):
         self.__cursor_style = EditorSettingsUpdater.get_cursor_style()
         self.__update_cursor_width()
+
+        self.__tab_width = EditorSettingsUpdater.get_tab_width()
+        self.setTabStopDistance(QFontMetrics(self.__main_font).horizontalAdvanceChar(" ") * self.__tab_width)
 
     def get_full_path(self):
         return self.__path

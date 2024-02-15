@@ -5,13 +5,13 @@ class CodeAnalyzer:
         res = 0
 
         for i, letter in enumerate(string):
-            if letter == " " and i < __cursor_index:
+            if letter == "\t" and i < __cursor_index:
                 res += 1
 
             else:
                 break
 
-        return res // 4
+        return res
 
     @staticmethod
     def check_last_character_is_colon(string: str) -> int:

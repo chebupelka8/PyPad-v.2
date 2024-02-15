@@ -92,9 +92,6 @@ class _CodeEditorArea(TextEditorArea):
         elif __event.key() == Qt.Key.Key_Apostrophe and apostrophe:
             self.insert_around_cursor("'", "'")
 
-        elif __event.key() == Qt.Key.Key_Tab:
-            self.textCursor().insertText("    ")
-
         else:
             super().keyPressEvent(__event)
 
@@ -173,12 +170,12 @@ class PythonCodeEditorArea(_CodeEditorArea):
             else:
                 prev = previous
 
-            if prev[-1] == ":" or self.get_current_line_text()[:4] == "    ":
+            if prev[-1] == ":" or self.get_current_line_text()[:1] == "\t":
                 tab_count = (
                     CodeAnalyzer.find_tabs_in_string(previous, cursor.positionInBlock()) +
                     CodeAnalyzer.check_last_character_is_colon(prev)
                 )
-                cursor.insertText("\n" + ("    " * tab_count))
+                cursor.insertText("\n" + ("\t" * tab_count))
 
             else:
                 key_func()
