@@ -1,3 +1,6 @@
+from .util import from_multiple
+
+
 class CodeAnalyzer:
 
     @staticmethod
@@ -25,6 +28,25 @@ class CodeAnalyzer:
                 break
 
         return res // __tab_count
+
+    @staticmethod
+    def get_index_first_symbol_of_line(__line: str) -> int:
+        for i, letter in enumerate(__line):
+            if letter != " ": return i
+
+    @classmethod
+    def get_tab_width_by_text(cls, __text: str) -> int | None:
+        res = []
+
+        for line in __text.split("\n"):
+            count = line.count(" ", 0, cls.get_index_first_symbol_of_line(line))
+            if count > 1: res.append(count)
+
+        return from_multiple(res, [2, 3, 4, 8])
+
+    @staticmethod
+    def refactor_spaces_to_tabs(__text: str, __tab_width: int) -> str:
+        return __text.replace(" " * __tab_width, "\t")
 
     @staticmethod
     def check_last_character_is_colon(string: str) -> int:

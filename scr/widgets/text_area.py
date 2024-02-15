@@ -1,4 +1,4 @@
-from scr.scripts import FileLoader, FileChecker, EditorFontManager, Font, EditorSettingsUpdater
+from scr.scripts import FileLoader, FileChecker, EditorFontManager, Font, EditorSettingsUpdater, CodeAnalyzer
 from scr.config import TextEditorTheme
 
 from PySide6.QtWidgets import QPlainTextEdit, QTextEdit, QWidget
@@ -16,7 +16,8 @@ class TextEditorArea(QPlainTextEdit):
         self.__path = __path
 
         if __path is not None and FileChecker.is_readable(__path):
-            self.insertPlainText(FileLoader.load_text(__path))
+            text = FileLoader.load_text(__path)
+            self.insertPlainText(CodeAnalyzer.refactor_spaces_to_tabs(text, CodeAnalyzer.get_tab_width_by_text(text)))
 
         # self setup
         self.setLineWrapMode(QPlainTextEdit.LineWrapMode.NoWrap)
