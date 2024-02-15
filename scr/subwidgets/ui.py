@@ -14,6 +14,7 @@ class _DialogWindow(QDialog):
         else: super().__init__(__parent)
 
         self.setStyleSheet(FileLoader.load_style("scr/styles/ui.css"))
+        self.setWindowModality(Qt.WindowModality.ApplicationModal)
 
 
 class _Dialog(_DialogWindow):
