@@ -42,7 +42,6 @@ class TabEditor(QTabWidget):
 
     def find_by_path(self, __path: str):
         for i in range(self.count()):
-
             if hasattr(self.widget(i), "get_full_path"):
                 if self.widget(i).get_full_path() == __path:
                     return self.widget(i)
@@ -54,7 +53,6 @@ class TabEditor(QTabWidget):
         res = []
 
         for i in range(self.count()):
-
             if hasattr(self.widget(i), "get_full_path"):
                 res.append(self.widget(i).get_full_path())
 

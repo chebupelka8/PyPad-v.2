@@ -39,3 +39,8 @@ class EditorSettingsUpdater(_SettingsUpdater):
     @classmethod
     def get_cursor_style(cls) -> str:
         return cls.get_settings()["cursor"]["style"]
+
+
+class WorkbenchSettingsUpdater(_SettingsUpdater):
+    updaters = []
+    directory = "workbench"
