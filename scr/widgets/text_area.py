@@ -1,8 +1,8 @@
-from scr.scripts import FileLoader, FileChecker, EditorFontManager, Font
+from scr.scripts import FileLoader, FileChecker, EditorFontManager, Font, EditorSettingsUpdater
 from scr.config import TextEditorTheme
 
 from PySide6.QtWidgets import QPlainTextEdit, QTextEdit, QWidget
-from PySide6.QtGui import QColor, QTextFormat, QPainter, QPalette
+from PySide6.QtGui import QColor, QTextFormat, QPainter, QPalette, QFontMetrics
 from PySide6.QtCore import Qt, QRect, QSize, QPoint
 
 
@@ -25,6 +25,8 @@ class TextEditorArea(QPlainTextEdit):
         self.__main_font = Font.get_system_font(*EditorFontManager.get_current_font().values())
         self.setFont(self.__main_font)
 
+        self.__cursor_style = EditorSettingsUpdater.get_cursor_style()
+
         # color setup
         self.set_default_text_color(TextEditorTheme.DEFAULT)
 
@@ -34,20 +36,41 @@ class TextEditorArea(QPlainTextEdit):
         # connections
         self.__highlight_current_line()
         self.__update_line_number_area_width()
+        self.__update_cursor_width()
         self.blockCountChanged.connect(self.__update_line_number_area_width)
         self.cursorPositionChanged.connect(self.__update_current_line)
         self.cursorPositionChanged.connect(self.__highlight_current_line)
-        self.textChanged.connect(self.__highlight_current_line())
+        self.cursorPositionChanged.connect(self.__update_cursor_width)
+        self.textChanged.connect(self.__highlight_current_line)
+        self.textChanged.connect(self.__update_cursor_width)
         self.verticalScrollBar().valueChanged.connect(self.lineNumberArea.update)
 
         # variables
         self.__current_line = 0
+
+    def __update_cursor_width(self):
+        if self.__cursor_style == "block":
+            cursor = self.textCursor()
+
+            try:
+                symbol = cursor.block().text()[cursor.positionInBlock()]
+            except IndexError:
+                symbol = " "
+
+            self.setCursorWidth(QFontMetrics(self.__main_font).horizontalAdvanceChar(symbol))
+
+        else:
+            self.setCursorWidth(1)
 
     def update_font(self):
         self.__main_font = Font.get_system_font(*EditorFontManager.get_current_font().values())
         self.setFont(self.__main_font)
 
         self.__update_line_number_area_width()
+
+    def update_settings(self):
+        self.__cursor_style = EditorSettingsUpdater.get_cursor_style()
+        self.__update_cursor_width()
 
     def get_full_path(self):
         return self.__path
@@ -67,6 +90,7 @@ class TextEditorArea(QPlainTextEdit):
         self.update()
         self.lineNumberArea.update()
         self.__highlight_current_line()
+        self.__update_cursor_width()
 
     def keyPressEvent(self, event):
         self.lineNumberArea.update()

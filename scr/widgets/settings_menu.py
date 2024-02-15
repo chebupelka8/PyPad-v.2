@@ -1,4 +1,4 @@
-from scr.scripts import EditorFontManager, FileLoader, Font, WorkbenchFontManager
+from scr.scripts import EditorFontManager, FileLoader, Font, WorkbenchFontManager, EditorSettingsUpdater
 from scr.subwidgets import ThemeChanger
 
 from PySide6.QtWidgets import (
@@ -55,7 +55,7 @@ class _SettingFrame(QFrame):
     def add_description(self, __text: str) -> None:
         self.mainLayout.addWidget(_UI.description(__text))
 
-    def add_combobox(self, __values: list, __width: int = 200, *, should_return: bool = True) -> None | QComboBox:
+    def add_combobox(self, __values: list, __width: int = 200, *, should_return: bool = True) -> QComboBox | None:
         combobox = QComboBox()
         combobox.addItems(__values)
         combobox.setFixedWidth(__width)
@@ -145,15 +145,22 @@ class EditorSettingsWidget(_SettingsWidget):
         self.font_size_spin = self.font_size_changer.add_spinbox((1, 100))
         self.font_size_spin.valueChanged.connect(lambda value: EditorFontManager.set_current_font(size=value))
 
+        self.cursor_style_changer = _SettingFrame("Cursor Style", "Defines the cursor style")
+        self.cursor_style_combo = self.cursor_style_changer.add_combobox(["line", "block"])
+        self.cursor_style_combo.currentTextChanged.connect(lambda style: EditorSettingsUpdater.set_cursor_style(style))
+
         self.update_values()
 
         self.mainLayout.addWidget(_UI.title("Font Settings"))
         self.mainLayout.addWidget(self.font_family_changer)
         self.mainLayout.addWidget(self.font_size_changer)
+        self.mainLayout.addWidget(_UI.title("Cursor Settings"))
+        self.mainLayout.addWidget(self.cursor_style_changer)
 
     def update_values(self):
         self.font_family_combo.setCurrentText(EditorFontManager.get_current_family())
         self.font_size_spin.setValue(EditorFontManager.get_current_font_size())
+        self.cursor_style_combo.setCurrentText(EditorSettingsUpdater.get_cursor_style())
 
 
 class ThemeSettingsWidget(_SettingsWidget):

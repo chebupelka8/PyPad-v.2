@@ -10,13 +10,16 @@
     "editor": {
         "font": {
             "family": "Cascadia Mono",
-            "size": 23,
+            "size": 17,
             "bold": false,
             "italic": false
+        },
+        "cursor": {
+            "style": "block"
         }
     },
     "theme": {
-        "path": "scr/data/themes/github-theme.json",
-        "name": "GitHub Theme"
+        "path": "scr/data/themes/one-dark.json",
+        "name": "One Dark"
     }
 }

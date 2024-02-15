@@ -35,6 +35,11 @@ class TabEditor(QTabWidget):
             if hasattr(self.widget(i), "update_font"):
                 self.widget(i).update_font()
 
+    def update_all_tabs_settings(self) -> None:
+        for i in range(self.count()):
+            if hasattr(self.widget(i), "update_settings"):
+                self.widget(i).update_settings()
+
     def find_by_path(self, __path: str):
         for i in range(self.count()):
 
