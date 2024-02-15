@@ -40,7 +40,7 @@ class MainWidget(QWidget):
         self.settingActionMenu = SettingsActionMenu()
         self.restarter = Restarter(self)
         self.themeChanger = ThemeChanger(self, restarter=self.restarter)
-        self.settingsMenu = SettingsMenu(self)
+        self.settingsMenu = SettingsMenu(self, restarter=self.restarter)
 
         # layouts
         self.workbenchLayout.addWidget(self.sideBar, stretch=1)
