@@ -150,7 +150,7 @@ class EditorSettingsWidget(_SettingsWidget):
         self.cursor_style_combo.currentTextChanged.connect(lambda style: EditorSettingsUpdater.set_cursor_style(style))
 
         self.tab_width_changer = _SettingFrame("Tab Width", "Defines the tab width")
-        self.tab_width_combo = self.tab_width_changer.add_combobox(["2", "3", "4", "6", "8"], 50)
+        self.tab_width_combo = self.tab_width_changer.add_combobox([str(i) for i in range(2, 9)], 50)
         self.tab_width_combo.currentTextChanged.connect(lambda wid: EditorSettingsUpdater.set_tab_width(int(wid)))
 
         self.update_values()
