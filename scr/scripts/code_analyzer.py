@@ -46,6 +46,9 @@ class CodeAnalyzer:
 
     @staticmethod
     def refactor_spaces_to_tabs(__text: str, __tab_width: int) -> str:
+        if __tab_width is None or __tab_width == 0:
+            return __text
+
         return __text.replace(" " * __tab_width, "\t")
 
     @staticmethod

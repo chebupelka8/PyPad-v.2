@@ -16,6 +16,9 @@ def smallest_multiple(lst) -> int | None:
 
 
 def from_multiple(__array: list[int], __for: list[int]) -> int | None:
+    if len(__array) == 0:
+        return
+
     for i in __for:
         if all(map(lambda x: x % i == 0, __array)) and min(__array) == i:
             return i
