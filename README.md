@@ -1,15 +1,3 @@
-<p align="center">
-  <img src="assets/icons/system_icons/Logo PyPad.png">
-</p>
-
-<h1></h1>
-<p align="center">
-
-  <img src="https://img.shields.io/badge/version-v0.2.2--alpha-green">
-  <img src="https://img.shields.io/github/license/chebupelka8/PyPad-v.2">
-  
-</p>
-
 <h3><b>The current version is now <a href="https://github.com/chebupelka8/PyPad-v2">here</a></b></h3>
 
 <b>PyPad</b> - is a code editor for different programming languages. 
