@@ -10,11 +10,11 @@
   <img src="https://img.shields.io/github/commit-activity/t/chebupelka8/PyPad-v.2"> 
   <img src="https://img.shields.io/github/stars/chebupelka8/PyPad-v.2">
   <img src="https://img.shields.io/github/watchers/chebupelka8/PyPad-v.2">
+  <h3>The current version is now <a href="https://github.com/chebupelka8/PyPad-v2">here</a><h2></h3>
   
 </p>
 
 <p align="center">
-  <h3>The current version is now <a href="https://github.com/chebupelka8/PyPad-v2">here</a><h2></h3>
 </p>
 
 <b>PyPad</b> - is a code editor for different programming languages. 
