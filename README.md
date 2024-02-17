@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-<h3>The current version is now <a href="https://github.com/chebupelka8/PyPad-v2">here</a><h2></h3>
+  <h3>The current version is now <a href="https://github.com/chebupelka8/PyPad-v2">here</a><h2></h3>
 </p>
 
 <b>PyPad</b> - is a code editor for different programming languages. 
