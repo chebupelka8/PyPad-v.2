@@ -226,7 +226,7 @@ class SettingTree(QListWidget):
 
 class SettingsMenu(QDialog):
     def __init__(self, __parent, restarter) -> None:
-        super().__init__(__parent)
+        super().__init__(__parent, f=Qt.WindowType.FramelessWindowHint)
 
         self.restarter = restarter
 

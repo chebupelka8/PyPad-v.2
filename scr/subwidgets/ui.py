@@ -9,12 +9,15 @@ from PySide6.QtCore import Qt
 
 
 class _DialogWindow(QDialog):
-    def __init__(self, __parent, frameless: bool = True) -> None:
+    def __init__(self, __parent, *, frameless: bool = True, transparent: bool = False) -> None:
         if frameless: super().__init__(__parent, f=Qt.WindowType.FramelessWindowHint)
         else: super().__init__(__parent)
 
+        self.transparent_dialog = QDialog()
+
         self.setStyleSheet(FileLoader.load_style("scr/styles/ui.css"))
         self.setWindowModality(Qt.WindowModality.ApplicationModal)
+        if transparent: self.setAttribute(Qt.WA_TranslucentBackground)
 
 
 class _Dialog(_DialogWindow):
@@ -91,7 +94,7 @@ class _InputDialog(_DialogWindow):
 
 class _ListChanger(_DialogWindow):
     def __init__(self, __parent, *__values, width: int = 200, height: int = 400) -> None:
-        super().__init__(__parent)
+        super().__init__(__parent, transparent=True)
 
         self.setMinimumSize(width, height)
         self.setFocusPolicy(Qt.FocusPolicy.NoFocus)

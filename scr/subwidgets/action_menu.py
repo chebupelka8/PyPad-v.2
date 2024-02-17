@@ -1,14 +1,16 @@
 from PySide6.QtWidgets import QMenu
-from PySide6.QtGui import QAction, QIcon
+from PySide6.QtGui import QAction
+from PySide6.QtCore import Qt
 
 from scr.scripts import FileLoader
 
 
 class _ActionMenu(QMenu):
-    def __init__(self, __width: int = 150) -> None:
-        super().__init__()
+    def __init__(self, parent = None, width: int = 150) -> None:
+        super().__init__(parent)
 
-        self.setFixedWidth(__width)
+        self.setFixedWidth(width)
+        self.setWindowFlags(self.windowFlags() | Qt.WindowType.NoDropShadowWindowHint)
         self.setStyleSheet(FileLoader.load_style("scr/styles/action_menu.css"))
 
     def add_action(self, __title: str, __path_to_icon: str | None = None):
@@ -31,8 +33,8 @@ class _ActionMenu(QMenu):
 
 
 class SettingsActionMenu(_ActionMenu):
-    def __init__(self) -> None:
-        super().__init__(200)
+    def __init__(self, parent = None) -> None:
+        super().__init__(parent, width=200)
 
         self.add_action("Interpreter Settings...", "assets/icons/system_icons/interpreter.png")
         self.add_action("Open Settings...", "assets/icons/system_icons/settings.png")

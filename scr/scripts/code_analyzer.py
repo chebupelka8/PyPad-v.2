@@ -42,7 +42,7 @@ class CodeAnalyzer:
             count = line.count(" ", 0, cls.get_index_first_symbol_of_line(line))
             if count > 1: res.append(count)
 
-        return from_multiple(res, [2, 3, 4, 8])
+        return from_multiple(res, [i for i in range(2, 9)])
 
     @staticmethod
     def refactor_spaces_to_tabs(__text: str, __tab_width: int) -> str:

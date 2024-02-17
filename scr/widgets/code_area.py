@@ -118,6 +118,7 @@ class PythonCodeEditorArea(_CodeEditorArea):
             self.insertPlainText(CodeAnalyzer.refactor_spaces_to_tabs(text, CodeAnalyzer.get_tab_width_by_text(text)))
 
         PythonCodeHighlighter(self)  # set highlighter
+
         # self.set_default_text_color(PythonTheme.DEFAULT)
 
     def __auto_completer_run(self):

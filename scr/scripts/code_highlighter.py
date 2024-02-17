@@ -1,7 +1,7 @@
 from scr.config import (
     PythonPatterns, PythonTheme, JsonPatterns,
     JsonTheme, StylePatterns, StyleTheme,
-    HtmlPatterns, HtmlTheme
+    HtmlPatterns, HtmlTheme, TextCharCreator
 )
 
 from PySide6.QtGui import QSyntaxHighlighter

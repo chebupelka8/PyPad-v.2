@@ -98,6 +98,16 @@ class TextCharCreator:
 
         return res
 
+    @classmethod
+    def create_char_format_background(cls, __bg_color: str, italic: bool = False, bold: bool = False):
+        res = QTextCharFormat()
+        res.setForeground(QColor(__bg_color))
+        res.setFontItalic(italic)
+        if bold:
+            res.setFontWeight(QFont.Bold)
+
+        return res
+
 
 class _AbstractTheme:
     theme = FileLoader.load_json(FileLoader.load_json("scr/data/settings.json")["theme"]["path"])
